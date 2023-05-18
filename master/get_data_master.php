@@ -1,6 +1,6 @@
 <?php
 // memanggil file koneksi.php
-require_once '../config/koneksi.php';
+require_once 'config/koneksi.php';
 
 
 // var_dump($_GET['data']);exit;

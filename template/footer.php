@@ -12,9 +12,8 @@
 <script src="/surat/vendors/@coreui/chartjs/js/coreui-chartjs.js"></script>
 <script src="/surat/vendors/@coreui/utils/js/coreui-utils.js"></script>
 <script src="/surat/js/main.js"></script>
-
-<script src="../sweetalert2.all.min.js"></script>
-<link rel="stylesheet" href="../sweetalert2.min.css">
+<!-- <script src="/surat/js/jquery-3.6.4.min.js"></script> -->
+<script src="/surat/sweetalert2.all.min.js"></script>
 <script>
 </script>
 
