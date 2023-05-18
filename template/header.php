@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'koneksi.php';
+require_once 'config/koneksi.php';
 // Cek apakah sesi ada
 if (!isset($_SESSION['username'])) {
     // Jika tidak ada sesi, redirect ke halaman login atau tindakan lainnya
@@ -78,23 +78,23 @@ if (!isset($_SESSION['username'])) {
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
 
     <link href="/surat/vendors/@coreui/icons/css/free.min.css" rel="stylesheet">
-
+    
     <script src="/surat/js/jquery/dist/jquery.js"></script>
     <script src="/surat/js/jquery/dist/jquery.min.js"></script>
     <script src="/surat/js/jquery/dist/jquery.min.map"></script>
     <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
+    window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        // Shared ID
-        gtag('config', 'UA-118965717-3');
-        // Bootstrap ID
-        gtag('config', 'UA-118965717-5');
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    // Shared ID
+    gtag('config', 'UA-118965717-3');
+    // Bootstrap ID
+    gtag('config', 'UA-118965717-5');
     </script>
     <link href="/surat/vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
