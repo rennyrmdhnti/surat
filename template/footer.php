@@ -14,6 +14,7 @@
 <script src="/surat/js/main.js"></script>
 <!-- <script src="/surat/js/jquery-3.6.4.min.js"></script> -->
 <script src="/surat/sweetalert2.all.min.js"></script>
+<script src="/surat/jquery.inputpicker.js"></script>
 <script>
 </script>
 

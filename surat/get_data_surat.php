@@ -8,7 +8,7 @@ require_once '../config/koneksi.php';
 if ($_GET['data'] == 'spt') {
     
 // mengambil data dari MySQL
-    $sql = "SELECT * FROM tb_spt";
+    $sql = "SELECT * FROM tb_perintah_tugas";
     $result = $conn->query($sql);
     // memeriksa apakah kueri berhasil dieksekusi
     if ($result->num_rows > 0) {
