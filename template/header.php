@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'config/koneksi.php';
+require_once 'koneksi.php';
 // Cek apakah sesi ada
 if (!isset($_SESSION['username'])) {
     // Jika tidak ada sesi, redirect ke halaman login atau tindakan lainnya
