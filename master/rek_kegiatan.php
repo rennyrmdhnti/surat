@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
-                        <div class="card-header"><strong>Filter & Input</strong><span class="small ms-1"></div>
+                        <div class="card-header"><strong>Input</strong><span class="small ms-1"></div>
                         <!-- <div class="card-body">
                             
                         </div> -->

@@ -8,7 +8,13 @@ require_once '../config/koneksi.php';
 if ($_GET['data'] == 'spt') {
     
 // mengambil data dari MySQL
-    $sql = "SELECT * FROM tb_perintah_tugas";
+    $sql = "SELECT no_spt, dasar, untuk, GROUP_CONCAT(CONCAT(nomor, '. ', nama) SEPARATOR '<br>') AS nama
+    FROM (
+        SELECT no_spt, dasar, untuk, nama, ROW_NUMBER() OVER (PARTITION BY no_spt, dasar, untuk ORDER BY nama) AS nomor
+        FROM tb_perintah_tugas
+    ) t
+    GROUP BY no_spt, dasar, untuk;       
+    ";
     $result = $conn->query($sql);
     // memeriksa apakah kueri berhasil dieksekusi
     if ($result->num_rows > 0) {
@@ -23,6 +29,25 @@ if ($_GET['data'] == 'spt') {
         echo "Tidak ada data";
     }
 }
+
+if ($_GET['data'] == 'sppd') {
+    
+    // mengambil data dari MySQL
+        $sql = "SELECT * FROM tb_perjalan_dinas";
+        $result = $conn->query($sql);
+        // memeriksa apakah kueri berhasil dieksekusi
+        if ($result->num_rows > 0) {
+            // membuat array untuk menampung data
+            $data = array();
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+            // mengirim data dalam format JSON
+            echo json_encode(array("data" => $data));
+        } else {
+            echo "Tidak ada data";
+        }
+    }
 
 
 if ($_GET['data'] == '1') {
