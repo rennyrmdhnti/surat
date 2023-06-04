@@ -3,8 +3,15 @@
 require_once 'config/koneksi.php';
 
 // Mengambil nilai input dari request
+
+// Mengambil nilai input dari request
+$id = $_POST['id'];
+// $noSPT = $_POST['no_spt'];
+// $untuk = $_POST['untuk'];
+// $dasar = $_POST['dasar'];
 $namaArray = $_POST['nama'];
-// var_dump($namaArray);exit;
+// var_dump($namaArray);
+// var_dump($id);exit;
 
 $query = "
 SELECT *
@@ -64,6 +71,8 @@ function romanNumerals($number) {
     return $result;
 }
 
+$sqlDel = "DELETE FROM tb_perintah_tugas WHERE id IN ($id)";
+$conn->query($sqlDel);
 
 
 $dasar = $_POST['dasar'];

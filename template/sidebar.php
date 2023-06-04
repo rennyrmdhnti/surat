@@ -40,15 +40,15 @@
                 </svg> Input Data</a>
             <ul class="nav-group-items">
                 <li class="nav-item"><a class="nav-link" href="/surat/surat/perintah_tugas.php"> Perintah Tugas</a></li>
-                <li class="nav-item"><a class="nav-link" href="/surat/surat/perjalanan_dinas.php"> Perjalanan Dinas</a>
-                </li>
-                <li class="nav-group"><a class="nav-link nav-group-toggle" href="#"> Nominatif</a>
+                <li class="nav-item"><a class="nav-link" href="/surat/surat/perjalanan_dinas.php"> Perjalanan Dinas</a></li>
+                <li class="nav-item"><a class="nav-link" href="/surat/surat/nominatif.php"> Pertanggung Jawaban</a></li>
+                <!-- <li class="nav-group"><a class="nav-link nav-group-toggle" href="#"> Nominatif</a>
                     <ul class="nav-group-items">
-                        <li class="nav-item"><a class="nav-link" href="/surat/surat/tanpa_panjar.php"> Tanpa Panjar</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/surat/surat/panjar.php"> Panjar</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/surat/surat/sisa_pencairan.php">Sisa Pencairan</a></li>
-                    </ul>
-                </li>
+                        <li class="nav-item"><a class="nav-link" href="/surat/surat/nominatif.php"> Pertanggung Jawaban</a></li> -->
+                        <!-- <li class="nav-item"><a class="nav-link" href="/surat/surat/panjar.php"> Panjar</a></li> -->
+                        <!-- <li class="nav-item"><a class="nav-link" href="/surat/surat/sisa_pencairan.php">Sisa Pencairan</a></li> -->
+                    <!-- </ul>
+                </li> -->
                 <li class="nav-item"><a class="nav-link" href="/surat/surat/nota_pencairan_dana.php"> Nota Pencairan
                         Dana</a></li>
             </ul>
