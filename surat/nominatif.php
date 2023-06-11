@@ -159,7 +159,7 @@
                                 <input type="text" class="form-control" id="uang_harian" name="uang_harian">
                             </div>
                         </div>
-                        <div class="col" style="margin-top: 522px !important;">
+                        <div class="col" style="margin-top: 501px !important;">
                             <div class="mb-2">
                                 <input class="form-check-input" type="checkbox" value="" id="myCheckbox">
                                 <label class="form-check-label" for="myCheckbox">
@@ -173,7 +173,7 @@
                                 </label><input type="text" class="form-control" id="pengikut" name="pengikut">
                             </div>
                         </div>
-                        <div class="col" style="margin-top: 512px !important;">
+                        <div class="col" style="margin-top: 490px !important;">
                             <div class="mb-2">
                                 <label for="exampleFormControlInput1" class="form-label">Pilih Travel</label>
                                 <select class="form-select" id="no_spt" name="no_spt"
@@ -189,7 +189,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col" style="margin-top: 522px !important;">
+                        <div class="col" style="margin-top: 501px !important;">
                             <div class="mb-2">
                                 <input class="form-check-input" type="checkbox" value="" id="myCheckbox">
                                 <label class="form-check-label" for="myCheckbox">

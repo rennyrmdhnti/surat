@@ -2,12 +2,36 @@
 require_once 'config/koneksi.php';
 
 $id = $_GET['id'];
+$panjang = strlen($id);
+// var_dump($panjang);exit;
 $firstPart = substr($id, 0, 3);
 $secondPart = substr($id, 3, 3);
 $thirdPart = substr($id, 6, 4);
 $fourthPart = substr($id, 10, 6);
-$fifthPart = substr($id, 16, 2);
-$sixPart = substr($id, 18);
+
+switch ($panjang) {
+    case 22:
+        $fifthPart = substr($id, 16, 2);
+        $sixPart = substr($id, 18);
+        break;
+    
+    case 23: 
+        $fifthPart = substr($id, 16, 3);
+        $sixPart = substr($id, 19);
+        break;
+
+    case 24:
+        $fifthPart = substr($id, 16, 4);
+        $sixPart = substr($id, 20);
+        break;
+    
+    default:
+    
+        $fifthPart = substr($id, 16, 1);
+        $sixPart = substr($id, 17);
+        break;
+}
+
 
 $finalId = $firstPart . '/' . $secondPart . '/' . $thirdPart . '/' . $fourthPart . '/' . $fifthPart . '/' . $sixPart;
 
@@ -50,10 +74,15 @@ foreach ($dataNama as $name) {
             $dataArray[] = $dtabel;
         }
     }
-//     var_dump($dataArray);exit;
+    // var_dump($dataArray);exit;
 ?>
 
-
+<style>
+@page {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+</style>
 
 <div style="margin-top: 100px;">
     <h3 style="margin-top:0pt; margin-bottom:0pt; text-align:center; page-break-after:avoid; font-size:14pt;"><span
@@ -190,7 +219,7 @@ foreach ($dataNama as $name) {
             style="font-family:Arial;">NIP. 19690112 1993 03 1 004</span></p>
 </div>
 <p><br style="page-break-before:always; clear:both; mso-break-type:section-break;"></p>
-<div style="margin-top: 900px;">
+<div style="margin-top: 60px;">
     <h2 style="margin-top:0pt; margin-bottom:0pt; text-align:center; page-break-after:avoid; font-size:12pt;"><span
             style="font-family:Arial; font-size:11pt;">Daftar Nama yang Melaksanakan Studi&nbsp;</span>Komperatif ke
         Badan Pengelolaan Keuangan dan Aset Daerah (BPKAD) Surabaya tentang Penatausahaan Penerimaan Pajak Daerah

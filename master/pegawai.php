@@ -1,7 +1,19 @@
 <?php include '../template/header.php'; ?>
 <?php include '../template/sidebar.php'; ?>
 
+<style>
+#data-table_wrapper {
+    overflow-x: auto;
+}
 
+td {
+    /* font-size: 10px; */
+    max-width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+</style>
 <div class="wrapper d-flex flex-column min-vh-100 bg-light">
     <header class="header header-sticky mb-4">
         <?php include '../template/headbar.php'; ?>
@@ -317,7 +329,13 @@
             }
         });
 
+        $("#data-table").on("mouseenter", "td", function() {
+            $(this).attr('title', this.innerText);
+        });
+
     });
+
+
 
     // Fungsi untuk menyimpan data pegawai ke dalam database
     function simpanData() {

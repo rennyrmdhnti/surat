@@ -5,9 +5,9 @@ try {
     // Query untuk mengambil data dari tabel "tb_pegawai"
     $sql = "SELECT ROW_NUMBER() OVER (ORDER BY nama) AS nomor, nama, bidang
     FROM (
-        SELECT nama, bidang FROM tb_pegawai 
+        SELECT nama, bidang  FROM tb_pegawai 
         UNION ALL 
-        SELECT nama, 'THL' AS bidang FROM tb_thl
+        SELECT nama, bidang FROM tb_thl
     ) AS hasil
     ";
     $result = $conn->query($sql); 

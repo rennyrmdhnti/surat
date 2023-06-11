@@ -62,7 +62,7 @@ if ($_GET['data'] == 'bidang') {
 
 if ($_GET['data'] == 'golongan') {
     // mengambil data dari MySQL
-    $sql = "SELECT * FROM tb_golongan";
+    $sql = "SELECT * FROM tb_golongan ";
     $result = $conn->query($sql);
     // memeriksa apakah kueri berhasil dieksekusi
     if ($result->num_rows > 0) {
@@ -80,7 +80,7 @@ if ($_GET['data'] == 'golongan') {
 
 if ($_GET['data'] == 'transportasi') {
     // mengambil data dari MySQL
-    $sql = "SELECT * FROM tb_transportasi";
+    $sql = "SELECT tb_transportasi.*, tb_propinsi.nama FROM tb_transportasi left join tb_propinsi on tb_propinsi.id = tb_transportasi.nama_provinsi";
     $result = $conn->query($sql);
     // memeriksa apakah kueri berhasil dieksekusi
     if ($result->num_rows > 0) {
@@ -171,6 +171,51 @@ if ($_GET['data'] == 'rek_kegiatan') {
         echo "Tidak ada data";
     }
 }
+
+if ($_GET['data'] == 'uang_harian') {
+    // mengambil data dari MySQL
+    $sql = "SELECT tb_uang_harian.*,tb_propinsi.nama  from tb_uang_harian left join tb_propinsi on tb_propinsi.id = tb_uang_harian.id_propinsi ";
+    $result = $conn->query($sql);
+    // memeriksa apakah kueri berhasil dieksekusi
+
+    if ($result->num_rows > 0) {
+        // membuat array untuk menampung data
+        $data = array();
+        $i = 0;
+        while ($row = $result->fetch_assoc()) {
+            $data[$i] = $row;
+            $i++;
+        }
+        // mengirim data dalam format JSON
+        echo json_encode(array("data" => $data));
+    } else {
+        echo "Tidak ada data";
+
+    }
+}
+
+if ($_GET['data'] == 'penginapan') {
+    // mengambil data dari MySQL
+    $sql = "SELECT tb_penginapan.*,tb_propinsi.nama  from tb_penginapan left join tb_propinsi on tb_propinsi.id = tb_penginapan.propinsi ";
+    $result = $conn->query($sql);
+    // memeriksa apakah kueri berhasil dieksekusi
+
+    if ($result->num_rows > 0) {
+        // membuat array untuk menampung data
+        $data = array();
+        $i = 0;
+        while ($row = $result->fetch_assoc()) {
+            $data[$i] = $row;
+            $i++;
+        }
+        // mengirim data dalam format JSON
+        echo json_encode(array("data" => $data));
+    } else {
+        echo "Tidak ada data";
+
+    }
+}
+
 
 
 
