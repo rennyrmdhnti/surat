@@ -5,6 +5,14 @@
 #data-table_wrapper {
     overflow-x: auto;
 }
+
+td {
+    /* font-size: 10px; */
+    max-width: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 </style>
 
 
@@ -315,6 +323,27 @@
             }
 
         });
+
+        $("#data-table").on("mouseenter", "td", function() {
+            $(this).attr('title', this.innerText);
+        });
+
+        table.on('draw', function() {
+            adjustRowHeight();
+        });
+
+        $(window).on('resize', function() {
+            adjustRowHeight();
+        });
+
+        // Fungsi untuk mengatur tinggi baris
+        function adjustRowHeight() {
+            $('.datatable td').each(function() {
+                var $cell = $(this);
+                var cellHeight = $cell[0].scrollHeight;
+                $cell.css('max-height', cellHeight);
+            });
+        }
 
         $.ajax({
             url: 'get_data_pegawai.php',

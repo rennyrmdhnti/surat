@@ -22,7 +22,7 @@
                 <li class="nav-item"><a class="nav-link" href="/surat/master/thl.php"> Data THL</a></li>
                 <li class="nav-item"><a class="nav-link" href="/surat/master/pagu_kegiatan.php"> Pagu Kegiatan</a></li>
                 <li class="nav-item"><a class="nav-link" href="/surat/master/rek_kegiatan.php"> Rek Kegiatan</a></li>
-                <li class="nav-item"><a class="nav-link" href="/surat/master/golongan.php"> Gologan</a></li>
+                <li class="nav-item"><a class="nav-link" href="/surat/master/golongan.php"> Golongan</a></li>
                 <li class="nav-item"><a class="nav-link" href="/surat/master/uang_harian.php"> Uang Harian</a></li>
                 <li class="nav-item"><a class="nav-link" href="/surat/master/biaya_transportasi.php"> Biaya
                         Transportasi</a></li>

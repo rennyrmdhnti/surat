@@ -79,6 +79,16 @@ table {
 #my-table {
     border: none;
 }
+
+@page {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+body {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
 </style>
 
 <table width="100%">
@@ -98,15 +108,28 @@ table {
 </table>
 <img src="https://myfiles.space/user_files/160776_2c764bf7c16fcedc/1685286320_2.-sppd/1685286320_2.-sppd-2.png" alt="">
 <br><br>
+
 <table width="100%">
-    <tr>
-        <td width="50%"></td>
-        <td width="50%" align="left">
-            <p>Lembar ke : ………………………..</p>
-            <p>Kode no. : ………………………..</p>
-            <p>Nomor : <?php echo $data[0]["no_sppd"] ;?></p>
-        </td>
-    </tr>
+    <tbody>
+        <tr>
+            <td width="50%"></td>
+            <td width="15%">Lembar Ke </td>
+            <td>:</td>
+            <td>...................................................</td>
+        </tr>
+        <tr>
+            <td width="50%"></td>
+            <td width="15%">Kode no. </td>
+            <td>:</td>
+            <td>...................................................</td>
+        </tr>
+        <tr>
+            <td width="50%"></td>
+            <td width="15%">Nomor</td>
+            <td>:</td>
+            <td><?php echo $data[0]["no_sppd"] ;?></td>
+        </tr>
+    </tbody>
 </table>
 <br>
 <h2 style="font-size: 20px;font-weight: normal;text-decoration: underline; text-align:center;">SURAT PERINTAH PERJALANAN
@@ -138,7 +161,8 @@ table {
                 <p>c. menurut peraturan</p>
                 <p>perjalanan</p>
             </td>
-            <td><?php echo $dataArray[$i]["nama_pangkat"] ?>(<?php echo $dataArray[$i]["kd_golongan"] ?>) <br><br> <?php echo $dataArray[$i]["jabatan"] ?>
+            <td><?php echo $dataArray[$i]["nama_pangkat"] ?>(<?php echo $dataArray[$i]["kd_golongan"] ?>) <br><br>
+                <?php echo $dataArray[$i]["jabatan"] ?>
             </td>
         </tr>
         <tr>
@@ -167,10 +191,106 @@ table {
                 c. Tanggalharuskembali
             </td>
             <td>
-            <?php echo $data[0]["lama"] ;?> Hari <br>
-            <?php echo $data[0]["tanggal_berangkat"] ;?> <br>
-            <?php echo $data[0]["tanggal_kembali"] ;?>
+                <?php
+                echo $data[0]["lama"] . " Hari" . "<br>";
+
+                $tanggal_berangkat = $data[0]["tanggal_berangkat"];
+                $tanggal_berangkat_parts = explode("-", $tanggal_berangkat);
+                $bulan_berangkat = "";
+                switch ($tanggal_berangkat_parts[1]) {
+                    case '01':
+                        $bulan_berangkat = "Januari";
+                        break;
+                    case '02':
+                        $bulan_berangkat = "Februari";
+                        break;
+                    case '03':
+                        $bulan_berangkat = "Maret";
+                        break;
+                    case '04':
+                        $bulan_berangkat = "April";
+                        break;
+                    case '05':
+                        $bulan_berangkat = "Mei";
+                        break;
+                    case '06':
+                        $bulan_berangkat = "Juni";
+                        break;
+                    case '07':
+                        $bulan_berangkat = "Juli";
+                        break;
+                    case '08':
+                        $bulan_berangkat = "Agustus";
+                        break;
+                    case '09':
+                        $bulan_berangkat = "September";
+                        break;
+                    case '10':
+                        $bulan_berangkat = "Oktober";
+                        break;
+                    case '11':
+                        $bulan_berangkat = "November";
+                        break;
+                    case '12':
+                        $bulan_berangkat = "Desember";
+                        break;
+                    default:
+                        $bulan_berangkat = "";
+                        break;
+                }
+
+                echo $tanggal_berangkat_parts[2] . " " . $bulan_berangkat . " " . $tanggal_berangkat_parts[0] . "<br>";
+
+                $tanggal_kembali = $data[0]["tanggal_kembali"];
+                $tanggal_kembali_parts = explode("-", $tanggal_kembali);
+                $bulan_kembali = "";
+                switch ($tanggal_kembali_parts[1]) {
+                    case '01':
+                        $bulan_kembali = "Januari";
+                        break;
+                    case '02':
+                        $bulan_kembali = "Februari";
+                        break;
+                    case '03':
+                        $bulan_kembali = "Maret";
+                        break;
+                    case '04':
+                        $bulan_kembali = "April";
+                        break;
+                    case '05':
+                        $bulan_kembali = "Mei";
+                        break;
+                    case '06':
+                        $bulan_kembali = "Juni";
+                        break;
+                    case '07':
+                        $bulan_kembali = "Juli";
+                        break;
+                    case '08':
+                        $bulan_kembali = "Agustus";
+                        break;
+                    case '09':
+                        $bulan_kembali = "September";
+                        break;
+                    case '10':
+                        $bulan_kembali = "Oktober";
+                        break;
+                    case '11':
+                        $bulan_kembali = "November";
+                        break;
+                    case '12':
+                        $bulan_kembali = "Desember";
+                        break;
+                    default:
+                        $bulan_kembali = "";
+                        break;
+                }
+
+                echo $tanggal_kembali_parts[2] . " " . $bulan_kembali . " " . $tanggal_kembali_parts[0];
+                ?>
             </td>
+
+
         </tr>
         <tr>
             <td>8. Pengikut
@@ -182,7 +302,7 @@ table {
             <td>9. Pembebanan Anggaran <br>a. Instansi <br> b. Mata Anggaran
             </td>
             <td>Badan Pengelolaan Keuangan, Pendapatan dan Daerah <br>
-            <?php echo $data[0]["mata_anggaran"] ;?>
+                <?php echo $data[0]["mata_anggaran"] ;?>
             </td>
         </tr>
         <tr>
@@ -209,6 +329,7 @@ table {
     </tr>
 </table>
 <br><br><br><br>
+<br><br><br><br>
 <table width="100%">
     <tbody>
         <tr>
@@ -233,7 +354,57 @@ table {
             <td width="45%"></td>
             <td width="20%">Pada tanggal</td>
             <td>:</td>
-            <td><?php echo $data[0]["tanggal_berangkat"] ;?></td>
+            <td>
+                <?php
+                $tanggal_berangkat = $data[0]["tanggal_berangkat"];
+                $tanggal_berangkat_parts = explode("-", $tanggal_berangkat);
+                $bulan_berangkat = "";
+                switch ($tanggal_berangkat_parts[1]) {
+                    case '01':
+                        $bulan_berangkat = "Januari";
+                        break;
+                    case '02':
+                        $bulan_berangkat = "Februari";
+                        break;
+                    case '03':
+                        $bulan_berangkat = "Maret";
+                        break;
+                    case '04':
+                        $bulan_berangkat = "April";
+                        break;
+                    case '05':
+                        $bulan_berangkat = "Mei";
+                        break;
+                    case '06':
+                        $bulan_berangkat = "Juni";
+                        break;
+                    case '07':
+                        $bulan_berangkat = "Juli";
+                        break;
+                    case '08':
+                        $bulan_berangkat = "Agustus";
+                        break;
+                    case '09':
+                        $bulan_berangkat = "September";
+                        break;
+                    case '10':
+                        $bulan_berangkat = "Oktober";
+                        break;
+                    case '11':
+                        $bulan_berangkat = "November";
+                        break;
+                    case '12':
+                        $bulan_berangkat = "Desember";
+                        break;
+                    default:
+                        $bulan_berangkat = "";
+                        break;
+                }
+
+                echo $tanggal_berangkat_parts[2] . " " . $bulan_berangkat . " " . $tanggal_berangkat_parts[0];
+                ?>
+            </td>
+
         </tr>
         <tr>
             <td width="45%"></td>
@@ -256,19 +427,168 @@ table {
 </table>
 <table width="100%" id="table-data">
     <tr height="145px" style="vertical-align: top;">
-        <td width="50%">I. Tiba di: <?php echo $data[0]["tempat_tujuan"] ;?><br>Pada tanggal: <?php echo $data[0]["tanggal_berangkat"] ;?></td>
-        <td width="50%">Berangkat dari: <?php echo $data[0]["tempat_tujuan"] ;?><br>Ke: <?php echo $data[0]["tempat_berangkat"] ;?><br>Pada tanggal: <?php echo $data[0]["tanggal_kembali"] ;?></td>
+        <td width="50%">I. Tiba di: <?php echo $data[0]["tempat_tujuan"] ;?><br>Pada tanggal:
+            <?php
+        $tanggal_berangkat = $data[0]["tanggal_berangkat"];
+        $tanggal_berangkat_parts = explode("-", $tanggal_berangkat);
+        $bulan_berangkat = "";
+        switch ($tanggal_berangkat_parts[1]) {
+            case '01':
+                $bulan_berangkat = "Januari";
+                break;
+            case '02':
+                $bulan_berangkat = "Februari";
+                break;
+            case '03':
+                $bulan_berangkat = "Maret";
+                break;
+            case '04':
+                $bulan_berangkat = "April";
+                break;
+            case '05':
+                $bulan_berangkat = "Mei";
+                break;
+            case '06':
+                $bulan_berangkat = "Juni";
+                break;
+            case '07':
+                $bulan_berangkat = "Juli";
+                break;
+            case '08':
+                $bulan_berangkat = "Agustus";
+                break;
+            case '09':
+                $bulan_berangkat = "September";
+                break;
+            case '10':
+                $bulan_berangkat = "Oktober";
+                break;
+            case '11':
+                $bulan_berangkat = "November";
+                break;
+            case '12':
+                $bulan_berangkat = "Desember";
+                break;
+            default:
+                $bulan_berangkat = "";
+                break;
+        }
+
+        echo $tanggal_berangkat_parts[2] . " " . $bulan_berangkat . " " . $tanggal_berangkat_parts[0];
+        ?>
+        </td>
+        <td width="50%">Berangkat dari: <?php echo $data[0]["tempat_tujuan"] ;?><br>Ke:
+            <?php echo $data[0]["tempat_berangkat"] ;?><br>Pada tanggal:
+            <?php
+        $tanggal_kembali = $data[0]["tanggal_kembali"];
+        $tanggal_kembali_parts = explode("-", $tanggal_kembali);
+        $bulan_kembali = "";
+        switch ($tanggal_kembali_parts[1]) {
+            case '01':
+                $bulan_kembali = "Januari";
+                break;
+            case '02':
+                $bulan_kembali = "Februari";
+                break;
+            case '03':
+                $bulan_kembali = "Maret";
+                break;
+            case '04':
+                $bulan_kembali = "April";
+                break;
+            case '05':
+                $bulan_kembali = "Mei";
+                break;
+            case '06':
+                $bulan_kembali = "Juni";
+                break;
+            case '07':
+                $bulan_kembali = "Juli";
+                break;
+            case '08':
+                $bulan_kembali = "Agustus";
+                break;
+            case '09':
+                $bulan_kembali = "September";
+                break;
+            case '10':
+                $bulan_kembali = "Oktober";
+                break;
+            case '11':
+                $bulan_kembali = "November";
+                break;
+            case '12':
+                $bulan_kembali = "Desember";
+                break;
+            default:
+                $bulan_kembali = "";
+                break;
+        }
+
+        echo $tanggal_kembali_parts[2] . " " . $bulan_kembali . " " . $tanggal_kembali_parts[0];
+        ?>
+        </td>
     </tr>
+
     <tr height="145px" style="vertical-align: top;">
         <td width="50%">II. Tiba di: <br>Pada tanggal: </td>
-        <td width="50%">Berangkat dari: Banjarmasin<br>Ke: <br>Pada tanggal: </td>
+        <td width="50%">Berangkat dari: <br>Ke: <br>Pada tanggal: </td>
     </tr>
     <tr height="145px" style="vertical-align: top;">
         <td width="50%">III. Tiba di: <br>Pada tanggal: </td>
         <td width="50%">Berangkat dari: <br>Ke: <br>Pada tanggal: </td>
     </tr>
     <tr height="145px" style="vertical-align: top;">
-        <td width="50%">IV. Tiba Kembali di: Banjarmasin <br>Pada tanggal: <?php echo $data[0]["tanggal_kembali"] ;?> <br><br><br>
+        <td width="50%">IV. Tiba Kembali di: Banjarmasin <br>Pada tanggal:
+            <?php
+            $tanggal_kembali = $data[0]["tanggal_kembali"];
+            $tanggal_kembali_parts = explode("-", $tanggal_kembali);
+            $bulan_kembali = "";
+            switch ($tanggal_kembali_parts[1]) {
+                case '01':
+                    $bulan_kembali = "Januari";
+                    break;
+                case '02':
+                    $bulan_kembali = "Februari";
+                    break;
+                case '03':
+                    $bulan_kembali = "Maret";
+                    break;
+                case '04':
+                    $bulan_kembali = "April";
+                    break;
+                case '05':
+                    $bulan_kembali = "Mei";
+                    break;
+                case '06':
+                    $bulan_kembali = "Juni";
+                    break;
+                case '07':
+                    $bulan_kembali = "Juli";
+                    break;
+                case '08':
+                    $bulan_kembali = "Agustus";
+                    break;
+                case '09':
+                    $bulan_kembali = "September";
+                    break;
+                case '10':
+                    $bulan_kembali = "Oktober";
+                    break;
+                case '11':
+                    $bulan_kembali = "November";
+                    break;
+                case '12':
+                    $bulan_kembali = "Desember";
+                    break;
+                default:
+                    $bulan_kembali = "";
+                    break;
+            }
+
+            echo $tanggal_kembali_parts[2] . " " . $bulan_kembali . " " . $tanggal_kembali_parts[0];
+            ?>
+            <br><br><br>
             <table width="100%" style="border: none;">
                 <tr>
                     <td width="40%" align="center">
@@ -302,7 +622,8 @@ table {
 <p>Pejabat yang berwenang menerbitkan SPPD, pegawai yang melakukan perjalanan dinas, para pejabat yang mengesahkan
     tanggal berangkat / tiba serta Bendaharawan bertanggungjawab berdasarkan peraturan-peraturan Keuangan Negara apabila
     Negara mendapat rugi akibat kesalahan, Kealpaannya. </p>
-
+<br><br><br><br><br>
+<br><br><br><br>
 
 <?php
 }
