@@ -159,6 +159,7 @@
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Kategori 3</label>
                         <input type="text" class="form-control" id="edit_kategori3" name="edit_kategori3">
+                        <input type="text" class="form-control" id="id_penginapan" name="id_penginapan" hidden>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -285,7 +286,7 @@
         $('#edit_kategori1').val(data.kategori1);
         $('#edit_kategori2').val(data.kategori2);
         $('#edit_kategori3').val(data.kategori3);
-        $('#id_penginapan').val(data.id);
+        $('#id_penginapan').val(data.id_penginapan);
 
         // Buka modal edit
         $('#editModal').modal('show');
