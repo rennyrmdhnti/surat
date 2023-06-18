@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Waktu pembuatan: 04 Jun 2023 pada 12.35
+-- Waktu pembuatan: 18 Jun 2023 pada 10.42
 -- Versi server: 8.0.31
 -- Versi PHP: 8.0.26
 
@@ -32,15 +32,21 @@ CREATE TABLE IF NOT EXISTS `tb_bidang` (
   `id_bidang` int NOT NULL AUTO_INCREMENT,
   `bidang` varchar(50) NOT NULL,
   PRIMARY KEY (`id_bidang`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_bidang`
 --
 
 INSERT INTO `tb_bidang` (`id_bidang`, `bidang`) VALUES
-(1, 'A'),
-(2, 'B');
+(1, 'Anggaran'),
+(2, 'Aset'),
+(3, 'Akuntansi'),
+(4, 'Pajak'),
+(5, 'Sekretariat'),
+(6, 'PBMD'),
+(7, 'Hanwas'),
+(8, 'Perbendaharaan');
 
 -- --------------------------------------------------------
 
@@ -50,7 +56,7 @@ INSERT INTO `tb_bidang` (`id_bidang`, `bidang`) VALUES
 
 DROP TABLE IF EXISTS `tb_golongan`;
 CREATE TABLE IF NOT EXISTS `tb_golongan` (
-  `id_gol` int NOT NULL,
+  `id_gol` int NOT NULL AUTO_INCREMENT,
   `kd_golongan` char(10) NOT NULL,
   `nama_pangkat` varchar(100) NOT NULL,
   `status` int NOT NULL,
@@ -59,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `tb_golongan` (
   `edit_by` varchar(50) NOT NULL,
   `edit_time` varchar(50) NOT NULL,
   PRIMARY KEY (`id_gol`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data untuk tabel `tb_golongan`
@@ -656,14 +662,14 @@ CREATE TABLE IF NOT EXISTS `tb_nominatif` (
 
 DROP TABLE IF EXISTS `tb_pagu`;
 CREATE TABLE IF NOT EXISTS `tb_pagu` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `program` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `kegiatan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `sub_kegiatan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `tahun` varchar(15) NOT NULL,
   `pagu_anggaran` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data untuk tabel `tb_pagu`
@@ -671,7 +677,7 @@ CREATE TABLE IF NOT EXISTS `tb_pagu` (
 
 INSERT INTO `tb_pagu` (`id`, `program`, `kegiatan`, `sub_kegiatan`, `tahun`, `pagu_anggaran`) VALUES
 (1, 'Penunjang Urusan Pemerintahan Daerah Kabupaten/Kota', 'Administrasi Umum Perangkat Daerah', 'Penyelenggaraan Rapat Koordinasi dan Konsultasi SKPD', '2023', 1357107000),
-(8, 'Program Pengelolaan Pendapatan Daerah', 'Kegiatan Pengelolaan Pendapatan Daerah', 'Penagihan Pajak Daerah', '2023', 1865917800);
+(2, 'Program Pengelolaan Pendapatan Daerah', 'Kegiatan Pengelolaan Pendapatan Daerah', 'Penagihan Pajak Daerah', '2023', 1865917800);
 
 -- --------------------------------------------------------
 
@@ -699,7 +705,7 @@ CREATE TABLE IF NOT EXISTS `tb_pegawai` (
   PRIMARY KEY (`id`),
   KEY `nama` (`nama`),
   KEY `fk_gol` (`id_gol`)
-) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data untuk tabel `tb_pegawai`
@@ -725,7 +731,6 @@ INSERT INTO `tb_pegawai` (`id`, `nip`, `nama`, `alamat`, `jabatan`, `nama_bank`,
 (62, '19771106 200501 2 010', 'Astri Kusmiatin, SE', 'Banjarmasin', 'Kasubbag Keuangan ', 'Bank Kalsel', '001.03.28.67432.0', 5, 'Sekretariat', '', '', 'Kawin', 'astri@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(4).jpeg', ''),
 (63, '19820527 200501 2 013', 'Meilani Dewi, A.Md', 'Banjarmasin', 'Bendahara', 'Bank Kalsel', '001.03.28.78091.3', 6, 'Sekretariat', '15.047.858.4-731.000', '6371046705820000', 'Kawin', 'meiliani@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(1).jpeg', ''),
 (64, '19730915 200701 1 011', 'Hermansyah, SE', 'Banjarmasin', 'Pengelola Keuangan', 'Bank Kalsel', '001.03.28.09074.5', 7, 'Pajak', '', '', 'Kawin', 'herman@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(7).jpeg', ''),
-(65, '19870905 201101 2 002', 'Noor Meldawaty, S.Ab', 'Banjarmasin', 'Bendahara', 'Bank Kalsel', '001.03.28.67092.3', 7, 'Sekretariat', '15.569.686.7-733.000', '6303054509870006', 'Kawin', 'meldawaty@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(3).jpeg', ''),
 (66, '19890522 201001 2 002', 'Meilia Rachmi, S.Ab', 'Banjarmasin', 'Penyusun Laporan Keuangan', 'Bank Kalsel', '001.03.28.09216.4', 7, 'Sekretariat', '15.428.000.2-731.000', '6371016205890000', 'Kawin', 'meilia@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(4).jpeg', ''),
 (67, '19880904 201001 2 004', 'Ika Novita Sari, A.Md', 'Banjarmasin', 'Pranata Komputer Pelaksana', 'Bank Kalsel', '001.03.28.20703.9', 9, 'Sekretariat', '77.972.982.1-731.000', '6371054409880000', 'Kawin', 'novita@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(5).jpeg', ''),
 (68, '19751222 200604 2 005', 'Wiwiek Indah Pertiwi', 'Banjarmasin', 'Pengadministrasi Keuangan', 'Bank', '2000365092', 8, 'Sekretariat', '49.297.331.8-721.000', '-', 'Kawin', 'wiwiek@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(3).jpeg', ''),
@@ -794,12 +799,9 @@ INSERT INTO `tb_pegawai` (`id`, `nip`, `nama`, `alamat`, `jabatan`, `nama_bank`,
 (132, '19950208 202203 1 005', 'Gusti Indra Rachmadani, SM', 'Banjarmasin', 'Analis Aset Daerah ', 'Bank', '3200515609', 8, 'PBMD', '65.143.704.8-731.000', '-', 'Kawin', 'gusti@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(7).jpeg', ''),
 (133, '19940303 201609 2 001', 'Sri Fathanah, S.STP, M.A', 'Banjarmasin', 'Analis Pembiayaan Daerah', 'Bank Kalsel', '3201013579', 6, 'Anggaran', '', '', 'Kawin', 'srifathanah@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(5).jpeg', ''),
 (134, 'admin', '', '', '', '', '', 0, '', '', '', '', '', NULL, '123'),
-(135, '123123', 'aaa', 'aaaa', 'aaaa', 'asdasd', '123123', 0, 'A', '', '', '1', '', NULL, '123456'),
-(136, '1111111', 'qqqqqqq', 'asas', 'asas', 'asa', '123123', 0, 'A', '', '', '1', '', NULL, '123456'),
-(137, '567', 'ase', 'asda', 'asa', 'asda', '1231', 0, 'A', '', '', '1', '', NULL, '123456'),
-(138, '3452', 'asda', 'asda', 'asda', 'asda', '23424', 0, 'B', '', '', '1', '', '../assets/pegawai/3452.jpg', '123456'),
-(139, '453', 'defs', 'dfgd', 'dfg', 'dfg', '453', 0, 'A', '', '', '2', '', '../assets/pegawai/453.jpg', '123456'),
-(140, '0000', 'popo', 'dsfa', 'aq', 'sada', '12313', 0, 'B', '', '', '1', '', '../assets/pegawai/0000.jpg', '123456');
+(141, 'AAA', 'AAA', 'AAA', 'A', 'AAA', 'AAA', 0, 'ANGGARAN', '', '', '1', '', '../assets/pegawai/AAA.jpg', '123456'),
+(142, '123123', 'asdadrfgdf', 'dfs', 'safsad', 'sdfs', '123414123414', 1, 'ANGGARAN', '', '', '1', '', NULL, '123456'),
+(143, '123432', 'adfsdf', 'asd', 'afsda', 'dasda', '123464353453', 4, 'Sekretariat', '', '', '2', '', NULL, '123456');
 
 -- --------------------------------------------------------
 
@@ -813,6 +815,30 @@ CREATE TABLE IF NOT EXISTS `tb_penggajihan` (
   `penggajihan` varchar(50) NOT NULL,
   PRIMARY KEY (`id_penggajihan`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_penginapan`
+--
+
+DROP TABLE IF EXISTS `tb_penginapan`;
+CREATE TABLE IF NOT EXISTS `tb_penginapan` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `propinsi` varchar(100) NOT NULL,
+  `satuan` varchar(100) NOT NULL,
+  `kategori1` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `kategori2` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `kategori3` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data untuk tabel `tb_penginapan`
+--
+
+INSERT INTO `tb_penginapan` (`id`, `propinsi`, `satuan`, `kategori1`, `kategori2`, `kategori3`) VALUES
+(2, '12', 'OH', '50000', '40000', '30000');
 
 -- --------------------------------------------------------
 
@@ -987,21 +1013,20 @@ INSERT INTO `tb_propinsi` (`id`, `nama`) VALUES
 
 DROP TABLE IF EXISTS `tb_rek_kegiatan`;
 CREATE TABLE IF NOT EXISTS `tb_rek_kegiatan` (
-  `id_rek` int NOT NULL,
+  `id_rek` int NOT NULL AUTO_INCREMENT,
   `id_sub` int NOT NULL,
   `kode_rekening` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `uraian` varchar(2000) NOT NULL,
-  `anggaran` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `anggaran` bigint NOT NULL,
+  PRIMARY KEY (`id_rek`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data untuk tabel `tb_rek_kegiatan`
 --
 
 INSERT INTO `tb_rek_kegiatan` (`id_rek`, `id_sub`, `kode_rekening`, `uraian`, `anggaran`) VALUES
-(1, 1, '5.1.02.02.02.0075', 'Bahan Alat/Bahan untuk Kegiatan Kantor-Alat/Bahan untuk Kegiatan Kantor Lainnya', 89200),
-(2, 1, '5.1.01.03.02.0002', 'Belanja Perjalanan Dinas Biasa', 1357107000),
-(3, 1, '5.1.02.02.03.0002', 'Belanja Perjalanan Dinas Biasa - Luar Negeri', 114119000);
+(2, 1, '123123', 'adads', 123123123);
 
 -- --------------------------------------------------------
 
@@ -1020,7 +1045,7 @@ CREATE TABLE IF NOT EXISTS `tb_rek_travel` (
   `edit_by` varchar(50) NOT NULL,
   `edit_time` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_rek_travel`
@@ -1069,7 +1094,7 @@ CREATE TABLE IF NOT EXISTS `tb_thl` (
   `foto` varchar(255) DEFAULT NULL,
   `bidang` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data untuk tabel `tb_thl`
@@ -1077,7 +1102,7 @@ CREATE TABLE IF NOT EXISTS `tb_thl` (
 
 INSERT INTO `tb_thl` (`id`, `nama`, `alamat`, `jabatan`, `nama_bank`, `kode_rekening`, `status`, `email`, `foto`, `bidang`) VALUES
 (24, 'Muhammad Aditiya Yanuari', 'Banjarmasin', 'THL', 'Bank Kalsel', '001.03.01.65091.0', 'Belum Kawin', 'aditiya@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08.jpeg', 'Hanwas'),
-(25, 'Muhammad Ridho Wahyudi', 'Banjarmasin', '', 'Bank Kalsel', '001.03.01.09017.6', 'Kawin', 'wahyudi@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(6).jpeg', 'Pajak'),
+(25, 'Muhammad Ridho Wahyudi', 'Banjarmasin', 'THL', 'Bank Kalsel', '001.03.01.09017.6', 'Kawin', 'wahyudi@gmail.com', 'Muhammad Ridho Wahyudi.jpg', 'PAJAK'),
 (26, 'Muhammad Farid Syauqi', 'Banjarmasin', '', 'Bank Kalsel', '038.03.01.76091.3', 'Belum Kawin', 'farid@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(2).jpeg', 'Perbendaharaan'),
 (27, 'M. Haris Fadillah', 'Banjarmasin', 'THL', 'Bank Kalsel', '001.03.01.09671.5', 'Belum Kawin', 'haris@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(2).jpeg', 'Pajak'),
 (28, 'Nurdin Rani', 'Banjarmasin', '', 'Bank Kalsel', '001.03.01.97391.8', 'Belum Kawin', 'nurdin@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08.jpeg', 'Pajak'),
@@ -1112,7 +1137,8 @@ INSERT INTO `tb_thl` (`id`, `nama`, `alamat`, `jabatan`, `nama_bank`, `kode_reke
 (61, 'Muhammad Syarif Hidayatullah', 'Banjarmasin', '', 'Bank Kalsel', '012.03.01.56309.0', 'Belum Kawin', 'syarifhidayat@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(6).jpeg', 'PBMD'),
 (62, 'Firda Kharisma', 'Banjarmasin', 'THL', 'Bank BNI', '038.03.01.09054.6', 'Belum Kawin', 'firdakharisma1@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(7).jpeg', 'PBMD'),
 (63, 'Afrizal Andi', 'Banjarmasin', 'THL', 'Bank Kalsel', '001.03.01.06543.9', 'Kawin', 'andiafrizal@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(3).jpeg', 'Anggaran'),
-(64, 'Andri Setiawan', 'Banjarmasin', '', 'Bank Kalsel', '001.03.01.04132.5', 'Kawin', 'andri@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(2).jpeg', 'Pajak');
+(64, 'Andri Setiawan', 'Banjarmasin', '', 'Bank Kalsel', '001.03.01.04132.5', 'Kawin', 'andri@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(2).jpeg', 'Pajak'),
+(67, 'hnfjf', 'ghf', 'THL', 'fghf', '1231231', 'Belum Kawin', 'fghf', '../assets/thl/hnfjf.jpg', 'Anggaran');
 
 -- --------------------------------------------------------
 
@@ -1122,10 +1148,11 @@ INSERT INTO `tb_thl` (`id`, `nama`, `alamat`, `jabatan`, `nama_bank`, `kode_reke
 
 DROP TABLE IF EXISTS `tb_transportasi`;
 CREATE TABLE IF NOT EXISTS `tb_transportasi` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `nama_provinsi` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `satuan` varchar(50) NOT NULL,
-  `besaran` decimal(65,0) NOT NULL
+  `besaran` decimal(65,0) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -1133,40 +1160,44 @@ CREATE TABLE IF NOT EXISTS `tb_transportasi` (
 --
 
 INSERT INTO `tb_transportasi` (`id`, `nama_provinsi`, `satuan`, `besaran`) VALUES
-(1, 'Aceh', 'Orang/Kali', '12300000'),
-(2, 'Sumatera Utara', 'Orang/Kali', '23200000'),
-(3, 'Riau', 'Orang/Kali', '9400000'),
-(4, 'Kepulauan Riau', 'Orang/Kali', '13700000'),
-(5, 'Jambi', 'Orang/Kali', '15700000'),
-(6, 'Sumatera Barat', 'Orang/Kali', '19000000'),
-(7, 'Sumatera Selatan', 'Orang/Kali', '12800000'),
-(8, 'Lampung', 'Orang/Kali', '16700000'),
-(9, 'Bengkulu', 'Orang/Kali', '10900000'),
-(10, 'Bangka Belitung', 'Orang/Kali', '9000000'),
-(11, 'Banten', 'Orang/Kali', '44600000'),
-(12, 'Jawa Barat', 'Orang/Kali', '16600000'),
-(13, 'D.K.I Jakarta', 'Orang/Kali', '25600000'),
-(14, 'Jawa Tengah', 'Orang/Kali', '7500000'),
-(15, 'D.I Yogyakarta', 'Orang/Kali', '11800000'),
-(16, 'Jawa Timur', 'Orang/Kali', '19400000'),
-(17, 'Bali', 'Orang/Kali', '15900000'),
-(18, 'Nusa Tenggara Barat', 'Orang/Kali', '23100000'),
-(19, 'Nusa Tenggara Timur', 'Orang/Kali', '10800000'),
-(20, 'Kalimantan Barat', 'Orang/Kali', '13500000'),
-(21, 'Kalimantan Tengah', 'Orang/Kali', '11100000'),
-(22, 'Kalimantan Selatan', 'Orang/Kali', '15000000'),
-(23, 'kalimantan Timur', 'Orang/Kali', '45000000'),
-(24, 'Kalimantan Utara', 'Orang/Kali', '10200000'),
-(25, 'Selawesi Utara', 'Orang/Kali', '13800000'),
-(26, 'Gorontalo', 'Orang/Kali', '24000000'),
-(27, 'Sulawesi Barat', 'Orang/Kali', '31300000'),
-(28, 'Sulawesi Selatan', 'Orang/Kali', '14500000'),
-(29, 'Sulawesi Tengah', 'Orang/Kali', '16500000'),
-(30, 'Sulawesi Tenggara', 'Orang/Kali', '17100000'),
-(31, 'Maluku', 'Orang/Kali', '24000000'),
-(32, 'Maluku Utara', 'Orang/Kali', '21500000'),
-(33, 'papua', 'Orang/Kali', '43100000'),
-(34, 'Papua Barat', 'Orang/Kali', '18200000');
+(1, '11', 'Orang/Kali', '12300000'),
+(2, '12', 'Orang/Kali', '23200000'),
+(3, '14', 'Orang/Kali', '9400000'),
+(4, '21', 'Orang/Kali', '13700000'),
+(5, '15', 'Orang/Kali', '15700000'),
+(6, '13', 'Orang/Kali', '19000000'),
+(7, '16', 'Orang/Kali', '12800000'),
+(8, '18', 'Orang/Kali', '16700000'),
+(9, '17', 'Orang/Kali', '10900000'),
+(10, '31', 'Orang/kali', '2560000');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_uang_harian`
+--
+
+DROP TABLE IF EXISTS `tb_uang_harian`;
+CREATE TABLE IF NOT EXISTS `tb_uang_harian` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_propinsi` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `satuan` varchar(10) NOT NULL,
+  `besaran` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data untuk tabel `tb_uang_harian`
+--
+
+INSERT INTO `tb_uang_harian` (`id`, `id_propinsi`, `satuan`, `besaran`) VALUES
+(1, '11', 'OH', '360000'),
+(8, '21', 'OH', '370000'),
+(3, '12', 'OH', '370000'),
+(4, '13', 'OH', '370000'),
+(5, '14', 'OH', '370000'),
+(6, '15', 'OH', '380000'),
+(7, '16', 'OH', '380000');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
