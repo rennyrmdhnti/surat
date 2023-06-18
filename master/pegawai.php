@@ -43,6 +43,9 @@ td {
                                 data-coreui-target="#exampleModal">
                                 Tambah Data
                             </button>
+                            <button type="button" class="btn btn-primary" id="print-button" >
+                                Cetak Data
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -108,16 +111,18 @@ td {
                         <select class="form-select" aria-label="Default select example" id="golonganSelect">
                             <option selected>Pilih golongan</option>
                             <?php
-                                // Ambil data dari tabel tb_golongan
-                                $query = "SELECT nama_pangkat FROM tb_golongan";
-                                $result = $conn->query($query);
+                            // Ambil data dari tabel tb_golongan
+                            $query = "SELECT id_gol, nama_pangkat,kd_golongan FROM tb_golongan";
+                            $result = $conn->query($query);
 
-                                // Loop melalui hasil query dan tampilkan opsi
-                                while ($row = $result->fetch_assoc()) {
-                                    $namaPangkat = $row['nama_pangkat'];
-                                    echo '<option value="' . $namaPangkat . '">' . $namaPangkat . '</option>';
-                                }
-                            ?>
+                            // Loop melalui hasil query dan tampilkan opsi
+                            while ($row = $result->fetch_assoc()) {
+                                $idGol = $row['id_gol'];
+                                $namaPangkat = $row['nama_pangkat'];
+                                $kodeGolongan = $row['kd_golongan'];
+                                echo '<option value="' . $idGol . '">' . $namaPangkat . ' - ' . $kodeGolongan . '</option>';
+                            }
+                        ?>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -196,13 +201,15 @@ td {
                             <option selected>Pilih golongan</option>
                             <?php
                             // Ambil data dari tabel tb_golongan
-                            $query = "SELECT nama_pangkat FROM tb_golongan";
+                            $query = "SELECT id_gol, nama_pangkat,kd_golongan FROM tb_golongan";
                             $result = $conn->query($query);
 
                             // Loop melalui hasil query dan tampilkan opsi
                             while ($row = $result->fetch_assoc()) {
+                                $idGol = $row['id_gol'];
                                 $namaPangkat = $row['nama_pangkat'];
-                                echo '<option value="' . $namaPangkat . '">' . $namaPangkat . '</option>';
+                                $kodeGolongan = $row['kd_golongan'];
+                                echo '<option value="' . $idGol . '">' . $namaPangkat . ' - ' . $kodeGolongan . '</option>';
                             }
                         ?>
                         </select>
@@ -287,7 +294,10 @@ td {
                     "data": "jabatan"
                 },
                 {
-                    "data": "kd_golongan"
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return row.nama_pangkat + " - " + row.kd_golongan;
+                    }
                 },
                 {
                     "data": "bidang"
@@ -323,7 +333,8 @@ td {
 
                     // add Delete button
                     $(row).append(
-                        '<td><button class="btn btn-danger delete-button" onclick="deleteData('+ data.id +')"><i class="cil-trash"></i></button></td>'
+                        '<td><button class="btn btn-danger delete-button" onclick="deleteData(' +
+                        data.id + ')"><i class="cil-trash"></i></button></td>'
                     );
                 }
             }
@@ -331,6 +342,41 @@ td {
 
         $("#data-table").on("mouseenter", "td", function() {
             $(this).attr('title', this.innerText);
+        });
+
+        $('#print-button').on('click', function() {
+            // Mendapatkan data dari DataTable yang telah difilter
+            var filteredData = table.rows({
+                filter: 'applied'
+            }).data();
+
+            // Mengambil data NIP dari baris yang telah difilter
+            var nips = filteredData.toArray().map(function(row) {
+                return row.nip;
+            });
+
+            // Mengirim data NIP ke pegawai_cetak.php menggunakan AJAX
+            $.ajax({
+                url: 'pegawai_cetak.php',
+                method: 'POST',
+                data: {
+                    nips: nips
+                },
+                success: function(response) {
+                    // Menampilkan response dari pegawai_cetak.php di jendela baru
+                    var newWindow = window.open('', '_blank');
+                    newWindow.document.open();
+                    newWindow.document.write(response);
+                    newWindow.document.close();
+
+                    // Melakukan pencetakan
+                    newWindow.print();
+                },
+                error: function(xhr, status, error) {
+                    // Penanganan kesalahan jika terjadi kesalahan dalam permintaan AJAX
+                    console.error(error);
+                }
+            });
         });
 
     });
@@ -406,7 +452,7 @@ td {
         $('#editNama').val(data.nama);
         $('#editNIP').val(data.nip);
         $('#editJabatan').val(data.jabatan);
-        $('#editGolongan').val(data.kd_golongan);
+        $('#editGolongan').val(data.id_gol);
         $('#editBidang').val(data.bidang);
         $('#editAlamat').val(data.alamat);
         $('#editStatus').val(data.status);

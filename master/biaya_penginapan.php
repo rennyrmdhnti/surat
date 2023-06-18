@@ -53,8 +53,6 @@
                                         <th>Ketegori 1</th>
                                         <th>Ketegori 2</th>
                                         <th>Ketegori 3</th>
-                                        <th>Ketegori 4</th>
-                                        <th>Ketegori 5</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -111,14 +109,6 @@
                         <label for="exampleFormControlInput1" class="form-label">Kategori 3</label>
                         <input type="text" class="form-control" id="kategori3" name="kategori3">
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Kategori 4</label>
-                        <input type="text" class="form-control" id="kategori4" name="kategori4">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Kategori 5</label>
-                        <input type="text" class="form-control" id="kategori5" name="kategori5">
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
@@ -167,19 +157,9 @@
                         <input type="text" class="form-control" id="edit_kategori2" name="edit_kategori2">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Kategori 2</label>
+                        <label for="exampleFormControlInput1" class="form-label">Kategori 3</label>
                         <input type="text" class="form-control" id="edit_kategori3" name="edit_kategori3">
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Kategori 2</label>
-                        <input type="text" class="form-control" id="edit_kategori4" name="edit_kategori4">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Kategori 2</label>
-                        <input type="text" class="form-control" id="edit_kategori5" name="edit_kategori5">
-                        <input type="text" class="form-control" id="id_penginapan" name="id_penginapan" hidden>
-                    </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
@@ -219,15 +199,7 @@
                 {
                     "data": "kategori3",
                     "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                },
-                {
-                    "data": "kategori4",
-                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                },
-                {
-                    "data": "kategori5",
-                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                },
+                }
             ],
             "columnDefs": [{
                 "targets": 0,
@@ -262,8 +234,6 @@
         var kategori1 = document.getElementById('kategori1').value;
         var kategori2 = document.getElementById('kategori2').value;
         var kategori3 = document.getElementById('kategori3').value;
-        var kategori4 = document.getElementById('kategori4').value;
-        var kategori5 = document.getElementById('kategori5').value;
 
         var formData = new FormData();
         // Menambahkan data ke formData
@@ -272,8 +242,6 @@
         formData.append('kategori1', kategori1);
         formData.append('kategori2', kategori2);
         formData.append('kategori3', kategori3);
-        formData.append('kategori4', kategori4);
-        formData.append('kategori5', kategori5);
 
         // Mengirim data ke server menggunakan AJAX
         var xhr = new XMLHttpRequest();
@@ -317,8 +285,6 @@
         $('#edit_kategori1').val(data.kategori1);
         $('#edit_kategori2').val(data.kategori2);
         $('#edit_kategori3').val(data.kategori3);
-        $('#edit_kategori4').val(data.kategori4);
-        $('#edit_kategori5').val(data.kategori5);
         $('#id_penginapan').val(data.id);
 
         // Buka modal edit
@@ -405,8 +371,6 @@
         var kategori1 = document.getElementById('edit_kategori1').value;
         var kategori2 = document.getElementById('edit_kategori2').value;
         var kategori3 = document.getElementById('edit_kategori3').value;
-        var kategori4 = document.getElementById('edit_kategori4').value;
-        var kategori5 = document.getElementById('edit_kategori5').value;
         var id_penginapan = document.getElementById('id_penginapan').value;
 
         var formData = new FormData();
@@ -417,8 +381,6 @@
         formData.append('kategori1', kategori1);
         formData.append('kategori2', kategori2);
         formData.append('kategori3', kategori3);
-        formData.append('kategori4', kategori4);
-        formData.append('kategori5', kategori5);
         formData.append('id_penginapan', id_penginapan);
 
         // Mengirim data ke server menggunakan AJAX

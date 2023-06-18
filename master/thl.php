@@ -44,6 +44,9 @@ td {
                                 data-coreui-target="#exampleModal">
                                 Tambah Data
                             </button>
+                            <button type="button" class="btn btn-primary" id="print-button" >
+                                Cetak Data
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -61,6 +64,7 @@ td {
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Gambar</th>
                                         <th>Nama</th>
                                         <th>Jabatan</th>
                                         <th>Bidang</th>
@@ -234,6 +238,14 @@ td {
                     "data": ""
                 },
                 {
+                    "data": "",
+                    "render": function(data, type, row, meta) {
+                        // Mengembalikan elemen gambar HTML dengan sumber gambar sesuai data
+                        return '<img src="' + row.foto +
+                            '" alt="Gambar" width="50" height="50">';
+                    }
+                },
+                {
                     "data": "nama"
                 },
                 {
@@ -285,6 +297,41 @@ td {
 
         $("#data-table").on("mouseenter", "td", function() {
             $(this).attr('title', this.innerText);
+        });
+
+        $('#print-button').on('click', function() {
+            // Mendapatkan data dari DataTable yang telah difilter
+            var filteredData = table.rows({
+                filter: 'applied'
+            }).data();
+
+            // Mengambil data NIP dari baris yang telah difilter
+            var nips = filteredData.toArray().map(function(row) {
+                return row.nama;
+            });
+
+            // Mengirim data NIP ke pegawai_cetak.php menggunakan AJAX
+            $.ajax({
+                url: 'thl_cetak.php',
+                method: 'POST',
+                data: {
+                    nips: nips
+                },
+                success: function(response) {
+                    // Menampilkan response dari pegawai_cetak.php di jendela baru
+                    var newWindow = window.open('', '_blank');
+                    newWindow.document.open();
+                    newWindow.document.write(response);
+                    newWindow.document.close();
+
+                    // Melakukan pencetakan
+                    newWindow.print();
+                },
+                error: function(xhr, status, error) {
+                    // Penanganan kesalahan jika terjadi kesalahan dalam permintaan AJAX
+                    console.error(error);
+                }
+            });
         });
     });
 
