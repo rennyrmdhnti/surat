@@ -8,7 +8,7 @@ require_once 'config/koneksi.php';
 if ($_GET['data'] == 'pegawai') {
     
 // mengambil data dari MySQL
-    $sql = "SELECT tb_pegawai.*,tb_golongan.kd_golongan FROM tb_pegawai LEFT JOIN tb_golongan ON tb_golongan.id_gol = tb_pegawai.id_gol";
+    $sql = "SELECT tb_pegawai.*,tb_golongan.kd_golongan,tb_golongan.nama_pangkat FROM tb_pegawai LEFT JOIN tb_golongan ON tb_golongan.id_gol = tb_pegawai.id_gol";
     $result = $conn->query($sql);
     // memeriksa apakah kueri berhasil dieksekusi
     if ($result->num_rows > 0) {

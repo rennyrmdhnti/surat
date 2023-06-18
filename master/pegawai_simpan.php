@@ -15,10 +15,9 @@ $kodeRekening = $_POST['kode_rekening'];
 
 // Periksa apakah ada file yang diunggah
 if(isset($_FILES['foto'])) {
-    $file = $_FILES['foto'];
+    
+       $file = $_FILES['foto'];
 
-    // Periksa apakah tidak ada kesalahan saat mengunggah file
-    if($file['error'] === UPLOAD_ERR_OK) {
         // Tentukan lokasi folder tujuan
         $folder = "../assets/pegawai/";
 
@@ -28,7 +27,7 @@ if(isset($_FILES['foto'])) {
         $tujuanSimpan = $folder . $nama_file;
 
         // Pindahkan file ke folder tujuan dengan menggunakan move_uploaded_file
-        if(move_uploaded_file($file['tmp_name'], $folder . $nama_file)) {
+        move_uploaded_file($file['tmp_name'], $folder . $nama_file);
             // File foto berhasil disimpan, Anda dapat melanjutkan dengan penyimpanan data ke dalam tabel pegawai
 
             // Query untuk menyimpan data ke dalam tabel pegawai
@@ -40,12 +39,16 @@ if(isset($_FILES['foto'])) {
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
+} else {
+      // Query untuk menyimpan data ke dalam tabel pegawai
+      $sql = "INSERT INTO tb_pegawai (nama, nip, jabatan, id_gol, bidang, alamat, status, nama_bank, kode_rekening, password, foto)
+      VALUES ('$nama', '$nip', '$jabatan', '$golongan', '$bidang', '$alamat', '$status', '$namaBank', '$kodeRekening', 123456, null)";
+
+        if ($conn->query($sql) === TRUE) {
+        echo "Data pegawai berhasil disimpan.";
         } else {
-            echo "Gagal menyimpan foto.";
+        echo "Error: " . $sql . "<br>" . $conn->error;
         }
-    } else {
-        echo "Terjadi kesalahan saat mengunggah foto.";
-    }
 }
 
 $conn->close();

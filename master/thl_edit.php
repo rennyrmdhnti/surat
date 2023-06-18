@@ -44,6 +44,14 @@ if (isset($_FILES['foto'])) {
     } else {
         echo "Terjadi kesalahan saat mengunggah foto.";
     }
+} else {
+    $sql = "UPDATE tb_thl SET jabatan = '$jabatan', bidang = '$bidang', status = '$status', alamat = '$alamat', email = '$email', nama_bank = '$namaBank', kode_rekening = '$kodeRekening' WHERE nama = '$nama'";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Data THL berhasil diperbarui.";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
 }
 
 $conn->close();

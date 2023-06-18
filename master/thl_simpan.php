@@ -30,7 +30,7 @@ if(isset($_FILES['foto'])) {
         if(move_uploaded_file($file['tmp_name'], $folder . $nama_file)) {
             // File foto berhasil disimpan, Anda dapat melanjutkan dengan penyimpanan data ke dalam tabel THL
             
-            $sql = "INSERT INTO tb_thl (nama, jabatan, bidang, status, alamat, email, nama_bank, kode_rekening, foto) VALUES ('$nama', '$jabatan', '$bidang', '$status', '$alamat', '$email', '$namaBank', '$kodeRekening', '$nama_file')";
+            $sql = "INSERT INTO tb_thl (nama, jabatan, bidang, status, alamat, email, nama_bank, kode_rekening, foto) VALUES ('$nama', '$jabatan', '$bidang', '$status', '$alamat', '$email', '$namaBank', '$kodeRekening', '$tujuanSimpan')";
 
             if ($conn->query($sql) === TRUE) {
                 echo "Data THL berhasil disimpan.";
@@ -42,6 +42,14 @@ if(isset($_FILES['foto'])) {
         }
     } else {
         echo "Terjadi kesalahan saat mengunggah foto.";
+    }
+} else {
+    $sql = "INSERT INTO tb_thl (nama, jabatan, bidang, status, alamat, email, nama_bank, kode_rekening, foto) VALUES ('$nama', '$jabatan', '$bidang', '$status', '$alamat', '$email', '$namaBank', '$kodeRekening', null)";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Data THL berhasil disimpan.";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
 
