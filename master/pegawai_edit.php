@@ -10,6 +10,7 @@ $golongan = $_POST['golongan'];
 $bidang = $_POST['bidang'];
 $alamat = $_POST['alamat'];
 $status = $_POST['status'];
+$email = $_POST['email'];
 $namaBank = $_POST['nama_bank'];
 $kodeRekening = $_POST['kode_rekening'];
 
@@ -40,7 +41,8 @@ if(isset($_FILES['foto'])) {
                     status = '$status',
                     nama_bank = '$namaBank',
                     kode_rekening = '$kodeRekening',
-                    foto = '$tujuanSimpan'
+                    foto = '$tujuanSimpan',
+                    email = '$email'
                     WHERE nip = '$nip'";
 
             if ($conn->query($sql) === TRUE) {
@@ -57,7 +59,8 @@ if(isset($_FILES['foto'])) {
             alamat = '$alamat',
             status = '$status',
             nama_bank = '$namaBank',
-            kode_rekening = '$kodeRekening'
+            kode_rekening = '$kodeRekening',
+            email = '$email'
             WHERE nip = '$nip'";
 
     if ($conn->query($sql) === TRUE) {

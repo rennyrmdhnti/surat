@@ -6,13 +6,12 @@
     overflow-x: auto;
 }
 
-td {
-    /* font-size: 10px; */
-    max-width: 40px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+/* td { */
+/* max-width: 80px; */
+/* overflow: hidden; */
+/* text-overflow: ellipsis; */
+/* white-space: nowrap; */
+/* } */
 </style>
 
 
@@ -61,8 +60,8 @@ td {
                             <table id="data-table">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>No SPT</th>
+                                        <th style='width: 3%;'>No</th>
+                                        <th style='width: 20%;'>No SPT</th>
                                         <th>Nama</th>
                                         <th>Dasar</th>
                                         <th>Untuk</th>
@@ -269,6 +268,7 @@ td {
         var table = $('#data-table').DataTable({
             // "processing": true,
             // "serverSide": true,
+            "scrollX": true,
             responsive: true,
             "ajax": {
                 "url": "get_data_surat.php?data=spt",
@@ -291,12 +291,33 @@ td {
                 }
             ],
             "columnDefs": [{
-                "targets": 0,
-                "data": null,
-                "render": function(data, type, row, meta) {
-                    return meta.row + 1;
+                    "width": "10px",
+                    "targets": [0]
+                }, // Mengubah lebar kolom pertama menjadi 200px
+                {
+                    "width": "300px",
+                    "targets": [1]
+                }, // Mengubah lebar kolom kedua menjadi 150px
+                {
+                    "width": "280px",
+                    "targets": [2]
+                },
+                {
+                    "width": "600px",
+                    "targets": [3]
+                },
+                {
+                    "width": "600px",
+                    "targets": [4]
+                },
+                {
+                    "targets": 0,
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1;
+                    }
                 }
-            }],
+            ],
             "createdRow": function(row, data, dataIndex) {
                 // check if this is the last row
                 var no_spt = data.no_spt.replace(/\//g, '').replace('Sekr/BPKPAD', '');
@@ -304,7 +325,7 @@ td {
                 if (dataIndex === (table.rows().count() - 1)) {
                     // add Edit button
                     $(row).append(
-                        '<td><button class="btn btn-primary" onclick="print(\'' + no_spt +
+                        '<td><button class="btn btn-primary" onclick="print(\'' + data.id +
                         '\')"><i class="cil-print"></i></button></td>'
                     );
                     // add Edit button

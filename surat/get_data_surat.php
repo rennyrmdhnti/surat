@@ -8,10 +8,10 @@ require_once '../config/koneksi.php';
 if ($_GET['data'] == 'spt') {
     
 // mengambil data dari MySQL
-    $sql = "SELECT no_spt, dasar, untuk, GROUP_CONCAT(CONCAT(nomor, '. ', nama) SEPARATOR '<br>') AS nama
+    $sql = "SELECT id,no_spt, dasar, untuk, GROUP_CONCAT(CONCAT(nomor, '. ', nama) SEPARATOR '<br>') AS nama 
     FROM (
-        SELECT no_spt, dasar, untuk, nama, ROW_NUMBER() OVER (PARTITION BY no_spt, dasar, untuk ORDER BY nama) AS nomor
-        FROM tb_perintah_tugas
+        SELECT id,no_spt, dasar, untuk, nama, ROW_NUMBER() OVER (PARTITION BY no_spt, dasar, untuk ORDER BY nama) AS nomor
+        FROM tb_perintah_tugas ORDER BY id DESC
     ) t
     GROUP BY no_spt, dasar, untuk;       
     ";
@@ -33,7 +33,7 @@ if ($_GET['data'] == 'spt') {
 if ($_GET['data'] == 'sppd') {
     
     // mengambil data dari MySQL
-        $sql = "SELECT * FROM tb_perjalan_dinas";
+        $sql = "SELECT * FROM tb_perjalan_dinas ORDER BY id DESC";
         $result = $conn->query($sql);
         // memeriksa apakah kueri berhasil dieksekusi
         if ($result->num_rows > 0) {

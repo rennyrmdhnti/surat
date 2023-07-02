@@ -10,6 +10,7 @@ $golongan = $_POST['golongan'];
 $bidang = $_POST['bidang'];
 $alamat = $_POST['alamat'];
 $status = $_POST['status'];
+$email = $_POST['email'];
 $namaBank = $_POST['nama_bank'];
 $kodeRekening = $_POST['kode_rekening'];
 
@@ -31,8 +32,8 @@ if(isset($_FILES['foto'])) {
             // File foto berhasil disimpan, Anda dapat melanjutkan dengan penyimpanan data ke dalam tabel pegawai
 
             // Query untuk menyimpan data ke dalam tabel pegawai
-            $sql = "INSERT INTO tb_pegawai (nama, nip, jabatan, id_gol, bidang, alamat, status, nama_bank, kode_rekening, password, foto)
-                    VALUES ('$nama', '$nip', '$jabatan', '$golongan', '$bidang', '$alamat', '$status', '$namaBank', '$kodeRekening', 123456, '$tujuanSimpan')";
+            $sql = "INSERT INTO tb_pegawai (nama, nip, jabatan, id_gol, bidang, alamat, status, nama_bank, kode_rekening, password, foto, email)
+                    VALUES ('$nama', '$nip', '$jabatan', '$golongan', '$bidang', '$alamat', '$status', '$namaBank', '$kodeRekening', 123456, '$tujuanSimpan', '$email')";
 
             if ($conn->query($sql) === TRUE) {
                 echo "Data pegawai berhasil disimpan.";
@@ -41,8 +42,8 @@ if(isset($_FILES['foto'])) {
             }
 } else {
       // Query untuk menyimpan data ke dalam tabel pegawai
-      $sql = "INSERT INTO tb_pegawai (nama, nip, jabatan, id_gol, bidang, alamat, status, nama_bank, kode_rekening, password, foto)
-      VALUES ('$nama', '$nip', '$jabatan', '$golongan', '$bidang', '$alamat', '$status', '$namaBank', '$kodeRekening', 123456, null)";
+      $sql = "INSERT INTO tb_pegawai (nama, nip, jabatan, id_gol, bidang, alamat, status, nama_bank, kode_rekening, password, foto, email)
+      VALUES ('$nama', '$nip', '$jabatan', '$golongan', '$bidang', '$alamat', '$status', '$namaBank', '$kodeRekening', 123456, null, '$email')";
 
         if ($conn->query($sql) === TRUE) {
         echo "Data pegawai berhasil disimpan.";
