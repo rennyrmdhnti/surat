@@ -2,20 +2,20 @@
 require_once 'config/koneksi.php';
 
 $id = $_GET['id'];
-$firstPart = substr($id, 0, 3);
-$secondPart = substr($id, 3, 3);
-$thirdPart = substr($id, 6, 4);
-$fourthPart = substr($id, 10, 6);
-$fifthPart = substr($id, 16, 2);
-$sixPart = substr($id, 18);
+// $firstPart = substr($id, 0, 3);
+// $secondPart = substr($id, 3, 3);
+// $thirdPart = substr($id, 6, 4);
+// $fourthPart = substr($id, 10, 6);
+// $fifthPart = substr($id, 16, 2);
+// $sixPart = substr($id, 18);
 
-$finalId = $firstPart . '/' . $secondPart . '/' . $thirdPart . '/' . $fourthPart . '/' . $fifthPart . '/' . $sixPart;
+// $finalId = $firstPart . '/' . $secondPart . '/' . $thirdPart . '/' . $fourthPart . '/' . $fifthPart . '/' . $sixPart;
 
 // var_dump($id);
 // var_dump($finalId);
 // exit;
 
-$sql = "SELECT * FROM tb_perjalan_dinas LEFT JOIN tb_perintah_tugas ON tb_perjalan_dinas.no_spt = tb_perintah_tugas.no_spt WHERE tb_perjalan_dinas.no_sppd = '$finalId'";
+$sql = "SELECT * FROM tb_perjalan_dinas LEFT JOIN tb_perintah_tugas ON tb_perjalan_dinas.no_spt = tb_perintah_tugas.no_spt WHERE tb_perjalan_dinas.id = '$id'";
 $result = $conn->query($sql);
     $data = array();
     $dataNama = array();
@@ -127,7 +127,15 @@ body {
             <td width="50%"></td>
             <td width="15%">Nomor</td>
             <td>:</td>
-            <td><?php echo $data[0]["no_sppd"] ;?></td>
+            <td> <?php
+            $urutan_ke_5 = substr($data[0]['no_sppd'], 4, 1);
+            if ($urutan_ke_5 === '/') {
+                $id_with_tabs = str_replace('//', "/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/", $data[0]['no_sppd']);
+                echo $id_with_tabs;
+            } else {
+                echo $data[0]['no_sppd'];
+            }
+            ?></td>
         </tr>
     </tbody>
 </table>
@@ -336,7 +344,15 @@ body {
             <td width="45%"></td>
             <td width="20%">SPD No.</td>
             <td>:</td>
-            <td><?php echo $data[0]["no_sppd"] ;?></td>
+            <td>   <?php
+            $urutan_ke_5 = substr($data[0]['no_sppd'], 4, 1);
+            if ($urutan_ke_5 === '/') {
+                $id_with_tabs = str_replace('//', "/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/", $data[0]['no_sppd']);
+                echo $id_with_tabs;
+            } else {
+                echo $data[0]['no_sppd'];
+            }
+            ?></td>
         </tr>
         <tr>
             <td width="45%"></td>

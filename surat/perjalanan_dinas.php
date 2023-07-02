@@ -92,7 +92,8 @@
                         <div class="col">
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">No. SPT</label>
-                                <select class="form-select" id="no_spt" name="no_spt" aria-label="Default select example" >
+                                <select class="form-select" id="no_spt" name="no_spt"
+                                    aria-label="Default select example">
                                     <?php
                                         // Query untuk mengambil data dari tabel tb_perintah_tugas
                                         $query = "SELECT no_spt FROM tb_perintah_tugas GROUP BY no_spt";
@@ -117,12 +118,17 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Alat Transportasi</label>
-                                <select class="form-select" aria-label="Default select example" id="transportasi" name="transportasi"> 
+                                <select class="form-select" aria-label="Default select example" id="transportasi"
+                                    name="transportasi">
                                     <option selected>Pilih Transportasi</option>
-                                    <option value="Pesawat atau Transportasi Lain yang Menunjang">Pesawat atau Transportasi Lain yang Menunjang</option>
-                                    <option value="Mobil atau Transportasi Lain yang Menunjang">Mobil atau Transportasi Lain yang Menunjang</option>
-                                    <option value="Kereta Api atau Transportasi Lain yang Menunjang">Kereta Api atau Transportasi Lain yang Menunjang</option>
-                                    <option value="Kapal atau Transportasi Lain yang Menunjang">Kapal atau Transportasi Lain yang Menunjang</option>
+                                    <option value="Pesawat atau Transportasi Lain yang Menunjang">Pesawat atau
+                                        Transportasi Lain yang Menunjang</option>
+                                    <option value="Mobil atau Transportasi Lain yang Menunjang">Mobil atau Transportasi
+                                        Lain yang Menunjang</option>
+                                    <option value="Kereta Api atau Transportasi Lain yang Menunjang">Kereta Api atau
+                                        Transportasi Lain yang Menunjang</option>
+                                    <option value="Kapal atau Transportasi Lain yang Menunjang">Kapal atau Transportasi
+                                        Lain yang Menunjang</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -171,8 +177,17 @@
                                     value='Badan Pengelola Keuangan, Pendapatan dan Aset Daerah' readonly></input>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Mata Anggaran</label>
-                                <textarea class="form-control" id="mata_anggaran" name="mata_anggaran" rows="2"></textarea>
+                                <label for="mata_anggaran" class="form-label">Mata Anggaran</label>
+                                <select class="form-control" id="mata_anggaran" name="mata_anggaran">
+                                    <option value="">-- Pilih Mata Anggaran --</option>
+                                    <?php
+                                    $query = "SELECT sub_kegiatan FROM tb_pagu";
+                                    $result = mysqli_query($conn, $query);
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo "<option value='" . $row['sub_kegiatan'] . "'>" . $row['sub_kegiatan'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Keterangan</label>
@@ -202,7 +217,8 @@
                         <div class="col">
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">No. SPT</label>
-                                <select class="form-select" id="edit_nospt" name="edit_nospt" aria-label="Default select example" >
+                                <select class="form-select" id="edit_nospt" name="edit_nospt"
+                                    aria-label="Default select example">
                                     <?php
                                         // Query untuk mengambil data dari tabel tb_perintah_tugas
                                         $query = "SELECT no_spt FROM tb_perintah_tugas GROUP BY no_spt";
@@ -227,18 +243,23 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Alat Transportasi</label>
-                                <select class="form-select" aria-label="Default select example" id="edit_transportasi" name="edit_transportasi"> 
+                                <select class="form-select" aria-label="Default select example" id="edit_transportasi"
+                                    name="edit_transportasi">
                                     <option selected>Pilih Transportasi</option>
-                                    <option value="Pesawat atau Transportasi Lain yang Menunjang">Pesawat atau Transportasi Lain yang Menunjang</option>
-                                    <option value="Mobil atau Transportasi Lain yang Menunjang">Mobil atau Transportasi Lain yang Menunjang</option>
-                                    <option value="Kereta Api atau Transportasi Lain yang Menunjang">Kereta Api atau Transportasi Lain yang Menunjang</option>
-                                    <option value="Kapal atau Transportasi Lain yang Menunjang">Kapal atau Transportasi Lain yang Menunjang</option>
+                                    <option value="Pesawat atau Transportasi Lain yang Menunjang">Pesawat atau
+                                        Transportasi Lain yang Menunjang</option>
+                                    <option value="Mobil atau Transportasi Lain yang Menunjang">Mobil atau Transportasi
+                                        Lain yang Menunjang</option>
+                                    <option value="Kereta Api atau Transportasi Lain yang Menunjang">Kereta Api atau
+                                        Transportasi Lain yang Menunjang</option>
+                                    <option value="Kapal atau Transportasi Lain yang Menunjang">Kapal atau Transportasi
+                                        Lain yang Menunjang</option>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Tempat Berangkat</label>
-                                <input type="text" class="form-control" id="edit_tempat_berangkat" name="edit_tempat_berangkat"
-                                    value="Banjarmasin" readonly>
+                                <input type="text" class="form-control" id="edit_tempat_berangkat"
+                                    name="edit_tempat_berangkat" value="Banjarmasin" readonly>
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Tempat Tujuan</label>
@@ -258,11 +279,13 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Tanggal Berangkat</label>
-                                <input type="date" class="form-control" id="edit_tanggal_berangkat" name="edit_tanggal_berangkat">
+                                <input type="date" class="form-control" id="edit_tanggal_berangkat"
+                                    name="edit_tanggal_berangkat">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Tanggal Kembali</label>
-                                <input type="date" class="form-control" id="edit_tanggal_kembali" name="edit_tanggal_kembali">
+                                <input type="date" class="form-control" id="edit_tanggal_kembali"
+                                    name="edit_tanggal_kembali">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Lama</label>
@@ -281,13 +304,23 @@
                                     value='Badan Pengelola Keuangan, Pendapatan dan Aset Daerah' readonly></input>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Mata Anggaran</label>
-                                <textarea class="form-control" id="edit_mata_anggaran" name="edit_mata_anggaran" rows="2"></textarea>
+                                <label for="mata_anggaran" class="form-label">Mata Anggaran</label>
+                                <select class="form-control" id="edit_mata_anggaran" name="edit_mata_anggaran">
+                                    <option value="">-- Pilih Mata Anggaran --</option>
+                                    <?php
+                                    $query = "SELECT sub_kegiatan FROM tb_pagu";
+                                    $result = mysqli_query($conn, $query);
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo "<option value='" . $row['sub_kegiatan'] . "'>" . $row['sub_kegiatan'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
                             </div>
+
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Keterangan</label>
                                 <input type="text" class="form-control" id="edit_keterangan" name="edit_keterangan">
-                                <input type="text" class="form-control" id="editID" name="editID" >
+                                <input type="text" class="form-control" id="editID" name="editID">
                             </div>
                         </div>
                     </div>
@@ -317,7 +350,7 @@
     });
 
     $(document).ready(function() {
-        
+
         $("#editID").hide();
         var table = $('#data-table').DataTable({
             // "processing": true,
@@ -350,10 +383,32 @@
                     "data": "tempat_tujuan"
                 },
                 {
-                    "data": "tanggal_berangkat"
+                    "data": "tanggal_berangkat",
+                    "render": function(data, type, row) {
+                        // Ubah format tanggal dari "YYYY-MM-DD" menjadi "senin, 10 januari 2023"
+                        var date = new Date(data);
+                        var options = {
+                            weekday: 'long',
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                        };
+                        return date.toLocaleDateString('id-ID', options);
+                    }
                 },
                 {
-                    "data": "tanggal_kembali"
+                    "data": "tanggal_kembali",
+                    "render": function(data, type, row) {
+                        // Ubah format tanggal dari "YYYY-MM-DD" menjadi "senin, 10 januari 2023"
+                        var date = new Date(data);
+                        var options = {
+                            weekday: 'long',
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                        };
+                        return date.toLocaleDateString('id-ID', options);
+                    }
                 },
                 {
                     "data": "lama"
@@ -385,17 +440,17 @@
                 if (dataIndex === (table.rows().count() - 1)) {
                     // add Edit button
                     $(row).append(
-                        '<td><button class="btn btn-primary" onclick="print(\'' + no_sppd +
+                        '<td><button class="btn btn-primary" onclick="print(\'' + data.id +
                         '\')"><i class="cil-print"></i></button></td>'
                     );
                     // add Edit button
                     $(row).append(
-                        '<td><button class="btn btn-primary edit-button" data-id="' + no_sppd +
+                        '<td><button class="btn btn-primary edit-button" data-id="' + data.id +
                         '"><i class="cil-pencil"></i></button></td>'
                     );
                     // add Delete button
                     $(row).append(
-                        '<td><button class="btn btn-danger" onclick="deleteRow(\'' + no_sppd +
+                        '<td><button class="btn btn-danger" onclick="deleteRow(\'' + data.id +
                         '\')"><i class="cil-trash"></i></button></td>'
                     );
 
@@ -431,7 +486,7 @@
         var instansi = $("#instansi").val();
         var mataAnggaran = $("#mata_anggaran").val();
         var keterangan = $("#keterangan").val();
-        
+
         // Mengirim data ke server menggunakan AJAX
         $.ajax({
             url: "perjalanandinas_simpan.php", // Ganti dengan URL endpoint untuk menyimpan data
@@ -482,7 +537,7 @@
         });
     }
 
-    
+
     function deleteRow(id) {
         // Lakukan permintaan AJAX untuk menghapus data pegawai berdasarkan ID
         $.ajax({
@@ -595,27 +650,27 @@
         var mataAnggaran = $("#edit_mata_anggaran").val();
         var keterangan = $("#edit_keterangan").val();
         var id = $("#editID").val();
-        
+
 
         // Mengirim data ke server menggunakan AJAX
         $.ajax({
             url: "perjalanandinas_edit.php", // Ganti dengan URL endpoint untuk menyimpan data
             type: "POST",
             data: {
-                no_spt : noSPT,
-                no_sppd : noSPPD,
-                maksud : maksud,
-                transportasi : transportasi,
-                tempat_berangkat : tempatBerangkat,
-                tempat_tujuan : tempatTujuan,
-                tanggal_berangkat : tanggalBerangkat,
-                tanggal_kembali : tanggalKembali,
-                lama : lama,
-                pengikut : pengikut,
-                instansi : instansi,
-                mata_anggaran : mataAnggaran,
-                keterangan : keterangan,
-                id :id
+                no_spt: noSPT,
+                no_sppd: noSPPD,
+                maksud: maksud,
+                transportasi: transportasi,
+                tempat_berangkat: tempatBerangkat,
+                tempat_tujuan: tempatTujuan,
+                tanggal_berangkat: tanggalBerangkat,
+                tanggal_kembali: tanggalKembali,
+                lama: lama,
+                pengikut: pengikut,
+                instansi: instansi,
+                mata_anggaran: mataAnggaran,
+                keterangan: keterangan,
+                id: id
             },
             success: function(response) {
                 // Handle response dari server setelah data disimpan
@@ -660,7 +715,6 @@
                 printWindow.close();
             });
     }
-
     </script>
 
     <?php include '../template/footer.php'; ?>

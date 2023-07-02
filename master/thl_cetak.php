@@ -23,7 +23,7 @@ if ($result) {
 
   // Mengubah data menjadi format tabel HTML
   // Mengubah data menjadi format tabel HTML
-  $html = '<html><head><title>Data Pegawai</title>';
+  $html = '<html><head><title>Data THL</title>';
   $html .= '<style>';
   $html .= 'table { border-collapse: collapse; width: 100%; border: 2px solid #ddd; }';
   $html .= 'th, td { text-align: left; padding: 8px; border: 2px solid #ddd; }';
@@ -45,18 +45,14 @@ if ($result) {
   $html .= '<p style="margin-top:0pt; margin-left:35.45pt; margin-bottom:0pt; text-align:center; font-size:10pt;"><span style="height:0pt; text-align:left; display:block; position:absolute; z-index:1;"><img src="https://myfiles.space/user_files/160776_2c764bf7c16fcedc/1684666560_1.-surat-tugas-dengan-lampiran/1684666560_1.-surat-tugas-dengan-lampiran-2.png" width="640" height="8" alt="" style="margin: 0 0 0 auto; display: block; "></span><span style="font-family:Arial;">&nbsp;</span></p>';
   $html .= '<h1>Data THL</h1>';
   $html .= '<table>';
-  $html .= '<tr><th>No.</th><th>Nama</th><th>Alamat</th><th>Jabatan</th><th>Nama Bank</th><th>Kode Rekening</th><th>Status</th><th>Bidang</th><th>Email</th></tr>';
+  $html .= '<tr><th>No.</th><th>Nama</th><th>Jabatan</th><th>Bidang</th><th>Status</th></tr>';
   foreach ($data_pegawai as $index => $pegawai) {
     $html .= '<tr>';
     $html .= '<td>' . ($index + 1) . '</td>';
     $html .= '<td>' . $pegawai['nama'] . '</td>';
-    $html .= '<td>' . $pegawai['alamat'] . '</td>';
     $html .= '<td>' . $pegawai['jabatan'] . '</td>';
-    $html .= '<td>' . $pegawai['nama_bank'] . '</td>';
-    $html .= '<td>' . $pegawai['kode_rekening'] . '</td>';
-    $html .= '<td>' . $pegawai['status'] . '</td>';
     $html .= '<td>' . $pegawai['bidang'] . '</td>';
-    $html .= '<td>' . $pegawai['email'] . '</td>';
+    $html .= '<td>' . $pegawai['status'] . '</td>';
     $html .= '</tr>';
   }
   $html .= '</table>';

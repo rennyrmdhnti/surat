@@ -48,17 +48,17 @@ if ($_POST['get_data'] === 'perjalanan_dinas') {
     if (isset($_POST['id'])) {
         $id = $_POST['id'];
         
-        $firstPart = substr($id, 0, 3);
-        $secondPart = substr($id, 3, 3);
-        $thirdPart = substr($id, 6, 4);
-        $fourthPart = substr($id, 10, 6);
-        $fifthPart = substr($id, 16, 2);
-        $sixPart = substr($id, 18);
+        // $firstPart = substr($id, 0, 3);
+        // $secondPart = substr($id, 3, 3);
+        // $thirdPart = substr($id, 6, 4);
+        // $fourthPart = substr($id, 10, 6);
+        // $fifthPart = substr($id, 16, 2);
+        // $sixPart = substr($id, 18);
         
-        $finalId = $firstPart . '/' . $secondPart . '/' . $thirdPart . '/' . $fourthPart . '/' . $fifthPart . '/' . $sixPart;
+        // $finalId = $firstPart . '/' . $secondPart . '/' . $thirdPart . '/' . $fourthPart . '/' . $fifthPart . '/' . $sixPart;
 
         // Mengambil data pegawai dari MySQL
-        $sql = "SELECT * FROM tb_perjalan_dinas WHERE no_sppd = '$finalId'";
+        $sql = "SELECT * FROM tb_perjalan_dinas WHERE id = '$id'";
         // var_dump($sql);exit;
         // Mempersiapkan statement SQL menggunakan prepared statement
         $stmt = $conn->prepare($sql);

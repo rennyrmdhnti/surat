@@ -39,7 +39,7 @@ $finalId = $firstPart . '/' . $secondPart . '/' . $thirdPart . '/' . $fourthPart
 // var_dump($finalId);
 // exit;
 
-$sql = "SELECT * FROM tb_perintah_tugas WHERE no_spt = '$finalId'";
+$sql = "SELECT * FROM tb_perintah_tugas WHERE id = $id";
 $result = $conn->query($sql);
     $data = array();
     $dataNama = array();
@@ -74,7 +74,7 @@ foreach ($dataNama as $name) {
             $dataArray[] = $dtabel;
         }
     }
-    // var_dump($dataArray);exit;
+    // var_dump($data[0]['no_spt']);exit;
 ?>
 
 <style>
@@ -113,8 +113,17 @@ foreach ($dataNama as $name) {
                 style="font-family:Arial;">&nbsp;</span></em><em><span style="font-family:Arial;">PERINTAH
                 TUGAS</span></em>
     </h4>
-    <p style="margin-top:0pt; margin-bottom:0pt; text-align:center;"><span style="font-family:Arial;"> :</span><span
-            style="font-family:Arial;"></span><span style="font-family:Arial;"><?php echo $data[0]['no_spt'];  ?></span>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:center;"><span style="font-family:Arial;"></span><span
+            style="font-family:Arial;"></span><span style="font-family:Arial;">
+            <?php
+            $urutan_ke_5 = substr($data[0]['no_spt'], 4, 1);
+            if ($urutan_ke_5 === '/') {
+                $id_with_tabs = str_replace('//', "/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/", $data[0]['no_spt']);
+                echo $id_with_tabs;
+            } else {
+                echo $data[0]['no_spt'];
+            }
+            ?></span>
     </p>
     <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify;"><strong><span
                 style="font-family:Arial;">Dasar</span></strong><strong><span
@@ -226,7 +235,17 @@ foreach ($dataNama as $name) {
         pada Tanggal 22 s.d 24 Februari 2023 di Surabaya</h2>
 
     <p style="margin-top:0pt; margin-bottom:0pt; text-align:center;"><span style="font-family:Arial;"> :</span><span
-            style="font-family:Arial;"></span><span style="font-family:Arial;"><?php echo $data[0]['no_spt'];  ?></span>
+            style="font-family:Arial;"></span><span style="font-family:Arial;">
+            <?php
+            $urutan_ke_5 = substr($data[0]['no_spt'], 4, 1);
+            if ($urutan_ke_5 === '/') {
+                $id_with_tabs = str_replace('//', "/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/", $data[0]['no_spt']);
+                echo $id_with_tabs;
+            } else {
+                echo $data[0]['no_spt'];
+            }
+            ?>
+        </span>
     </p>
     <p style="margin-top:0pt; margin-bottom:0pt; text-align:center;"><span style="font-family:Arial;">&nbsp;</span></p>
     <!-- <table cellspacing="0" cellpadding="0" style="border:0.75pt solid #000000; border-collapse:collapse;">

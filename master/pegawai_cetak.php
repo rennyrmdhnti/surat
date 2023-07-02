@@ -9,7 +9,7 @@ $nips = $_POST['nips'];
 $nipsString = implode("','", $nips);
 
 // Query untuk mengambil data pegawai berdasarkan NIP yang dipilih
-$sql = "SELECT nip, nama, alamat, jabatan, nama_bank, kode_rekening, id_gol, bidang, status FROM tb_pegawai WHERE nip IN ('$nipsString')";
+$sql = "SELECT nip, nama, jabatan, tg.kd_golongan  , bidang FROM tb_pegawai tp left join tb_golongan tg on tg.id_gol = tp.id_gol WHERE nip IN ('$nipsString')";
 
 $result = $conn->query($sql);
 
@@ -45,19 +45,15 @@ if ($result) {
   $html .= '<p style="margin-top:0pt; margin-left:35.45pt; margin-bottom:0pt; text-align:center; font-size:10pt;"><span style="height:0pt; text-align:left; display:block; position:absolute; z-index:1;"><img src="https://myfiles.space/user_files/160776_2c764bf7c16fcedc/1684666560_1.-surat-tugas-dengan-lampiran/1684666560_1.-surat-tugas-dengan-lampiran-2.png" width="640" height="8" alt="" style="margin: 0 0 0 auto; display: block; "></span><span style="font-family:Arial;">&nbsp;</span></p>';
   $html .= '<h1>Data Pegawai</h1>';
   $html .= '<table>';
-  $html .= '<tr><th>No.</th><th>NIP</th><th>Nama</th><th>Alamat</th><th>Jabatan</th><th>Nama Bank</th><th>Kode Rekening</th><th>ID Gol</th><th>Bidang</th><th>Status</th></tr>';
+  $html .= '<tr><th>No.</th><th>NIP</th><th>Nama</th><th>Jabatan</th><th>Golongan</th><th>Bidang</th></tr>';
   foreach ($data_pegawai as $index => $pegawai) {
     $html .= '<tr>';
     $html .= '<td>' . ($index + 1) . '</td>';
     $html .= '<td>' . $pegawai['nip'] . '</td>';
     $html .= '<td>' . $pegawai['nama'] . '</td>';
-    $html .= '<td>' . $pegawai['alamat'] . '</td>';
     $html .= '<td>' . $pegawai['jabatan'] . '</td>';
-    $html .= '<td>' . $pegawai['nama_bank'] . '</td>';
-    $html .= '<td>' . $pegawai['kode_rekening'] . '</td>';
-    $html .= '<td>' . $pegawai['id_gol'] . '</td>';
+    $html .= '<td>' . $pegawai['kd_golongan'] . '</td>';
     $html .= '<td>' . $pegawai['bidang'] . '</td>';
-    $html .= '<td>' . $pegawai['status'] . '</td>';
     $html .= '</tr>';
   }
   $html .= '</table>';

@@ -70,6 +70,7 @@ td {
                                         <th>Golongan</th>
                                         <th>Bidang</th>
                                         <th>Alamat</th>
+                                        <th>Email</th>
                                         <th>Status</th>
                                         <th>Nama Bank</th>
                                         <th>Kode Rekening</th>
@@ -150,9 +151,13 @@ td {
                         <label for="exampleFormControlInput1" class="form-label">Status</label>
                         <select class="form-select" aria-label="Default select example" id="statusSelect">
                             <option selected>Pilih Status</option>
-                            <option value="1">Menikah</option>
-                            <option value="2">Belum Menikah</option>
+                            <option value="Kawin">Kawin</option>
+                            <option value="Belum Kawin">Belum Kawin</option>
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" class="form-control" id="email" name="email">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Nama Bank</label>
@@ -239,9 +244,13 @@ td {
                         <label for="editStatus" class="form-label">Status</label>
                         <select class="form-select" id="editStatus" name="editStatus">
                             <option selected>Pilih Status</option>
-                            <option value="1">Menikah</option>
-                            <option value="2">Belum Menikah</option>
+                            <option value="Kawin">Kawin</option>
+                            <option value="Belum Kawin">Belum Kawin</option>
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editEmail" class="form-label">Email</label>
+                        <input type="text" class="form-control" id="editEmail" name="editEmail">
                     </div>
                     <div class="mb-3">
                         <label for="editNamaBank" class="form-label">Nama Bank</label>
@@ -304,6 +313,9 @@ td {
                 },
                 {
                     "data": "alamat"
+                },
+                {
+                    "data": "email"
                 },
                 {
                     "data": "status"
@@ -393,6 +405,7 @@ td {
         var bidang = document.getElementById('bidangSelect').value;
         var alamat = document.getElementById('alamat').value;
         var status = document.getElementById('statusSelect').value;
+        var email = document.getElementById('email').value;
         var namaBank = document.getElementById('nama_bank').value;
         var kodeRekening = document.getElementById('kode_rekening').value;
 
@@ -408,6 +421,7 @@ td {
         formData.append('bidang', bidang);
         formData.append('alamat', alamat);
         formData.append('status', status);
+        formData.append('email', email);
         formData.append('nama_bank', namaBank);
         formData.append('kode_rekening', kodeRekening);
         formData.append('foto', file);
@@ -456,6 +470,7 @@ td {
         $('#editBidang').val(data.bidang);
         $('#editAlamat').val(data.alamat);
         $('#editStatus').val(data.status);
+        $('#editEmail').val(data.email);
         $('#editNamaBank').val(data.nama_bank);
         $('#editKodeRekening').val(data.kode_rekening);
 
@@ -545,6 +560,7 @@ td {
         var bidang = document.getElementById('editBidang').value;
         var alamat = document.getElementById('editAlamat').value;
         var status = document.getElementById('editStatus').value;
+        var email = document.getElementById('editEmail').value;
         var namaBank = document.getElementById('editNamaBank').value;
         var kodeRekening = document.getElementById('editKodeRekening').value;
 
@@ -560,6 +576,7 @@ td {
         formData.append('bidang', bidang);
         formData.append('alamat', alamat);
         formData.append('status', status);
+        formData.append('email', email);
         formData.append('nama_bank', namaBank);
         formData.append('kode_rekening', kodeRekening);
         formData.append('foto', file);
