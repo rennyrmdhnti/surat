@@ -278,7 +278,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // Pengguna mengklik tombol "OK"
-                        window.location.href = 'rek_kegiatan.php';
+                        window.location.href = 'golongan.php';
                     }
                 });
             },

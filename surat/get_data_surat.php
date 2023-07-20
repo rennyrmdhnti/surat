@@ -216,6 +216,35 @@ if ($_GET['data'] == '8') {
             }
         }
     
+    if ($_GET['data'] == 'nominatif') {
+    
+        // mengambil data dari MySQL
+        $sql = "SELECT id,nama,no_npd ,tujuan ,lama ,uang_harian , 
+		case 
+			when hotel_pribadi = '' then hotel_travel
+			when hotel_travel = '' then hotel_pribadi
+		end hotel,
+		case 
+			when pesawat_pribadi = '' then pesawat_travel
+			when pesawat_travel = '' then pesawat_pribadi
+		end pesawat, transport_tujuan as transport , status 
+        from tb_nominatif tn order by id desc";
+        $result = $conn->query($sql);
+        // memeriksa apakah kueri berhasil dieksekusi
+        if ($result->num_rows > 0) {
+            // membuat array untuk menampung data
+            $data = array();
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+            // mengirim data dalam format JSON
+            echo json_encode(array("data" => $data));
+        } else {
+            echo "Tidak ada data";
+        }
+    }
+
+    
 
 
 
