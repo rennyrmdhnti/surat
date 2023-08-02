@@ -49,7 +49,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Kota</th>
-                                        <th>Bisnis</th>
+                                        <!-- <th>Bisnis</th> -->
                                         <th>Ekonomi</th>
                                     </tr>
                                 </thead>
@@ -109,10 +109,10 @@
                 {
                     "data": "kota"
                 },
-                {
-                    "data": "bisnis",
-                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                },
+                // {
+                //     "data": "bisnis",
+                //     "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                // },
                 {
                     "data": "ekonomi",
                     "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')

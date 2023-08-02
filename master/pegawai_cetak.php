@@ -57,17 +57,17 @@ if ($result) {
     $html .= '</tr>';
   }
   $html .= '</table>';
-$html .= '<table width="100%" style="border: 0 !important;">';
-$html .= '<tr>';
-$html .= '<td width="60%" style="border: 0 !important;></td>';
-$html .= '<td width="40%" align="left" style="border: 0 !important;">';
-$html .= '<p>PENGGUNA ANGGARAN,</p><br><br><br>';
-$html .= '<p>H. EDY WIBOWO, SE</p>';
-$html .= '<p>Pembina</p>';
-$html .= '<p>NIP. 19660602 199203 1 001</p>';
-$html .= '</td>';
-$html .= '</tr>';
-$html .= '</table>';
+  $html .= '<table width="100%" style="border: 0 !important;">';
+  $html .= '<tr>';
+  $html .= '<td width="70%" style="border: 0 !important;"></td>';
+  $html .= '<td width="30%" align="left" style="border: 0 !important;">';
+  $html .= '<p>PENGGUNA ANGGARAN,</p><br><br><br>';
+  $html .= '<p>H. EDY WIBOWO, SE</p>';
+  $html .= '<p>Pembina</p>';
+  $html .= '<p>NIP. 19660602 199203 1 001</p>';
+  $html .= '</td>';
+  $html .= '</tr>';
+  $html .= '</table>';
   $html .= '</body></html>';
   
   echo $html;

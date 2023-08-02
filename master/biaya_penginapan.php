@@ -227,8 +227,8 @@
             }
         });
     });
-  // Fungsi untuk menyimpan data pegawai ke dalam database
-  function simpanData() {
+    // Fungsi untuk menyimpan data pegawai ke dalam database
+    function simpanData() {
         // Mengambil nilai input dari form
         var propinsi = document.getElementById('propinsi').value;
         var satuan = document.getElementById('satuan').value;
@@ -325,27 +325,48 @@
 
     // Menghapus data pegawai berdasarkan ID
     function deleteData(id) {
-        // Lakukan permintaan AJAX untuk menghapus data pegawai berdasarkan ID
-        $.ajax({
-            url: 'biaya_penginapan_hapus.php', // Ganti dengan URL yang sesuai untuk menghapus data pegawai berdasarkan ID
-            type: 'POST',
-            data: {
-                id: id
-            },
-            success: function(response) {
-                // Menampilkan pesan atau melakukan aksi setelah data berhasil dihapus
-                // alert(response);
+        // Show a confirmation popup before proceeding with deletion
+        Swal.fire({
+            icon: 'warning',
+            title: 'Konfirmasi',
+            text: 'Apakah Anda yakin ingin menghapus data ini?',
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak',
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                return new Promise((resolve) => {
+                    // Lakukan permintaan AJAX untuk menghapus data biaya penginapan berdasarkan ID
+                    $.ajax({
+                        url: 'biaya_penginapan_hapus.php', // Ganti dengan URL yang sesuai untuk menghapus data biaya penginapan berdasarkan ID
+                        type: 'POST',
+                        data: {
+                            id: id
+                        },
+                        success: function(response) {
+                            // Menampilkan pesan atau melakukan aksi setelah data berhasil dihapus
+                            resolve(response);
+                        },
+                        error: function(xhr, status, error) {
+                            // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
+                            console.error(xhr.responseText);
+                            resolve('Terjadi kesalahan saat menghapus data.');
+                        }
+                    });
+                });
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Pengguna mengklik tombol "Ya"
                 Swal.fire({
                     icon: 'success',
                     title: 'Sukses',
-                    text: response,
-                    // showCancelButton: true,
+                    text: result.value,
                     confirmButtonText: 'OK',
-                    // cancelButtonText: 'Batal',
                     showLoaderOnConfirm: true,
                     preConfirm: () => {
                         return new Promise((resolve) => {
-                            // Mengatur waktu delay sebelum mengarahkan ke halaman 'pegawai.php'
+                            // Mengatur waktu delay sebelum mengarahkan ke halaman 'biaya_penginapan.php'
                             setTimeout(() => {
                                 resolve();
                             }, 3000);
@@ -357,13 +378,10 @@
                         window.location.href = 'biaya_penginapan.php';
                     }
                 });
-            },
-            error: function(xhr, status, error) {
-                // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
-                console.error(xhr.responseText);
             }
         });
     }
+
 
     function updateData() {
         // Mengambil nilai input dari form

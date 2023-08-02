@@ -146,7 +146,8 @@
                 if (dataIndex === (table.rows().count() - 1)) {
                     // add Edit button
                     $(row).append(
-                        '<td><button class="btn btn-primary edit-button" data-id="' + data.id_gol +
+                        '<td><button class="btn btn-primary edit-button" data-id="' + data
+                        .id_gol +
                         '"><i class="cil-pencil"></i></button></td>'
                     );
 
@@ -159,8 +160,8 @@
             }
         });
     });
-  // Fungsi untuk menyimpan data pegawai ke dalam database
-  function simpanData() {
+    // Fungsi untuk menyimpan data pegawai ke dalam database
+    function simpanData() {
         // Mengambil nilai input dari form
         var golongan = document.getElementById('golongan').value;
         var nama_pangkat = document.getElementById('nama_pangkat').value;
@@ -210,7 +211,7 @@
         $('#edit_golongan').val(data.kd_golongan);
         $('#edit_nama_pangkat').val(data.nama_pangkat);
         $('#id_gol').val(data.id_gol);
-        
+
 
         // Buka modal edit
         $('#editModal').modal('show');
@@ -249,27 +250,48 @@
 
     // Menghapus data pegawai berdasarkan ID
     function deleteData(id) {
-        // Lakukan permintaan AJAX untuk menghapus data pegawai berdasarkan ID
-        $.ajax({
-            url: 'golongan_hapus.php', // Ganti dengan URL yang sesuai untuk menghapus data pegawai berdasarkan ID
-            type: 'POST',
-            data: {
-                id: id
-            },
-            success: function(response) {
-                // Menampilkan pesan atau melakukan aksi setelah data berhasil dihapus
-                // alert(response);
+        // Show a confirmation popup before proceeding with deletion
+        Swal.fire({
+            icon: 'warning',
+            title: 'Konfirmasi',
+            text: 'Apakah Anda yakin ingin menghapus data ini?',
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak',
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                return new Promise((resolve) => {
+                    // Lakukan permintaan AJAX untuk menghapus data golongan berdasarkan ID
+                    $.ajax({
+                        url: 'golongan_hapus.php', // Ganti dengan URL yang sesuai untuk menghapus data golongan berdasarkan ID
+                        type: 'POST',
+                        data: {
+                            id: id
+                        },
+                        success: function(response) {
+                            // Menampilkan pesan atau melakukan aksi setelah data berhasil dihapus
+                            resolve(response);
+                        },
+                        error: function(xhr, status, error) {
+                            // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
+                            console.error(xhr.responseText);
+                            resolve('Terjadi kesalahan saat menghapus data.');
+                        }
+                    });
+                });
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Pengguna mengklik tombol "Ya"
                 Swal.fire({
                     icon: 'success',
                     title: 'Sukses',
-                    text: response,
-                    // showCancelButton: true,
+                    text: result.value,
                     confirmButtonText: 'OK',
-                    // cancelButtonText: 'Batal',
                     showLoaderOnConfirm: true,
                     preConfirm: () => {
                         return new Promise((resolve) => {
-                            // Mengatur waktu delay sebelum mengarahkan ke halaman 'pegawai.php'
+                            // Mengatur waktu delay sebelum mengarahkan ke halaman 'golongan.php'
                             setTimeout(() => {
                                 resolve();
                             }, 3000);
@@ -278,16 +300,13 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // Pengguna mengklik tombol "OK"
-                        window.location.href = 'rek_kegiatan.php';
+                        window.location.href = 'golongan.php';
                     }
                 });
-            },
-            error: function(xhr, status, error) {
-                // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
-                console.error(xhr.responseText);
             }
         });
     }
+
 
     function updateData() {
         // Mengambil nilai input dari form

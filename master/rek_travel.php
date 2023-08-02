@@ -247,45 +247,63 @@
 
     // Menghapus data pegawai berdasarkan ID
     function deleteData(id) {
-        // Lakukan permintaan AJAX untuk menghapus data pegawai berdasarkan ID
-        $.ajax({
-            url: 'rek_travel_hapus.php', // Ganti dengan URL yang sesuai untuk menghapus data pegawai berdasarkan ID
-            type: 'POST',
-            data: {
-                id: id
-            },
-            success: function(response) {
-                // Menampilkan pesan atau melakukan aksi setelah data berhasil dihapus
-                // alert(response);
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Sukses',
-                    text: response,
-                    // showCancelButton: true,
-                    confirmButtonText: 'OK',
-                    // cancelButtonText: 'Batal',
-                    showLoaderOnConfirm: true,
-                    preConfirm: () => {
-                        return new Promise((resolve) => {
-                            // Mengatur waktu delay sebelum mengarahkan ke halaman 'pegawai.php'
-                            setTimeout(() => {
-                                resolve();
-                            }, 3000);
-                        });
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Pengguna mengklik tombol "OK"
-                        window.location.href = 'rek_travel.php';
+    // Show a confirmation popup before proceeding with deletion
+    Swal.fire({
+        icon: 'warning',
+        title: 'Konfirmasi',
+        text: 'Apakah Anda yakin ingin menghapus data ini?',
+        showCancelButton: true,
+        confirmButtonText: 'Ya',
+        cancelButtonText: 'Tidak',
+        showLoaderOnConfirm: true,
+        preConfirm: () => {
+            return new Promise((resolve) => {
+                // Lakukan permintaan AJAX untuk menghapus data rekening travel berdasarkan ID
+                $.ajax({
+                    url: 'rek_travel_hapus.php', // Ganti dengan URL yang sesuai untuk menghapus data rekening travel berdasarkan ID
+                    type: 'POST',
+                    data: {
+                        id: id
+                    },
+                    success: function (response) {
+                        // Menampilkan pesan atau melakukan aksi setelah data berhasil dihapus
+                        resolve(response);
+                    },
+                    error: function (xhr, status, error) {
+                        // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
+                        console.error(xhr.responseText);
+                        resolve('Terjadi kesalahan saat menghapus data.');
                     }
                 });
-            },
-            error: function(xhr, status, error) {
-                // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
-                console.error(xhr.responseText);
-            }
-        });
-    }
+            });
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Pengguna mengklik tombol "Ya"
+            Swal.fire({
+                icon: 'success',
+                title: 'Sukses',
+                text: result.value,
+                confirmButtonText: 'OK',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return new Promise((resolve) => {
+                        // Mengatur waktu delay sebelum mengarahkan ke halaman 'rek_travel.php'
+                        setTimeout(() => {
+                            resolve();
+                        }, 3000);
+                    });
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Pengguna mengklik tombol "OK"
+                    window.location.href = 'rek_travel.php';
+                }
+            });
+        }
+    });
+}
+
 
     function updateData() {
         // Mengambil nilai input dari form
