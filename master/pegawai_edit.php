@@ -13,6 +13,7 @@ $status = $_POST['status'];
 $email = $_POST['email'];
 $namaBank = $_POST['nama_bank'];
 $kodeRekening = $_POST['kode_rekening'];
+$id = $_POST['id'];
 
 // Periksa apakah ada file yang diunggah
 if(isset($_FILES['foto'])) {
@@ -60,8 +61,9 @@ if(isset($_FILES['foto'])) {
             status = '$status',
             nama_bank = '$namaBank',
             kode_rekening = '$kodeRekening',
-            email = '$email'
-            WHERE nip = '$nip'";
+            email = '$email',
+            nip = '$nip'
+            WHERE id = '$id'";
 
     if ($conn->query($sql) === TRUE) {
         echo "Data pegawai berhasil diperbarui.";
