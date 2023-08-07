@@ -54,7 +54,7 @@
             </ul>
         </li>
         <li class="nav-title">Report</li>
-        <li class="nav-group"><a class="nav-link nav-group-toggle" href="#">
+        <!-- <li class="nav-group"><a class="nav-link nav-group-toggle" href="#">
                 <svg class="nav-icon">
                     <use xlink:href="/surat/vendors/@coreui/icons/svg/free.svg#cil-description"></use>
                 </svg> Cetak Surat</a>
@@ -65,17 +65,21 @@
                 <li class="nav-item"><a class="nav-link" href="forms/range.html"> Rek Kegiatan</a></li>
                 <li class="nav-item"><a class="nav-link" href="forms/input-group.html"> Akses User</a></li>
             </ul>
-        </li>
+        </li> -->
         <li class="nav-group"><a class="nav-link nav-group-toggle" href="#">
                 <svg class="nav-icon">
                     <use xlink:href="/surat/vendors/@coreui/icons/svg/free.svg#cil-description"></use>
                 </svg> Cetak Laporan</a>
             <ul class="nav-group-items">
-                <li class="nav-item"><a class="nav-link" href="forms/form-control.html"> Data Pegawai</a></li>
-                <li class="nav-item"><a class="nav-link" href="forms/select.html"> Data THL</a></li>
-                <li class="nav-item"><a class="nav-link" href="forms/checks-radios.html"> Pagu Kegiatan</a></li>
-                <li class="nav-item"><a class="nav-link" href="forms/range.html"> Rek Kegiatan</a></li>
-                <li class="nav-item"><a class="nav-link" href="forms/input-group.html"> Akses User</a></li>
+                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_perintah_tugas.php">SPT</a></li>
+                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_perjalanan_dinas.php">SPPD</a></li>
+                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_nominatif.php">Nominatif</a></li>
+                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_nota_pencairan_dana.php">NPD</a></li>
+                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_kegiatan.php">Laporan Kegiatan</a></li>
+                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_kegiatan_dinas.php">Laporan Perjalanan Dinas</a></li>
+                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_realisasi_anggaran.php">Laporan Realisasi Anggaran</a></li>
+                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_walikota.php">Laporan Walikota</a></li>
+                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_keberangkatan.php">Laporan Keberangkatan</a></li>
             </ul>
         </li>
 
