@@ -80,25 +80,24 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">No. NPD</label>
-                        <select class="form-select" id="no_npd" name="no_npd" aria-label="Default select example"  onchange="updatePencairan()">
+                        <label for="exampleFormControlInput1" class="form-label">No. SPPD</label>
+                        <select class="form-select" id="no_npd" name="no_npd" aria-label="Default select example">
                             <option value="">-- Pilih No NPD --</option>
                             <?php
                                         // Query untuk mengambil data dari tabel tb_perintah_tugas
-                                        $query = "SELECT no_npd,nama,uang_harian FROM tb_nominatif GROUP BY no_npd";
+                                        $query = "SELECT no_npd FROM tb_nominatif GROUP BY no_npd";
                                         $result = mysqli_query($conn, $query);
 
                                         // Iterasi hasil query dan menampilkan nilai kolom "no_spt" dalam elemen select
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            echo "<option value='" . $row['no_npd'] . "' data-uangharian='" . $row['uang_harian'] . "'>" . $row['no_npd'] . " - " . $row['nama'] . "</option>";
+                                            echo "<option value='" . $row['no_npd'] . "'>" . $row['no_npd'] . "</option>";
                                         }
                                         ?>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Sub Kegiatan</label>
-                        <select class="form-select" id="sub_kegiatan" name="sub_kegiatan"
-                            aria-label="Default select example">
+                        <select class="form-select" id="sub_kegiatan" name="sub_kegiatan" aria-label="Default select example">
                             <option value="">-- Pilih Kegiatan --</option>
                             <?php
                                         // Query untuk mengambil data dari tabel tb_perintah_tugas
@@ -134,7 +133,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Pencairan</label>
-                        <input type="text" class="form-control" id="pencairan" name="pencairan" readonly>
+                        <input type="text" class="form-control" id="pencairan" name="pencairan">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Tanggal</label>
@@ -230,14 +229,18 @@
             "createdRow": function(row, data, dataIndex) {
                 // check if this is the last row
                 if (dataIndex === (table.rows().count() - 1)) {
-                    // add Edit button
                     $(row).append(
-                        '<td><button class="btn btn-primary"><i class="cil-pencil"></i></button></td>'
+                        '<td><button class="btn btn-primary" onclick="print(\'' + data.id +
+                        '\')"><i class="cil-print"></i></button></td>'
                     );
-                    // add Delete button
-                    $(row).append(
-                        '<td><button class="btn btn-danger"><i class="cil-trash"></i></button></td>'
-                    );
+                    // // add Edit button
+                    // $(row).append(
+                    //     '<td><button class="btn btn-primary"><i class="cil-pencil"></i></button></td>'
+                    // );
+                    // // add Delete button
+                    // $(row).append(
+                    //     '<td><button class="btn btn-danger"><i class="cil-trash"></i></button></td>'
+                    // );
                 }
             }
         });
@@ -295,23 +298,19 @@
         });
 
     }
-    // Fungsi ini akan dipanggil ketika pilihan dalam select berubah
-    function updatePencairan() {
-        // Dapatkan elemen select dan input
-        var selectElement = document.getElementById("no_npd");
-        var pencairanInput = document.getElementById("pencairan");
 
-        // Dapatkan nilai yang dipilih dalam select
-        var selectedValue = selectElement.value;
-
-        // Temukan opsi yang dipilih
-        var selectedOption = selectElement.options[selectElement.selectedIndex];
-
-        // Dapatkan teks yang berisi nominal dari opsi yang dipilih
-        var nominalText = selectedOption.getAttribute("data-uangharian");
-
-        // Set nilai input pencairan dengan nilai nominal
-        pencairanInput.value = nominalText;
+    function print(id) {
+        console.log(id); // Menampilkan nilai id ke konsol
+        var printWindow = window.open();
+        fetch('nota_pencairan_dana_print.php?id=' + id)
+            .then(response => response.text())
+            .then(content => {
+                printWindow.document.write('<html><head><title>Cetak</title></head><body>');
+                printWindow.document.write(content);
+                printWindow.document.write('</body></html>');
+                printWindow.print();
+                printWindow.close();
+            });
     }
     </script>
 
