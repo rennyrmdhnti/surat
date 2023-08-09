@@ -244,6 +244,44 @@ if ($_GET['data'] == '8') {
         }
     }
 
+
+    if ($_GET['data'] == 'npd') {
+    
+        // mengambil data dari MySQL
+        $sql = "select
+                    tpd.id,
+                    no_npd ,
+                    tp.sub_kegiatan ,
+                    no_dpa ,
+                    trk.kode_rekening ,
+                    trk.uraian ,
+                    trk.anggaran ,
+                    pencairan ,
+                    tanggal_npd ,
+                    tp2.nama
+                from
+                    tb_pencairan_dana tpd
+                left join tb_pagu tp on
+                    tp.id = tpd.id_sub
+                left join tb_rek_kegiatan trk on
+                    trk.id_rek = tpd.id_rek
+                left join tb_pegawai tp2 on
+                    tp2.id = tpd.id_pegawai
+                    order by tpd.id desc ";
+        $result = $conn->query($sql);
+        // memeriksa apakah kueri berhasil dieksekusi
+        if ($result->num_rows > 0) {
+            // membuat array untuk menampung data
+            $data = array();
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+            // mengirim data dalam format JSON
+            echo json_encode(array("data" => $data));
+        } else {
+            echo "Tidak ada data";
+        }
+    }
     
 
 

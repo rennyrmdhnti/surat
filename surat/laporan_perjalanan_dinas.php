@@ -23,15 +23,12 @@
             </nav> -->
         </div>
     </header>
-    <div class="body px-3">
+    <!-- <div class="body px-3">
         <div class="container-lg">
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header"><strong>Input</strong><span class="small ms-1"></div>
-                        <!-- <div class="card-body">
-                            
-                        </div> -->
                         <div class="card-body">
                             <button type="button" class="btn btn-primary" data-coreui-toggle="modal"
                                 data-coreui-target="#exampleModal">
@@ -42,7 +39,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="body flex-grow-1 px-3">
         <div class="container-lg">
             <div class="row">
@@ -439,20 +436,20 @@
 
                 if (dataIndex === (table.rows().count() - 1)) {
                     // add Edit button
-                    // $(row).append(
-                    //     '<td><button class="btn btn-primary" onclick="print(\'' + data.id +
-                    //     '\')"><i class="cil-print"></i></button></td>'
-                    // );
+                    $(row).append(
+                        '<td><button class="btn btn-primary" onclick="print(\'' + data.id +
+                        '\')"><i class="cil-print"></i></button></td>'
+                    );
                     // add Edit button
-                    $(row).append(
-                        '<td><button class="btn btn-primary edit-button" data-id="' + data.id +
-                        '"><i class="cil-pencil"></i></button></td>'
-                    );
-                    // add Delete button
-                    $(row).append(
-                        '<td><button class="btn btn-danger" onclick="deleteRow(\'' + data.id +
-                        '\')"><i class="cil-trash"></i></button></td>'
-                    );
+                    // $(row).append(
+                    //     '<td><button class="btn btn-primary edit-button" data-id="' + data.id +
+                    //     '"><i class="cil-pencil"></i></button></td>'
+                    // );
+                    // // add Delete button
+                    // $(row).append(
+                    //     '<td><button class="btn btn-danger" onclick="deleteRow(\'' + data.id +
+                    //     '\')"><i class="cil-trash"></i></button></td>'
+                    // );
 
 
                 }
