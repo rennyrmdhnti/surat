@@ -64,6 +64,13 @@ $result = $conn->query($sql);
         $datarek[] = $rowrek;
     }
 
+    $sqlrektotal = "SELECT SUM(anggaran) as total FROM tb_rek_kegiatan";
+    $resultrektotal = $conn->query($sqlrektotal);
+    $datarektotal = array();
+    while ($rowrektotal = $resultrektotal->fetch_assoc()) {
+        $datarektotal[] = $rowrektotal;
+    }
+
         ?>
 
 <style>
@@ -191,6 +198,7 @@ function formatRupiah($angka) {
 }
 $dataCount = count($data);
 
+$pencairanAngkaTotal = 0;
 for ($i = 0; $i < $dataCount; $i++) {
     $key = $i;
     $value = $data[$i];
@@ -228,10 +236,14 @@ for ($i = 0; $i < $dataCount; $i++) {
 <br>
 
 <?php
+$anggaran = intval($value['anggaran']);
 
 $pencairanAngka = intval($value['pencairan']);
 $pencairanTerbilang = terbilang($pencairanAngka);
 $pencairanRupiah = formatRupiah($pencairanAngka);
+
+$pencairanAngkaTotal += $pencairanAngka;
+
 
 ?>
 
@@ -318,41 +330,134 @@ $pencairanRupiah = formatRupiah($pencairanAngka);
         $rowNumber = 1; // Initialize the row number
 
         foreach ($datarek as $row) {
-    ?>
+            ?>
     <tr>
         <td><?php echo $rowNumber; ?></td>
         <td><?php echo $row['kode_rekening']; ?></td>
         <td><?php echo $row['uraian']; ?></td>
         <td><?php echo "Rp " . number_format($row['anggaran'], 0, ',', '.'); ?></td>
         <?php
-        if ($rowNumber == 1 || $rowNumber == 3){
-            ?>
+                if ($rowNumber == 1 || $rowNumber == 3){
+                    ?>
         <td>Rp. 0</td>
         <td>Rp. 0</td>
-        <?php
-        } else {
-            if ($i == 0) {
-                ?>
-                <td>Rp. 0</td>
-                <td><?php echo $pencairanRupiah; ?></td>
-                <?php
-            } else {
-                ?>
-                <td><?php echo $pencairanRupiah; ?></td>
-                <td>Rp. 0</td>
-                <?php
-            }
-        }
-        ?>
         <td><?php echo "Rp " . number_format($row['anggaran'], 0, ',', '.'); ?></td>
+        <?php
+                } else {
+                    if ($i == 0) {
+                        ?>
+        <td>Rp. 0</td>
+        <td><?php echo $pencairanRupiah; ?></td>
+        <td><?php echo  formatRupiah($row['anggaran'] - $pencairanAngka);?></td>
+        <?php
+                    } else {
+                        ?>
+        <td><?php echo formatRupiah($pencairanAngkaTotal - $pencairanAngka); ?></td>
+        <td><?php echo $pencairanRupiah; ?></td>
+        <td><?php echo  formatRupiah($row['anggaran'] - $pencairanAngkaTotal);?></td>
+        <?php
+                    }
+                }
+                ?>
     </tr>
     <?php
-            $rowNumber++; // Increment the row number
+                    $rowNumber++; // Increment the row number
         }
     ?>
+    <tr>
+        <td colspan="3" style="text-align: center;">Jumlah</td>
+        <td><?php  echo formatRupiah($datarektotal[0]['total']) ?></td>
+        <?php 
+            if ($i == 0) {
+                ?>
+        <td>Rp. 0</td>
+        <td><?php echo $pencairanRupiah; ?></td>
+        <td><?php echo  formatRupiah($datarektotal[0]['total'] - $pencairanAngka);?></td>
+        <?php
+            } else {
+                ?>
+        <td><?php echo formatRupiah($pencairanAngkaTotal - $pencairanAngka); ?></td>
+        <td><?php echo $pencairanRupiah; ?></td>
+        <td><?php echo  formatRupiah($datarektotal[0]['total'] - $pencairanAngkaTotal);?></td>
+        <?php
+            }
+       ?>
+    </tr>
+    <tr>
+        <td colspan="7" style="text-align: left;">POTONGAN - POTONGAN</td>
+    </tr>
+    <tr>
+        <td colspan="3" style="text-align: left;">PPH</td>
+        <td colspan="4" style="text-align: left;">0</td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align: left;">PPh - 23/22/21</td>
+        <td style="text-align: center;">Rp.</td>
+        <td colspan="4" style="text-align: left;">-</td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align: left;">JUMLAH YANG DITERIMA</td>
+        <td style="text-align: left;" colspan="6"><?php echo $pencairanRupiah; ?></td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align: left;">POTONGAN PPN & PPH</td>
+        <td style="text-align: left;" colspan="6">Rp -</td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align: left;">JUMLAH YANG DIBAYARKAN</td>
+        <td style="text-align: left;" colspan="6"><?php echo $pencairanRupiah; ?></td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold;" colspan="8"><?php echo $pencairanTerbilang;?> RUPIAH</td>
+    </tr>
 </table>
+<?php
+$bulanIndonesia = array(
+    "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+    "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+);
 
+$tanggal = 11;
+$bulan = 2;
+$tahun = 2023;
 
+$tanggalFormat = $tanggal . " " . $bulanIndonesia[$bulan - 1] . " " . $tahun;
+$lokasi = "Banjarmasin";
+
+?>
+
+<br>
+<br>
+<br>
+
+<table>
+    <tr>
+        <td colspan="2" style="width: 60%;"></td>
+        <td><?php echo $lokasi . ", " . $tanggalFormat; ?></td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">Mengetahui & Menyetujui</td>
+        <td colspan="2" style="width: 60%;"></td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">Pengguna Anggaran</td>
+        <td style="width: 30%;"></td>
+        <td style="text-align: center;">Pejabat Pelaksana Teknis Kegiatan</td>
+    </tr>
+    <tr>
+        <td colspan="3" style="height: 120px;"></td>
+    </tr>
+    <tr>
+        <td style="text-align: center;"><u>H. EDY WIBOWO, SE</u></td>
+        <td style="width: 30%;"></td>
+        <td style="text-align: center;"><u><?php echo $value['nama']?></u></td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">NIP. 19690112 199303 1 004</td>
+        <td style="width: 30%;"></td>
+        <td style="text-align: center;"></td>
+    </tr>
+</table>
 <br><br><br><br><br>
 <br><br><br><br><br>
 <br><br><br><br><br>

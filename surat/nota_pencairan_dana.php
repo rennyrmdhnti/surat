@@ -1,6 +1,11 @@
 <?php include '../template/header.php'; ?>
 <?php include '../template/sidebar.php'; ?>
 
+<style>
+#data-table_wrapper {
+    overflow-x: auto;
+}
+</style>
 
 <div class="wrapper d-flex flex-column min-vh-100 bg-light">
     <header class="header header-sticky mb-4">
@@ -81,7 +86,8 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">No. NPD</label>
-                        <select class="form-select" id="no_npd" name="no_npd" aria-label="Default select example"  onchange="updatePencairan()">
+                        <select class="form-select" id="no_npd" name="no_npd" aria-label="Default select example"
+                            onchange="updatePencairan()">
                             <option value="">-- Pilih No NPD --</option>
                             <?php
                                         // Query untuk mengambil data dari tabel tb_perintah_tugas
@@ -169,78 +175,136 @@
 
     <script>
     $(document).ready(function() {
-        var table = $('#data-table').DataTable({
-            // "processing": true,
-            // "serverSide": true,
-            "ajax": {
-                "url": "get_data_surat.php?data=npd",
-                "type": "POST"
-            },
-            "columns": [{
-                    "data": ""
+        var table;
+
+        if (<?php echo $status_login ?> === 0) {
+            table = $('#data-table').DataTable({
+                responsive: true,
+                "ajax": {
+                    "url": "get_data_surat.php?data=npd",
+                    "type": "POST"
                 },
-                {
-                    "data": "no_npd"
-                },
-                {
-                    "data": "sub_kegiatan"
-                },
-                {
-                    "data": "no_dpa"
-                },
-                {
-                    "data": "kode_rekening"
-                },
-                {
-                    "data": "uraian"
-                },
-                {
-                    "data": "anggaran",
-                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                },
-                {
-                    "data": "pencairan",
-                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                },
-                {
-                    "data": "tanggal_npd",
-                    "render": function(data, type, row) {
-                        // Ubah format tanggal dari "YYYY-MM-DD" menjadi "senin, 10 januari 2023"
-                        var date = new Date(data);
-                        var options = {
-                            weekday: 'long',
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric'
-                        };
-                        return date.toLocaleDateString('id-ID', options);
+                "columns": [{
+                        "data": ""
+                    },
+                    {
+                        "data": "no_npd"
+                    },
+                    {
+                        "data": "sub_kegiatan"
+                    },
+                    {
+                        "data": "no_dpa"
+                    },
+                    {
+                        "data": "kode_rekening"
+                    },
+                    {
+                        "data": "uraian"
+                    },
+                    {
+                        "data": "anggaran",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "pencairan",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "tanggal_npd",
+                        "render": function(data, type, row) {
+                            var date = new Date(data);
+                            var options = {
+                                weekday: 'long',
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric'
+                            };
+                            return date.toLocaleDateString('id-ID', options);
+                        }
+                    },
+                    {
+                        "data": "nama"
                     }
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                }],
+                "createdRow": function(row, data, dataIndex) {
+                    if (dataIndex === (table.rows().count() - 1)) {
+                        $(row).append(
+                            '<td><button class="btn btn-primary"><i class="cil-pencil"></i></button></td>'
+                        );
+                        $(row).append(
+                            '<td><button class="btn btn-danger"><i class="cil-trash"></i></button></td>'
+                        );
+                    }
+                }
+            });
+        } else {
+            table = $('#data-table').DataTable({
+                responsive: true,
+                "ajax": {
+                    "url": "get_data_surat.php?data=npd",
+                    "type": "POST"
                 },
-                {
-                    "data": "nama"
-                }
-            ],
-            "columnDefs": [{
-                "targets": 0,
-                "data": null,
-                "render": function(data, type, row, meta) {
-                    return meta.row + 1;
-                }
-            }],
-            "createdRow": function(row, data, dataIndex) {
-                // check if this is the last row
-                if (dataIndex === (table.rows().count() - 1)) {
-                    // add Edit button
-                    $(row).append(
-                        '<td><button class="btn btn-primary"><i class="cil-pencil"></i></button></td>'
-                    );
-                    // add Delete button
-                    $(row).append(
-                        '<td><button class="btn btn-danger"><i class="cil-trash"></i></button></td>'
-                    );
-                }
-            }
-        });
+                "columns": [{
+                        "data": ""
+                    },
+                    {
+                        "data": "no_npd"
+                    },
+                    {
+                        "data": "sub_kegiatan"
+                    },
+                    {
+                        "data": "no_dpa"
+                    },
+                    {
+                        "data": "kode_rekening"
+                    },
+                    {
+                        "data": "uraian"
+                    },
+                    {
+                        "data": "anggaran",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "pencairan",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "tanggal_npd",
+                        "render": function(data, type, row) {
+                            var date = new Date(data);
+                            var options = {
+                                weekday: 'long',
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric'
+                            };
+                            return date.toLocaleDateString('id-ID', options);
+                        }
+                    },
+                    {
+                        "data": "nama"
+                    }
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                }]
+            });
+        }
+
     });
 
     function simpanData() {

@@ -261,8 +261,8 @@
     </div>
     <!-- end modal -->
 
-     <!-- Modal -->
-     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
@@ -542,82 +542,124 @@
         });
 
         $("#editID").hide();
-        var table = $('#data-table').DataTable({
-            // "processing": true,
-            // "serverSide": true,
+        var table;
 
-            responsive: true,
-            "ajax": {
-                "url": "get_data_surat.php?data=nominatif",
-                "type": "POST"
-            },
-            "columns": [{
-                    "data": ""
+        if (<?php echo $status_login ?> === 0) {
+            table = $('#data-table').DataTable({
+                responsive: true,
+                "ajax": {
+                    "url": "get_data_surat.php?data=nominatif",
+                    "type": "POST"
                 },
-                {
-                    "data": "nama"
-                },
-                {
-                    "data": "no_npd"
-                },
-                {
-                    "data": "tujuan"
-                },
-                {
-                    "data": "lama"
-                },
-                {
-                    "data": "uang_harian",
-                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                },
-                {
-                    "data": "hotel",
-                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                },
-                {
-                    "data": "pesawat",
-                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                },
-                {
-                    "data": "transport",
-                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                },
-                {
-                    "data": "status"
+                "columns": [{
+                        "data": ""
+                    },
+                    {
+                        "data": "nama"
+                    },
+                    {
+                        "data": "no_npd"
+                    },
+                    {
+                        "data": "tujuan"
+                    },
+                    {
+                        "data": "lama"
+                    },
+                    {
+                        "data": "uang_harian",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "hotel",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "pesawat",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "transport",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "status"
+                    }
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                }],
+                "createdRow": function(row, data, dataIndex) {
+                    if (dataIndex === (table.rows().count() - 1)) {
+                        $(row).append(
+                            '<td><button class="btn btn-primary edit-button" data-id="' + data
+                            .id +
+                            '"><i class="cil-pencil"></i></button></td>'
+                        );
+                        $(row).append(
+                            '<td><button class="btn btn-danger" onclick="deleteRow(\'' + data
+                            .id +
+                            '\')"><i class="cil-trash"></i></button></td>'
+                        );
+                    }
                 }
-            ],
-            "columnDefs": [{
-                "targets": 0,
-                "data": null,
-                "render": function(data, type, row, meta) {
-                    return meta.row + 1;
-                }
-            }],
-            "createdRow": function(row, data, dataIndex) {
-                // check if this is the last row
-                // var no_sppd = data.no_sppd.replace(/\//g, '').replace('Sekr/BPKPAD', '');
+            });
+        } else {
+            table = $('#data-table').DataTable({
+                responsive: true,
+                "ajax": {
+                    "url": "get_data_surat.php?data=nominatif",
+                    "type": "POST"
+                },
+                "columns": [{
+                        "data": ""
+                    },
+                    {
+                        "data": "nama"
+                    },
+                    {
+                        "data": "no_npd"
+                    },
+                    {
+                        "data": "tujuan"
+                    },
+                    {
+                        "data": "lama"
+                    },
+                    {
+                        "data": "uang_harian",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "hotel",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "pesawat",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "transport",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "status"
+                    }
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                }]
+            });
+        }
 
-                if (dataIndex === (table.rows().count() - 1)) {
-                    // add Edit button
-                    // $(row).append(
-                    //     '<td><button class="btn btn-primary" onclick="print(\'' + data.id +
-                    //     '\')"><i class="cil-print"></i></button></td>'
-                    // );
-                    // add Edit button
-                    $(row).append(
-                        '<td><button class="btn btn-primary edit-button" data-id="' + data.id +
-                        '"><i class="cil-pencil"></i></button></td>'
-                    );
-                    // add Delete button
-                    $(row).append(
-                        '<td><button class="btn btn-danger" onclick="deleteRow(\'' + data.id +
-                        '\')"><i class="cil-trash"></i></button></td>'
-                    );
-
-
-                }
-            }
-        });
     });
 
     const checkbox_lebih_hotel = document.getElementById('check_lebih_hotel');

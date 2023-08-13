@@ -6,7 +6,34 @@ if (!isset($_SESSION['username'])) {
     // Jika tidak ada sesi, redirect ke halaman login atau tindakan lainnya
     header("Location: http://localhost/surat/index.php");
     exit();
+} 
+
+$username = $_SESSION['username'];
+$sql = "SELECT * FROM tb_pegawai WHERE nip = '$username'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Mengambil data dari hasil query
+    $row = $result->fetch_assoc();
+    
+    // Gunakan data sesuai kebutuhan
+    $nama = $row['nip'];
+    $jabatan = $row['jabatan'];
+    
+    if ($jabatan === 'Kepala Badan') {
+        $status_login = 1;
+    } else {
+        $status_login = 0;
+    }
+
+
+} else {
+    echo "Data tidak ditemukan.";
 }
+    
+    // var_dump($status_login);
+    // exit;
+    
 
 // Ambil waktu terakhir akses sesi
 // $lastAccess = isset($_SESSION['last_access']) ? $_SESSION['last_access'] : 0;

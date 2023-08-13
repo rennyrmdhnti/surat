@@ -228,73 +228,122 @@ td {
     </div>
     <script>
     $(document).ready(function() {
-        var table = $('#data-table').DataTable({
-            // "processing": true,
-            // "serverSide": true,
-            "ajax": {
-                "url": "get_data_master.php?data=thl",
-                "type": "POST"
-            },
-            "columns": [{
-                    "data": ""
-                },
-                {
-                    "data": "",
-                    "render": function(data, type, row, meta) {
-                        // Mengembalikan elemen gambar HTML dengan sumber gambar sesuai data
-                        return '<img src="' + row.foto +
-                            '" alt="Gambar" width="50" height="50">';
-                    }
-                },
-                {
-                    "data": "nama"
-                },
-                {
-                    "data": "jabatan"
-                },
-                {
-                    "data": "bidang"
-                },
-                {
-                    "data": "status"
-                },
-                {
-                    "data": "alamat"
-                },
-                {
-                    "data": "email"
-                },
-                {
-                    "data": "nama_bank"
-                },
-                {
-                    "data": "kode_rekening"
-                }
-            ],
-            "columnDefs": [{
-                "targets": 0,
-                "data": null,
-                "render": function(data, type, row, meta) {
-                    return meta.row + 1;
-                }
-            }],
-            "createdRow": function(row, data, dataIndex) {
-                // check if this is the last row
-                if (dataIndex === (table.rows().count() - 1)) {
-                    // add Edit button
-                    $(row).append(
-                        '<td><button class="btn btn-primary edit-button" data-id="' + data.id +
-                        '"><i class="cil-pencil"></i></button></td>'
-                    );
+        var table;
 
-                    // add Delete button
-                    $(row).append(
-                        '<td><button class="btn btn-danger delete-button" onclick="deleteData(' +
-                        data.id + ')"><i class="cil-trash"></i></button></td>'
-                    );
+        if (<?php echo $status_login ?> === 0) {
+            table = $('#data-table').DataTable({
+                "ajax": {
+                    "url": "get_data_master.php?data=thl",
+                    "type": "POST"
+                },
+                "columns": [{
+                        "data": ""
+                    },
+                    {
+                        "data": "",
+                        "render": function(data, type, row, meta) {
+                            return '<img src="' + row.foto +
+                                '" alt="Gambar" width="50" height="50">';
+                        }
+                    },
+                    {
+                        "data": "nama"
+                    },
+                    {
+                        "data": "jabatan"
+                    },
+                    {
+                        "data": "bidang"
+                    },
+                    {
+                        "data": "status"
+                    },
+                    {
+                        "data": "alamat"
+                    },
+                    {
+                        "data": "email"
+                    },
+                    {
+                        "data": "nama_bank"
+                    },
+                    {
+                        "data": "kode_rekening"
+                    }
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                }],
+                "createdRow": function(row, data, dataIndex) {
+                    if (dataIndex === (table.rows().count() - 1)) {
+                        $(row).append(
+                            '<td><button class="btn btn-primary edit-button" data-id="' + data
+                            .id +
+                            '"><i class="cil-pencil"></i></button></td>'
+                        );
+
+                        $(row).append(
+                            '<td><button class="btn btn-danger delete-button" onclick="deleteData(' +
+                            data.id + ')"><i class="cil-trash"></i></button></td>'
+                        );
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            table = $('#data-table').DataTable({
+                "ajax": {
+                    "url": "get_data_master.php?data=thl",
+                    "type": "POST"
+                },
+                "columns": [{
+                        "data": ""
+                    },
+                    {
+                        "data": "",
+                        "render": function(data, type, row, meta) {
+                            return '<img src="' + row.foto +
+                                '" alt="Gambar" width="50" height="50">';
+                        }
+                    },
+                    {
+                        "data": "nama"
+                    },
+                    {
+                        "data": "jabatan"
+                    },
+                    {
+                        "data": "bidang"
+                    },
+                    {
+                        "data": "status"
+                    },
+                    {
+                        "data": "alamat"
+                    },
+                    {
+                        "data": "email"
+                    },
+                    {
+                        "data": "nama_bank"
+                    },
+                    {
+                        "data": "kode_rekening"
+                    }
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                }]
+            });
+        }
+
 
         $("#data-table").on("mouseenter", "td", function() {
             $(this).attr('title', this.innerText);

@@ -65,6 +65,7 @@
                                         <th>Nama</th>
                                         <th>Dasar</th>
                                         <th>Untuk</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -265,85 +266,181 @@
 
         $("#editID").hide();
 
-        var table = $('#data-table').DataTable({
-            // "processing": true,
-            // "serverSide": true,
-            "scrollX": true,
-            responsive: true,
-            "ajax": {
-                "url": "get_data_surat.php?data=spt",
-                "type": "POST"
-            },
-            "columns": [{
-                    "data": ""
+        var table;
+
+        if (<?php echo $status_login ?> === 0) {
+            table = $('#data-table').DataTable({
+                "scrollX": true,
+                responsive: true,
+                "ajax": {
+                    "url": "get_data_surat.php?data=spt",
+                    "type": "POST"
                 },
-                {
-                    "data": "no_spt"
-                },
-                {
-                    "data": "nama"
-                },
-                {
-                    "data": "dasar"
-                },
-                {
-                    "data": "untuk"
-                }
-            ],
-            "columnDefs": [{
-                    "width": "10px",
-                    "targets": [0]
-                }, // Mengubah lebar kolom pertama menjadi 200px
-                {
-                    "width": "300px",
-                    "targets": [1]
-                }, // Mengubah lebar kolom kedua menjadi 150px
-                {
-                    "width": "280px",
-                    "targets": [2]
-                },
-                {
-                    "width": "600px",
-                    "targets": [3]
-                },
-                {
-                    "width": "600px",
-                    "targets": [4]
-                },
-                {
-                    "targets": 0,
-                    "data": null,
-                    "render": function(data, type, row, meta) {
-                        return meta.row + 1;
+                "columns": [{
+                        "data": ""
+                    },
+                    {
+                        "data": "no_spt"
+                    },
+                    {
+                        "data": "nama"
+                    },
+                    {
+                        "data": "dasar"
+                    },
+                    {
+                        "data": "untuk"
+                    },
+                    {
+                        "data": "status",
+                        "render": function(data, type, row) {
+                            if (data === "1") {
+                                return "approve";
+                            } else if (data === null) {
+                                return "belum diapprove";
+                            } else {
+                                return "unapproved";
+                            }
+                        }
+                    }
+                ],
+                "columnDefs": [{
+                        "width": "10px",
+                        "targets": [0]
+                    },
+                    {
+                        "width": "300px",
+                        "targets": [1]
+                    },
+                    {
+                        "width": "280px",
+                        "targets": [2]
+                    },
+                    {
+                        "width": "600px",
+                        "targets": [3]
+                    },
+                    {
+                        "width": "600px",
+                        "targets": [4]
+                    },
+                    {
+                        "width": "200px",
+                        "targets": [5]
+                    },
+                    {
+                        "targets": 0,
+                        "data": null,
+                        "render": function(data, type, row, meta) {
+                            return meta.row + 1;
+                        }
+                    }
+                ],
+                "createdRow": function(row, data, dataIndex) {
+                    var no_spt = data.no_spt.replace(/\//g, '').replace('Sekr/BPKPAD', '');
+                    if (dataIndex === (table.rows().count() - 1)) {
+                        $(row).append(
+                            '<td><button class="btn btn-primary edit-button" data-id="' +
+                            no_spt +
+                            '"><i class="cil-pencil"></i></button></td>'
+                        );
+                        $(row).append(
+                            '<td><button class="btn btn-danger" onclick="deleteRow(\'' +
+                            no_spt +
+                            '\')"><i class="cil-trash"></i></button></td>'
+                        );
+                        $(row).append(
+                            '<td><button class="btn btn-secondary" onclick="approve(\'' + data
+                            .id +
+                            '\')"><i class="cil-task"></i></button></td>'
+                        );
                     }
                 }
-            ],
-            "createdRow": function(row, data, dataIndex) {
-                // check if this is the last row
-                var no_spt = data.no_spt.replace(/\//g, '').replace('Sekr/BPKPAD', '');
-
-                if (dataIndex === (table.rows().count() - 1)) {
-                    // add Edit button
-                    // $(row).append(
-                    //     '<td><button class="btn btn-primary" onclick="print(\'' + data.id +
-                    //     '\')"><i class="cil-print"></i></button></td>'
-                    // );
-                    // add Edit button
-                    $(row).append(
-                        '<td><button class="btn btn-primary edit-button" data-id="' + no_spt +
-                        '"><i class="cil-pencil"></i></button></td>'
-                    );
-                    // add Delete button
-                    $(row).append(
-                        '<td><button class="btn btn-danger" onclick="deleteRow(\'' + no_spt +
-                        '\')"><i class="cil-trash"></i></button></td>'
-                    );
-
-
+            });
+        } else {
+            table = $('#data-table').DataTable({
+                "scrollX": true,
+                responsive: true,
+                "ajax": {
+                    "url": "get_data_surat.php?data=spt",
+                    "type": "POST"
+                },
+                "columns": [{
+                        "data": ""
+                    },
+                    {
+                        "data": "no_spt"
+                    },
+                    {
+                        "data": "nama"
+                    },
+                    {
+                        "data": "dasar"
+                    },
+                    {
+                        "data": "untuk"
+                    },
+                    {
+                        "data": "status",
+                        "render": function(data, type, row) {
+                            if (data === "1") {
+                                return "approve";
+                            } else if (data === null) {
+                                return "belum diapprove";
+                            } else {
+                                return "unapproved";
+                            }
+                        }
+                    }
+                ],
+                "columnDefs": [{
+                        "width": "10px",
+                        "targets": [0]
+                    },
+                    {
+                        "width": "300px",
+                        "targets": [1]
+                    },
+                    {
+                        "width": "280px",
+                        "targets": [2]
+                    },
+                    {
+                        "width": "600px",
+                        "targets": [3]
+                    },
+                    {
+                        "width": "600px",
+                        "targets": [4]
+                    },
+                    {
+                        "width": "200px",
+                        "targets": [5]
+                    },
+                    {
+                        "targets": 0,
+                        "data": null,
+                        "render": function(data, type, row, meta) {
+                            return meta.row + 1;
+                        }
+                    }
+                ],
+                "createdRow": function(row, data, dataIndex) {
+                    var no_spt = data.no_spt.replace(/\//g, '').replace('Sekr/BPKPAD', '');
+                    if (data.status !== 1) {
+                        if (dataIndex === (table.rows().count() - 1)) {
+                            $(row).append(
+                                '<td><button class="btn btn-secondary" onclick="approve(\'' +
+                                data
+                                .id +
+                                '\')"><i class="cil-task"></i></button></td>'
+                            );
+                        }
+                    }
                 }
-            }
+            });
+        }
 
-        });
 
         $("#data-table").on("mouseenter", "td", function() {
             $(this).attr('title', this.innerText);
@@ -413,6 +510,47 @@
         // Lakukan permintaan AJAX untuk menghapus data pegawai berdasarkan ID
         $.ajax({
             url: 'perintahtugas_hapus.php', // Ganti dengan URL yang sesuai untuk menghapus data pegawai berdasarkan ID
+            type: 'POST',
+            data: {
+                id: id
+            },
+            success: function(response) {
+                // Menampilkan pesan atau melakukan aksi setelah data berhasil dihapus
+                // alert(response);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sukses',
+                    text: response,
+                    // showCancelButton: true,
+                    confirmButtonText: 'OK',
+                    // cancelButtonText: 'Batal',
+                    showLoaderOnConfirm: true,
+                    preConfirm: () => {
+                        return new Promise((resolve) => {
+                            // Mengatur waktu delay sebelum mengarahkan ke halaman 'pegawai.php'
+                            setTimeout(() => {
+                                resolve();
+                            }, 3000);
+                        });
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Pengguna mengklik tombol "OK"
+                        window.location.href = 'perintah_tugas.php';
+                    }
+                });
+            },
+            error: function(xhr, status, error) {
+                // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function approve(id) {
+        // Lakukan permintaan AJAX untuk menghapus data pegawai berdasarkan ID
+        $.ajax({
+            url: 'perintahtugas_approve.php', // Ganti dengan URL yang sesuai untuk menghapus data pegawai berdasarkan ID
             type: 'POST',
             data: {
                 id: id
