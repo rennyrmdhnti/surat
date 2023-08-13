@@ -171,55 +171,86 @@
 
     <script>
     $(document).ready(function() {
-        var table = $('#data-table').DataTable({
-            // "processing": true,
-            // "serverSide": true,
-            "ajax": {
-                "url": "get_data_master.php?data=rek_kegiatan",
-                "type": "POST"
-            },
-            "columns": [{
-                    "data": ""
-                },
-                {
-                    "data": "sub_kegiatan"
-                },
-                {
-                    "data": "kode_rekening"
-                },
-                {
-                    "data": "uraian"
-                },
-                {
-                    "data": "anggaran",
-                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                }
-            ],
-            "columnDefs": [{
-                "targets": 0,
-                "data": null,
-                "render": function(data, type, row, meta) {
-                    return meta.row + 1;
-                }
-            }],
-            "createdRow": function(row, data, dataIndex) {
-                // check if this is the last row
-                if (dataIndex === (table.rows().count() - 1)) {
-                    // add Edit button
-                    $(row).append(
-                        '<td><button class="btn btn-primary edit-button" data-id="' + data
-                        .id_rek +
-                        '"><i class="cil-pencil"></i></button></td>'
-                    );
+        var table;
 
-                    // add Delete button
-                    $(row).append(
-                        '<td><button class="btn btn-danger delete-button" onclick="deleteData(' +
-                        data.id_rek + ')"><i class="cil-trash"></i></button></td>'
-                    );
+        if (<?php echo $status_login ?> === 0) {
+            table = $('#data-table').DataTable({
+                "ajax": {
+                    "url": "get_data_master.php?data=rek_kegiatan",
+                    "type": "POST"
+                },
+                "columns": [{
+                        "data": ""
+                    },
+                    {
+                        "data": "sub_kegiatan"
+                    },
+                    {
+                        "data": "kode_rekening"
+                    },
+                    {
+                        "data": "uraian"
+                    },
+                    {
+                        "data": "anggaran",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    }
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                }],
+                "createdRow": function(row, data, dataIndex) {
+                    if (dataIndex === (table.rows().count() - 1)) {
+                        $(row).append(
+                            '<td><button class="btn btn-primary edit-button" data-id="' + data
+                            .id_rek +
+                            '"><i class="cil-pencil"></i></button></td>'
+                        );
+
+                        $(row).append(
+                            '<td><button class="btn btn-danger delete-button" onclick="deleteData(' +
+                            data.id_rek + ')"><i class="cil-trash"></i></button></td>'
+                        );
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            table = $('#data-table').DataTable({
+                "ajax": {
+                    "url": "get_data_master.php?data=rek_kegiatan",
+                    "type": "POST"
+                },
+                "columns": [{
+                        "data": ""
+                    },
+                    {
+                        "data": "sub_kegiatan"
+                    },
+                    {
+                        "data": "kode_rekening"
+                    },
+                    {
+                        "data": "uraian"
+                    },
+                    {
+                        "data": "anggaran",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    }
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                }]
+            });
+        }
+
     });
     // Fungsi untuk menyimpan data pegawai ke dalam database
     function simpanData() {

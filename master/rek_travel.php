@@ -116,50 +116,74 @@
 
     <script>
     $(document).ready(function() {
-        var table = $('#data-table').DataTable({
-            // "processing": true,
-            // "serverSide": true,
-            "ajax": {
-                "url": "get_data_master.php?data=rek_travel",
-                "type": "POST"
-            },
-            "columns": [{
-                    "data": ""
-                },
-                {
-                    "data": "nama"
-                },
-                {
-                    "data": "norek"
-                }
-            ],
-            "columnDefs": [{
-                "targets": 0,
-                "data": null,
-                "render": function(data, type, row, meta) {
-                    return meta.row + 1;
-                }
-            }],
-            "createdRow": function(row, data, dataIndex) {
-                // check if this is the last row
-                if (dataIndex === (table.rows().count() - 1)) {
-                    // add Edit button
-                    $(row).append(
-                        '<td><button class="btn btn-primary edit-button" data-id="' + data.id +
-                        '"><i class="cil-pencil"></i></button></td>'
-                    );
+        var table;
 
-                    // add Delete button
-                    $(row).append(
-                        '<td><button class="btn btn-danger delete-button" onclick="deleteData(' +
-                        data.id + ')"><i class="cil-trash"></i></button></td>'
-                    );
+        if (<?php echo $status_login ?> === 0) {
+            table = $('#data-table').DataTable({
+                "ajax": {
+                    "url": "get_data_master.php?data=rek_travel",
+                    "type": "POST"
+                },
+                "columns": [{
+                        "data": ""
+                    },
+                    {
+                        "data": "nama"
+                    },
+                    {
+                        "data": "norek"
+                    }
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                }],
+                "createdRow": function(row, data, dataIndex) {
+                    if (dataIndex === (table.rows().count() - 1)) {
+                        $(row).append(
+                            '<td><button class="btn btn-primary edit-button" data-id="' + data
+                            .id +
+                            '"><i class="cil-pencil"></i></button></td>'
+                        );
+                        $(row).append(
+                            '<td><button class="btn btn-danger delete-button" onclick="deleteData(' +
+                            data.id + ')"><i class="cil-trash"></i></button></td>'
+                        );
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            table = $('#data-table').DataTable({
+                "ajax": {
+                    "url": "get_data_master.php?data=rek_travel",
+                    "type": "POST"
+                },
+                "columns": [{
+                        "data": ""
+                    },
+                    {
+                        "data": "nama"
+                    },
+                    {
+                        "data": "norek"
+                    }
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                }]
+            });
+        }
+
     });
-   // Fungsi untuk menyimpan data pegawai ke dalam database
-  function simpanData() {
+    // Fungsi untuk menyimpan data pegawai ke dalam database
+    function simpanData() {
         // Mengambil nilai input dari form
         var nama_travel = document.getElementById('nama_travel').value;
         var no_rek = document.getElementById('no_rek').value;
@@ -247,62 +271,62 @@
 
     // Menghapus data pegawai berdasarkan ID
     function deleteData(id) {
-    // Show a confirmation popup before proceeding with deletion
-    Swal.fire({
-        icon: 'warning',
-        title: 'Konfirmasi',
-        text: 'Apakah Anda yakin ingin menghapus data ini?',
-        showCancelButton: true,
-        confirmButtonText: 'Ya',
-        cancelButtonText: 'Tidak',
-        showLoaderOnConfirm: true,
-        preConfirm: () => {
-            return new Promise((resolve) => {
-                // Lakukan permintaan AJAX untuk menghapus data rekening travel berdasarkan ID
-                $.ajax({
-                    url: 'rek_travel_hapus.php', // Ganti dengan URL yang sesuai untuk menghapus data rekening travel berdasarkan ID
-                    type: 'POST',
-                    data: {
-                        id: id
-                    },
-                    success: function (response) {
-                        // Menampilkan pesan atau melakukan aksi setelah data berhasil dihapus
-                        resolve(response);
-                    },
-                    error: function (xhr, status, error) {
-                        // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
-                        console.error(xhr.responseText);
-                        resolve('Terjadi kesalahan saat menghapus data.');
+        // Show a confirmation popup before proceeding with deletion
+        Swal.fire({
+            icon: 'warning',
+            title: 'Konfirmasi',
+            text: 'Apakah Anda yakin ingin menghapus data ini?',
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak',
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                return new Promise((resolve) => {
+                    // Lakukan permintaan AJAX untuk menghapus data rekening travel berdasarkan ID
+                    $.ajax({
+                        url: 'rek_travel_hapus.php', // Ganti dengan URL yang sesuai untuk menghapus data rekening travel berdasarkan ID
+                        type: 'POST',
+                        data: {
+                            id: id
+                        },
+                        success: function(response) {
+                            // Menampilkan pesan atau melakukan aksi setelah data berhasil dihapus
+                            resolve(response);
+                        },
+                        error: function(xhr, status, error) {
+                            // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
+                            console.error(xhr.responseText);
+                            resolve('Terjadi kesalahan saat menghapus data.');
+                        }
+                    });
+                });
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Pengguna mengklik tombol "Ya"
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sukses',
+                    text: result.value,
+                    confirmButtonText: 'OK',
+                    showLoaderOnConfirm: true,
+                    preConfirm: () => {
+                        return new Promise((resolve) => {
+                            // Mengatur waktu delay sebelum mengarahkan ke halaman 'rek_travel.php'
+                            setTimeout(() => {
+                                resolve();
+                            }, 3000);
+                        });
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Pengguna mengklik tombol "OK"
+                        window.location.href = 'rek_travel.php';
                     }
                 });
-            });
-        }
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Pengguna mengklik tombol "Ya"
-            Swal.fire({
-                icon: 'success',
-                title: 'Sukses',
-                text: result.value,
-                confirmButtonText: 'OK',
-                showLoaderOnConfirm: true,
-                preConfirm: () => {
-                    return new Promise((resolve) => {
-                        // Mengatur waktu delay sebelum mengarahkan ke halaman 'rek_travel.php'
-                        setTimeout(() => {
-                            resolve();
-                        }, 3000);
-                    });
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Pengguna mengklik tombol "OK"
-                    window.location.href = 'rek_travel.php';
-                }
-            });
-        }
-    });
-}
+            }
+        });
+    }
 
 
     function updateData() {

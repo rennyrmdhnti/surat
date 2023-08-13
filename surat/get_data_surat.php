@@ -8,9 +8,9 @@ require_once '../config/koneksi.php';
 if ($_GET['data'] == 'spt') {
     
 // mengambil data dari MySQL
-    $sql = "SELECT id,no_spt, dasar, untuk, GROUP_CONCAT(CONCAT(nomor, '. ', nama) SEPARATOR '<br>') AS nama 
+    $sql = "SELECT id,no_spt, dasar, untuk, GROUP_CONCAT(CONCAT(nomor, '. ', nama) SEPARATOR '<br>') AS nama , status
     FROM (
-        SELECT id,no_spt, dasar, untuk, nama, ROW_NUMBER() OVER (PARTITION BY no_spt, dasar, untuk ORDER BY nama) AS nomor
+        SELECT id,no_spt, dasar, untuk, nama, ROW_NUMBER() OVER (PARTITION BY no_spt, dasar, untuk ORDER BY nama) AS nomor, status
         FROM tb_perintah_tugas ORDER BY id DESC
     ) t
     GROUP BY no_spt, dasar, untuk;       
