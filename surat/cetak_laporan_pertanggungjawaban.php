@@ -28,78 +28,91 @@ if ($startDate !== '' && $endDate !== '') {
         return 'Rp ' . number_format($angka, 0, ',', '.');
     }
         ?>
+<html>
 
-<style>
-h2,
-h1,
-h6,
-p {
-    margin: 0;
-    padding: 0;
-}
+<head>
+    <title>Cetak</title>
+</head>
 
-@media print {
-    @page {
-        size: landscape;
+<body>
+    <style>
+    h2,
+    h1,
+    h6,
+    p {
+        margin: 0;
+        padding: 0;
     }
-}
 
-.custom-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #ccc;
-}
+    @media print {
+        @page {
+            size: landscape;
+        }
+    }
 
-.custom-table th,
-.custom-table td {
-    padding: 10px;
-    border: 1px solid #ccc;
-}
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #ccc;
+    }
 
-.custom-table th {
-    background-color: #f2f2f2;
-    text-align: center;
-}
+    .custom-table th,
+    .custom-table td {
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
 
-.custom-table td {
-    vertical-align: top;
-}
-</style>
+    .custom-table th {
+        background-color: #f2f2f2;
+        text-align: center;
+    }
 
-<table width="100%">
-    <tr>
-        <td width="20" align="center"><img
-                src="https://myfiles.space/user_files/160776_2c764bf7c16fcedc/1685286320_2.-sppd/1685286320_2.-sppd-1.jpeg"
-                width="100%"></td>
-        <td width="50" align="center">
-            <h2>PEMERINTAH KOTA BANJARMASIN</h2>
-            <h1>BADAN PENGELOLAAN KEUANGAN,
-                PENDAPATAN DAN ASET DAERAH
-            </h1>
-            <h6>Jalan Pramuka Tirta Dharma Komplek PDAM Bandarmasih Banjarmasin No.17 RT.09</h6>
-            <h6>Telp.(0511) 4281292 -6742525 Banjarmasin – Kalimantan selatan</h6>
-        </td>
-    </tr>
-</table>
-<img src="https://myfiles.space/user_files/160776_2c764bf7c16fcedc/1685286320_2.-sppd/1685286320_2.-sppd-2.png" alt="">
-<br><br>
-<hr>
+    .custom-table td {
+        vertical-align: top;
+    }
 
-<h3 style="text-align: center;">LAPORAN SURAT PERTANNGGUNGJAWABAN</h3>
-
-<table class="custom-table">
-    <thead>
+    .logo-image {
+        max-width: 100px;
+        /* Sesuaikan dengan ukuran yang Anda inginkan */
+        height: auto;
+        /* Agar gambar tetap proporsional */
+    }
+    </style>
+    <table width="100%">
         <tr>
-            <th>No</th>
-            <th>No NPD</th>
-            <th>Tanggal</th>
-            <th>Nama / NIP</th>
-            <th>Tujuan</th>
-            <th>Jumlah Bersih</th>
+            <td width="10%" style="text-align: center;">
+                <img src="LOGO_KOTA_BANJARMASIN_PNG.png" class="logo-image">
+            </td>
+            <td align="center" width="90%">
+                <h2>PEMERINTAH KOTA BANJARMASIN</h2>
+                <h1>BADAN PENGELOLAAN KEUANGAN,
+                    PENDAPATAN DAN ASET DAERAH
+                </h1>
+                <h6>Jalan Pramuka Tirta Dharma Komplek PDAM Bandarmasih Banjarmasin No.17 RT.09</h6>
+                <h6>Telp.(0511) 4281292 -6742525 Banjarmasin – Kalimantan selatan</h6>
+            </td>
         </tr>
-    </thead>
-    <tbody>
-        <?php
+    </table>
+    <img src="https://myfiles.space/user_files/160776_2c764bf7c16fcedc/1685286320_2.-sppd/1685286320_2.-sppd-2.png"
+        alt="">
+    <br><br>
+    <hr>
+
+    <h3 style="text-align: center;">LAPORAN SURAT PERTANNGGUNGJAWABAN</h3>
+
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>No NPD</th>
+                <th>Tanggal</th>
+                <th>Nama / NIP</th>
+                <th>Tujuan</th>
+                <th>Jumlah Bersih</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
         // Misalnya, $data adalah array asosiatif yang berisi data dari database
         foreach ($data as $index => $item) {
             echo '<tr>';
@@ -112,12 +125,12 @@ p {
             echo '</tr>';
         }
         ?>
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
 
 
-<?php
+    <?php
 $bulanIndonesia = array(
     "Januari", "Februari", "Maret", "April", "Mei", "Juni",
     "Juli", "Agustus", "September", "Oktober", "November", "Desember"
@@ -132,32 +145,38 @@ $lokasi = "Banjarmasin";
 
 ?>
 
-<br>
-<br>
-<br>
+    <br>
+    <br>
+    <br>
 
-<table>
-    <tr>
-        <td style="width: 82%;"></td>
-        <td style="text-align: center;">Dikeluarkan Di Banjarmasin</td>
-    </tr>
-    <tr>
-        <td style="width: 60%;"></td>
-        <td style="text-align: center;">Pada Tanggal,<?php echo $tanggalFormat; ?></td>
-    </tr>
-    <tr>
-        <td style="width: 60%;"></td>
-        <td style="text-align: center;">Mengetahui,</td>
-    </tr>
-    <tr>
-        <td colspan="2" style="height: 120px;"></td>
-    </tr>
-    <tr>
-        <td style="width: 60%;"></td>
-        <td style="text-align: center;"><u>H. EDY WIBOWO, SE</u></td>
-    </tr>
-    <tr>
-        <td style="width: 60%;"></td>
-        <td style="text-align: center;">NIP. 19690112 199303 1 004</td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <td style="width: 82%;"></td>
+            <td style="text-align: center;">Dikeluarkan Di Banjarmasin</td>
+        </tr>
+        <tr>
+            <td style="width: 60%;"></td>
+            <td style="text-align: center;">Pada Tanggal,<?php echo $tanggalFormat; ?></td>
+        </tr>
+        <tr>
+            <td style="width: 60%;"></td>
+            <td style="text-align: center;">Mengetahui,</td>
+        </tr>
+        <tr>
+            <td style="width: 60%;"></td>
+            <td style="text-align: center;"><img src="ttd.png" class="logo-image"></td>
+        </tr>
+        <tr>
+            <td style="width: 60%;"></td>
+            <td style="text-align: center;"><u>H. EDY WIBOWO, SE</u></td>
+        </tr>
+        <tr>
+            <td style="width: 60%;"></td>
+            <td style="text-align: center;">NIP. 19690112 199303 1 004</td>
+        </tr>
+    </table>
+    <script>
+    window.onload = function() {
+        window.print();
+    };
+    </script>

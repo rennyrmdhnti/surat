@@ -5,15 +5,13 @@ $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : null;
 $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : null;
 
 $sql = "SELECT *
-        FROM tb_perintah_tugas 
-        LEFT JOIN tb_perjalan_dinas ON tb_perjalan_dinas.no_spt = tb_perintah_tugas.no_spt
-        WHERE status = 1";
+FROM tb_hasil_dinas ";
 
 // Tambahkan kondisi WHERE jika startDate dan endDate tidak null
 if ($startDate !== '' && $endDate !== '') {
     // Anda mungkin perlu memformat tanggal sesuai dengan format di tabel atau database Anda
     // Contoh format: 'Y-m-d'
-    $sql .= " AND tanggal_buat >= '$startDate' AND tanggal_buat <= '$endDate'";
+    $sql .= " AND tb_hasil_dinas.tanggal_buat >= '$startDate' AND tb_hasil_dinas.tanggal_buat <= '$endDate'";
 }
 
     $result = $conn->query($sql);
@@ -94,17 +92,16 @@ if ($startDate !== '' && $endDate !== '') {
     <br><br>
     <hr>
 
-    <h3 style="text-align: center;">LAPORAN SURAT PERINTAH TUGAS</h3>
+    <h3 style="text-align: center;">LAPORAN KEGIATAN PERJALANAN DINAS</h3>
 
     <table class="custom-table">
         <thead>
             <tr>
                 <th>No</th>
-                <th>No SPT</th>
-                <th>Berangkat/Kembali</th>
-                <th>Tujuan</th>
-                <th>Dasar</th>
-                <th>Untuk</th>
+                <th>Tanggal</th>
+                <th>Tempat</th>
+                <th>Nama Kegiatan</th>
+                <th>Hasil Kegiatan</th>
             </tr>
         </thead>
         <tbody>
@@ -113,11 +110,10 @@ if ($startDate !== '' && $endDate !== '') {
         foreach ($data as $index => $item) {
             echo '<tr>';
             echo '<td>' . ($index + 1) . '</td>'; // Nomor urut
-            echo '<td>' . $item['no_spt'] . '</td>';
-            echo '<td>' . $item['tanggal_berangkat'] . ' / ' . $item['tanggal_kembali'] . '</td>';
-            echo '<td>' . $item['tempat_tujuan'] . '</td>';
-            echo '<td>' . $item['dasar'] . '</td>';
-            echo '<td>' . $item['untuk'] . '</td>';
+            echo '<td>' . $item['tanggal_buat'] . '</td>';
+            echo '<td>' . $item['waktu_dan_tempat'] . '</td>';
+            echo '<td>' . $item['nama_kegiatan'] . '</td>';
+            echo '<td>' . $item['kesimpulan'] . '</td>';
             echo '</tr>';
         }
         ?>

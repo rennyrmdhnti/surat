@@ -242,6 +242,10 @@
                         $(row).append(
                             '<td><button class="btn btn-danger"><i class="cil-trash"></i></button></td>'
                         );
+                        $(row).append(
+                            '<td><button class="btn btn-primary" onclick="print(\'' + data.id +
+                            '\')"><i class="cil-print"></i></button></td>'
+                        );
                     }
                 }
             });
@@ -376,6 +380,20 @@
 
         // Set nilai input pencairan dengan nilai nominal
         pencairanInput.value = nominalText;
+    }
+
+    function print(id) {
+        console.log(id); // Menampilkan nilai id ke konsol
+        var printWindow = window.open();
+        fetch('nota_pencairan_dana_print.php?id=' + id)
+            .then(response => response.text())
+            .then(content => {
+                printWindow.document.write('<html><head><title>Cetak</title></head><body>');
+                printWindow.document.write(content);
+                printWindow.document.write('</body></html>');
+                printWindow.print();
+                printWindow.close();
+            });
     }
     </script>
 

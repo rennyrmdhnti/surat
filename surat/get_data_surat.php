@@ -282,6 +282,25 @@ if ($_GET['data'] == '8') {
             echo "Tidak ada data";
         }
     }
+
+    if ($_GET['data'] == 'hasil_dinas') {
+    
+        // mengambil data dari MySQL
+        $sql = "select * from tb_hasil_dinas order by id desc ";
+        $result = $conn->query($sql);
+        // memeriksa apakah kueri berhasil dieksekusi
+        if ($result->num_rows > 0) {
+            // membuat array untuk menampung data
+            $data = array();
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+            // mengirim data dalam format JSON
+            echo json_encode(array("data" => $data));
+        } else {
+            echo "Tidak ada data";
+        }
+    }
     
 
 
