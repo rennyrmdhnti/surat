@@ -32,7 +32,7 @@
                 <li class="nav-item"><a class="nav-link" href="/surat/master/rek_travel.php"> Rek Travel</a></li>
             </ul>
         </li>
-        
+
         <li class="nav-title">Input Surat</li>
         <li class="nav-group"><a class="nav-link nav-group-toggle" href="#">
                 <svg class="nav-icon">
@@ -40,21 +40,24 @@
                 </svg> Input Data</a>
             <ul class="nav-group-items">
                 <li class="nav-item"><a class="nav-link" href="/surat/surat/perintah_tugas.php"> Perintah Tugas</a></li>
-                <li class="nav-item"><a class="nav-link" href="/surat/surat/perjalanan_dinas.php"> Perjalanan Dinas</a></li>
+                <li class="nav-item"><a class="nav-link" href="/surat/surat/perjalanan_dinas.php"> Perjalanan Dinas</a>
+                </li>
                 <li class="nav-item"><a class="nav-link" href="/surat/surat/nominatif.php"> Pertanggung Jawaban</a></li>
-                <!-- <li class="nav-group"><a class="nav-link nav-group-toggle" href="#"> Nominatif</a>
-                    <ul class="nav-group-items">
-                        <li class="nav-item"><a class="nav-link" href="/surat/surat/nominatif.php"> Pertanggung Jawaban</a></li> -->
-                        <!-- <li class="nav-item"><a class="nav-link" href="/surat/surat/panjar.php"> Panjar</a></li> -->
-                        <!-- <li class="nav-item"><a class="nav-link" href="/surat/surat/sisa_pencairan.php">Sisa Pencairan</a></li> -->
-                    <!-- </ul>
-                </li> -->
-                <li class="nav-item"><a class="nav-link" href="/surat/surat/nota_pencairan_dana.php"> Nota Pencairan
-                        Dana</a></li>
-            </ul>
         </li>
-        <li class="nav-title">Report</li>
-        <!-- <li class="nav-group"><a class="nav-link nav-group-toggle" href="#">
+        <!-- <li class="nav-group"><a class="nav-link nav-group-toggle" href="#"> Nominatif</a>
+            <ul class="nav-group-items">
+                <li class="nav-item"><a class="nav-link" href="/surat/surat/nominatif.php"> Pertanggung Jawaban</a></li> -->
+        <!-- <li class="nav-item"><a class="nav-link" href="/surat/surat/panjar.php"> Panjar</a></li> -->
+        <!-- <li class="nav-item"><a class="nav-link" href="/surat/surat/sisa_pencairan.php">Sisa Pencairan</a></li> -->
+        <!-- </ul>
+            </li> -->
+        <li class="nav-item"><a class="nav-link" href="/surat/surat/nota_pencairan_dana.php"> Nota Pencairan
+                Dana</a></li>
+        <li class="nav-item"><a class="nav-link" href="/surat/surat/hasil_perjalanan.php"> Hasil Perjalanan</a>
+    </ul>
+    </li>
+    <li class="nav-title">Report</li>
+    <!-- <li class="nav-group"><a class="nav-link nav-group-toggle" href="#">
                 <svg class="nav-icon">
                     <use xlink:href="/surat/vendors/@coreui/icons/svg/free.svg#cil-description"></use>
                 </svg> Cetak Surat</a>
@@ -66,23 +69,347 @@
                 <li class="nav-item"><a class="nav-link" href="forms/input-group.html"> Akses User</a></li>
             </ul>
         </li> -->
-        <li class="nav-group"><a class="nav-link nav-group-toggle" href="#">
-                <svg class="nav-icon">
-                    <use xlink:href="/surat/vendors/@coreui/icons/svg/free.svg#cil-description"></use>
-                </svg> Cetak Laporan</a>
-            <ul class="nav-group-items">
-                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_perintah_tugas.php">SPT</a></li>
-                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_perjalanan_dinas.php">SPPD</a></li>
-                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_nominatif.php">Nominatif</a></li>
-                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_nota_pencairan_dana.php">NPD</a></li>
-                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_kegiatan.php">Laporan Kegiatan</a></li>
-                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_kegiatan_dinas.php">Laporan Perjalanan Dinas</a></li>
-                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_realisasi_anggaran.php">Laporan Realisasi Anggaran</a></li>
-                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_walikota.php">Laporan Walikota</a></li>
-                <li class="nav-item"><a class="nav-link" href="/surat/surat/laporan_keberangkatan.php">Laporan Keberangkatan</a></li>
-            </ul>
-        </li>
+    <li class="nav-group"><a class="nav-link nav-group-toggle" href="#">
+            <svg class="nav-icon">
+                <use xlink:href="/surat/vendors/@coreui/icons/svg/free.svg#cil-description"></use>
+            </svg> Cetak Laporan</a>
+        <ul class="nav-group-items">
+            <li class="nav-item">
+                <a class="nav-link" data-coreui-toggle="modal" data-coreui-target="#ModalSPT">Lap Perintah Tugas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-coreui-toggle="modal" data-coreui-target="#ModalRPD">Rekap Perjalan
+                    Dinas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-coreui-toggle="modal" data-coreui-target="#ModalLPD">Lap Perjalanan
+                    Dinas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-coreui-toggle="modal" onclick="cetakDataLRA()">Lap Realisasi Anggaran</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-coreui-toggle="modal" data-coreui-target="#ModalLaporanKegiatan">Kegiatan
+                    Perjalanan Dinas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-coreui-toggle="modal" data-coreui-target="#ModalPaguKegiatan">Laporan Pagu
+                    Kegiatan</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-coreui-toggle="modal" data-coreui-target="#ModalLapNota">Lap Nota Pencairan
+                    Dana</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-coreui-toggle="modal" data-coreui-target="#ModalSP">Surat
+                    Pertanggungjawaban</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-coreui-toggle="modal" data-coreui-target="#ModalLAP">Lap Anggaran
+                    Perjadin</a>
+            </li>
+        </ul>
+    </li>
 
     </ul>
     <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="ModalSPT" tabindex="-1" aria-labelledby="ModalSPTLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cetak Laporan Surat Perintah Tugas</h5>
+                <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="startDate">Tanggal Mulai</label>
+                <input type="date" id="startDateSPT" class="form-control">
+                <br>
+                <label for="endDate">Tanggal Akhir</label>
+                <input type="date" id="endDateSPT" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="cetakDataSPT()">Cetak Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="ModalRPD" tabindex="-1" aria-labelledby="ModalRPDLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Rekap Perjalanan Dinas</h5>
+                <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="startDate">Tanggal Mulai</label>
+                <input type="date" id="startDateRPD" class="form-control">
+                <br>
+                <label for="endDate">Tanggal Akhir</label>
+                <input type="date" id="endDateRPD" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="cetakDataRPD()">Cetak Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="ModalLPD" tabindex="-1" aria-labelledby="ModalLPDLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Laporan Perjalanan Dinas</h5>
+                <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="startDate">Tanggal Mulai</label>
+                <input type="date" id="startDateLPD" class="form-control">
+                <br>
+                <label for="endDate">Tanggal Akhir</label>
+                <input type="date" id="endDateLPD" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="cetakDataLPD()">Cetak Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="ModalLRA" tabindex="-1" aria-labelledby="ModalLRALabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Laporan Realisasi Anggaran</h5>
+                <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="startDate">Tanggal Mulai</label>
+                <input type="date" id="startDateLRA" class="form-control">
+                <br>
+                <label for="endDate">Tanggal Akhir</label>
+                <input type="date" id="endDateLRA" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="cetakDataLRA()">Cetak Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="ModalLapNota" tabindex="-1" aria-labelledby="ModalLapNotaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Laporan Nota Pencairan Dana</h5>
+                <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="startDate">Tanggal Mulai</label>
+                <input type="date" id="startDateLapNota" class="form-control">
+                <br>
+                <label for="endDate">Tanggal Akhir</label>
+                <input type="date" id="endDateLapNota" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="cetakDataLapNota()">Cetak Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="ModalSP" tabindex="-1" aria-labelledby="ModalSPLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Laporan Surat Pertanggung Jawaban</h5>
+                <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="startDate">Tanggal Mulai</label>
+                <input type="date" id="startDateSP" class="form-control">
+                <br>
+                <label for="endDate">Tanggal Akhir</label>
+                <input type="date" id="endDateSP" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="cetakDataSP()">Cetak Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="ModalLAP" tabindex="-1" aria-labelledby="ModalLAPLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Laporan Surat Pertanggung Jawaban</h5>
+                <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="startDate">Tanggal Mulai</label>
+                <input type="date" id="startDateLAP" class="form-control">
+                <br>
+                <label for="endDate">Tanggal Akhir</label>
+                <input type="date" id="endDateLAP" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="cetakDataLAP()">Cetak Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="ModalPaguKegiatan" tabindex="-1" aria-labelledby="ModalPaguKegiatanLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Laporan Surat Pertanggung Jawaban</h5>
+                <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="startDate">Tanggal Mulai</label>
+                <input type="date" id="startDatePaguKegiatan" class="form-control">
+                <br>
+                <label for="endDate">Tanggal Akhir</label>
+                <input type="date" id="endDatePaguKegiatan" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="cetakDataPaguKegiatan()">Cetak Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="ModalLaporanKegiatan" tabindex="-1" aria-labelledby="ModalLaporanKegiatanLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Laporan Surat Pertanggung Jawaban</h5>
+                <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="startDate">Tanggal Mulai</label>
+                <input type="date" id="startDateLaporanKegiatan" class="form-control">
+                <br>
+                <label for="endDate">Tanggal Akhir</label>
+                <input type="date" id="endDateLaporanKegiatan" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="cetakDataLaporanKegiatan()">Cetak Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal -->
+
+<!-- Anda harus menempatkan kode ini di dalam tag <script> di bagian bawah halaman -->
+<script>
+function cetakDataSPT() {
+    var startDate = document.getElementById("startDateSPT").value;
+    var endDate = document.getElementById("endDateSPT").value;
+
+    // Mengarahkan pengguna ke halaman cetak_data_pagu.php dengan parameter startDate dan endDate
+    var url = "cetak_laporan_surat_perintah_tugas.php?startDate=" + startDate + "&endDate=" + endDate;
+    window.open(url, '_blank');
+}
+
+function cetakDataRPD() {
+    var startDate = document.getElementById("startDateRPD").value;
+    var endDate = document.getElementById("endDateRPD").value;
+
+    var url = "cetak_rekap_perjalan_dinas.php?startDate=" + startDate + "&endDate=" + endDate;
+    window.open(url, '_blank');
+}
+
+function cetakDataLPD() {
+    var startDate = document.getElementById("startDateLPD").value;
+    var endDate = document.getElementById("endDateLPD").value;
+
+    var url = "cetak_laporan_perjalan_dinas.php?startDate=" + startDate + "&endDate=" + endDate;
+    window.open(url, '_blank');
+}
+
+function cetakDataLRA() {
+    var startDate = document.getElementById("startDateLRA").value;
+    var endDate = document.getElementById("endDateLRA").value;
+
+
+    var url = "cetak_laporan_realisasi_anggaran.php?startDate=" + startDate + "&endDate=" + endDate;
+    window.open(url, '_blank');
+}
+
+function cetakDataLapNota() {
+    var startDate = document.getElementById("startDateLapNota").value;
+    var endDate = document.getElementById("endDateLapNota").value;
+
+    var url = "cetak_laporan_pencairan_dana.php?startDate=" + startDate + "&endDate=" + endDate;
+    window.open(url, '_blank');
+}
+
+function cetakDataSP() {
+    var startDate = document.getElementById("startDateSP").value;
+    var endDate = document.getElementById("endDateSP").value;
+
+
+    var url = "cetak_laporan_pertanggungjawaban.php?startDate=" + startDate + "&endDate=" + endDate;
+    window.open(url, '_blank');
+}
+
+function cetakDataLAP() {
+    var startDate = document.getElementById("startDateLAP").value;
+    var endDate = document.getElementById("endDateLAP").value;
+
+    var url = "cetak_laporan_anggaran_perjadin.php?startDate=" + startDate + "&endDate=" + endDate;
+    window.open(url, '_blank');
+}
+
+function cetakDataPaguKegiatan() {
+    var startDate = document.getElementById("startDatePaguKegiatan").value;
+    var endDate = document.getElementById("endDatePaguKegiatan").value;
+
+    // Mengarahkan pengguna ke halaman cetak_data_pagu.php dengan parameter startDate dan endDate
+    var url = "cetak_laporan_pertanggungjawaban.php?startDate=" + startDate + "&endDate=" + endDate;
+    window.open(url, '_blank');
+
+}
+
+function cetakDataLaporanKegiatan() {
+    var startDate = document.getElementById("startDateLaporanKegiatan").value;
+    var endDate = document.getElementById("endDateLaporanKegiatan").value;
+
+    // Mengarahkan pengguna ke halaman cetak_data_pagu.php dengan parameter startDate dan endDate
+    var url = "cetak_laporan_kegiatan.php?startDate=" + startDate + "&endDate=" + endDate;
+    window.open(url, '_blank');
+
+}
+</script>

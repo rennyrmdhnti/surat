@@ -37,14 +37,14 @@
                                 data-coreui-target="#exampleModal">
                                 Data Tanpa Panjar
                             </button>
-                            <button type="button" class="btn btn-primary" data-coreui-toggle="modal"
+                            <!-- <button type="button" class="btn btn-primary" data-coreui-toggle="modal"
                                 data-coreui-target="#exampleModal">
                                 Data Panjar
                             </button>
                             <button type="button" class="btn btn-primary" data-coreui-toggle="modal"
                                 data-coreui-target="#exampleModal">
                                 Data Sisa Pencairan
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                                         <th>Uang Hotel</th>
                                         <th>Uang Pesawat</th>
                                         <th>Transport</th>
-                                        <th>Status</th>
+                                        <!-- <th>Status</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -130,12 +130,12 @@
                                 <label for="exampleFormControlInput1" class="form-label">Lama</label>
                                 <input type="text" class="form-control" id="lama" name="lama" readonly>
                             </div>
-                            <div class="mb-2">
+                            <div class="mb-2" style="margin-bottom: 20px;">
                                 <label for="exampleFormControlInput1" class="form-label">Uang Harian</label>
                                 <input type="text" class="form-control" id="uang_harian" name="uang_harian">
                             </div>
-                            <div class="mb-2">
-                                <label for="exampleFormControlInput1" class="form-label">Hotel</label> <input
+                            <div class="mb-2" style="padding-top: 40px; margin-bottom: 20px;">
+                                <label for="exampleFormControlInput1" class="form-label"></label> <input
                                     class="form-check-input" type="checkbox" value="" id="check_hotel_pribadi">
                                 <label class="form-check-label" for="myCheckbox">
                                     Pribadi
@@ -144,8 +144,8 @@
                                     disabled>
                                 <p style="color:red;" id="text_hotel_pribadi" name="text_hotel_pribadi"></p>
                             </div>
-                            <div class="mb-2">
-                                <label for="exampleFormControlInput1" class="form-label">Pesawat</label> <input
+                            
+                            <div class="mb-2" style="padding-top: 40px; margin-bottom: 20px;"> <input
                                     class="form-check-input" type="checkbox" value="" id="check_pesawat_pribadi">
                                 <label class="form-check-label" for="myCheckbox">
                                     Pribadi
@@ -168,12 +168,12 @@
                             <div class="mb-2" style="margin-top: 15px !important;">
                                 <input class="form-check-input" type="checkbox" value="" id="check_uang_presentatif">
                                 <label class="form-check-label" for="myCheckbox">
-                                    Uang Presentatif
+                                    Uang Repsentasi
                                 </label><input type="text" class="form-control" id="uang_presentatif"
                                     name="uang_presentatif" disabled>
                             </div>
                         </div>
-                        <div class="col" style="margin-top: 501px !important;">
+                        <div class="col" style="margin-top: 501px !important; padding-top: 40px; margin-bottom: 20px;">
                             <div class="mb-2">
                                 <input class="form-check-input" type="checkbox" value="" id="check_hotel_travel">
                                 <label class="form-check-label" for="myCheckbox">
@@ -182,7 +182,8 @@
                                     disabled>
                                 <p style="color:red;" id="text_hotel_travel" name="text_hotel_travel"></p>
                             </div>
-                            <div class="mb-2" style="margin-top: 15px !important;">
+                            <div class="mb-2"
+                                style="margin-top: 15px !important; padding-top: 40px; margin-bottom: 20px;">
                                 <input class="form-check-input" type="checkbox" value="" id="check_pesawat_travel">
                                 <label class="form-check-label" for="myCheckbox">
                                     Travel
@@ -195,9 +196,9 @@
                             <br><br><br><br>
                             Tujuan
                         </div>
-                        <div class="col" style="margin-top: 490px !important;">
+                        <div class="col" style="margin-top: 490px !important; padding-top: 40px; margin-bottom: 20px;">
                             <div class="mb-2">
-                                <label for="exampleFormControlInput1" class="form-label">Pilih Travel</label>
+                            <label for="exampleFormControlInput1" class="form-label" style="font-weight: bold; ">HOTEL</label>
                                 <select class="form-select" id="select_hotel_travel" name="select_hotel_travel"
                                     aria-label="Default select example" disabled>
                                     <option value="">-- Pilih Travel --</option>
@@ -213,8 +214,8 @@
                                         ?>
                                 </select>
                             </div>
-                            <div class="mb-2">
-                                <label for="exampleFormControlInput1" class="form-label">Pilih Travel</label>
+                            <div class="mb-2" style="padding-top: 40px; margin-bottom: 20px;">
+                            <label for="exampleFormControlInput1" class="form-label" style="font-weight: bold; ">PESAWAT</label>
                                 <select class="form-select" id="select_pesawat_travel" name="select_pesawat_travel"
                                     aria-label="Default select example" disabled>
                                     <option value="">-- Pilih Travel --</option>
@@ -231,7 +232,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col" style="margin-top: 501px !important;">
+                        <div class="col" style="margin-top: 501px !important; padding-top: 40px; margin-bottom: 20px;">
                             <div class="mb-2">
                                 <input class="form-check-input" type="checkbox" value="" id="check_lebih_hotel">
                                 <label class="form-check-label" for="myCheckbox">
@@ -240,7 +241,8 @@
                                 <input type="text" class="form-control" id="lebih_pagu_hotel" name="lebih_pagu_hotel"
                                     disabled>
                             </div>
-                            <div class="mb-2" style="margin-top: 15px !important;">
+                            <div class="mb-2"
+                                style="margin-top: 15px !important; padding-top: 40px; margin-bottom: 20px;">
                                 <input class="form-check-input" type="checkbox" value="" id="check_lebih_pesawat">
                                 <label class="form-check-label" for="myCheckbox">
                                     Lebih Pagu
@@ -261,8 +263,8 @@
     </div>
     <!-- end modal -->
 
-     <!-- Modal -->
-     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
@@ -542,82 +544,128 @@
         });
 
         $("#editID").hide();
-        var table = $('#data-table').DataTable({
-            // "processing": true,
-            // "serverSide": true,
+        var table;
 
-            responsive: true,
-            "ajax": {
-                "url": "get_data_surat.php?data=nominatif",
-                "type": "POST"
-            },
-            "columns": [{
-                    "data": ""
+        if (<?php echo $status_login ?> === 0) {
+            table = $('#data-table').DataTable({
+                responsive: true,
+                "ajax": {
+                    "url": "get_data_surat.php?data=nominatif",
+                    "type": "POST"
                 },
-                {
-                    "data": "nama"
-                },
-                {
-                    "data": "no_npd"
-                },
-                {
-                    "data": "tujuan"
-                },
-                {
-                    "data": "lama"
-                },
-                {
-                    "data": "uang_harian",
-                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                },
-                {
-                    "data": "hotel",
-                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                },
-                {
-                    "data": "pesawat",
-                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                },
-                {
-                    "data": "transport",
-                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                },
-                {
-                    "data": "status"
+                "columns": [{
+                        "data": ""
+                    },
+                    {
+                        "data": "nama"
+                    },
+                    {
+                        "data": "no_npd"
+                    },
+                    {
+                        "data": "tujuan"
+                    },
+                    {
+                        "data": "lama"
+                    },
+                    {
+                        "data": "uang_harian",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "hotel",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "pesawat",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "transport",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    // {
+                    //     "data": "status"
+                    // }
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                }],
+                "createdRow": function(row, data, dataIndex) {
+                    if (dataIndex === (table.rows().count() - 1)) {
+                        $(row).append(
+                            '<td><button class="btn btn-primary edit-button" data-id="' + data
+                            .id +
+                            '"><i class="cil-pencil"></i></button></td>'
+                        );
+                        $(row).append(
+                            '<td><button class="btn btn-danger" onclick="deleteRow(\'' + data
+                            .id +
+                            '\')"><i class="cil-trash"></i></button></td>'
+                        );
+                        $(row).append(
+                            '<td><button class="btn btn-primary" onclick="print(\'' + data.id +
+                            '\')"><i class="cil-print"></i></button></td>'
+                        );
+                    }
                 }
-            ],
-            "columnDefs": [{
-                "targets": 0,
-                "data": null,
-                "render": function(data, type, row, meta) {
-                    return meta.row + 1;
-                }
-            }],
-            "createdRow": function(row, data, dataIndex) {
-                // check if this is the last row
-                // var no_sppd = data.no_sppd.replace(/\//g, '').replace('Sekr/BPKPAD', '');
+            });
+        } else {
+            table = $('#data-table').DataTable({
+                responsive: true,
+                "ajax": {
+                    "url": "get_data_surat.php?data=nominatif",
+                    "type": "POST"
+                },
+                "columns": [{
+                        "data": ""
+                    },
+                    {
+                        "data": "nama"
+                    },
+                    {
+                        "data": "no_npd"
+                    },
+                    {
+                        "data": "tujuan"
+                    },
+                    {
+                        "data": "lama"
+                    },
+                    {
+                        "data": "uang_harian",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "hotel",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "pesawat",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    {
+                        "data": "transport",
+                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    },
+                    // {
+                    //     "data": "status"
+                    // }
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                }]
+            });
+        }
 
-                if (dataIndex === (table.rows().count() - 1)) {
-                    // add Edit button
-                    // $(row).append(
-                    //     '<td><button class="btn btn-primary" onclick="print(\'' + data.id +
-                    //     '\')"><i class="cil-print"></i></button></td>'
-                    // );
-                    // add Edit button
-                    $(row).append(
-                        '<td><button class="btn btn-primary edit-button" data-id="' + data.id +
-                        '"><i class="cil-pencil"></i></button></td>'
-                    );
-                    // add Delete button
-                    $(row).append(
-                        '<td><button class="btn btn-danger" onclick="deleteRow(\'' + data.id +
-                        '\')"><i class="cil-trash"></i></button></td>'
-                    );
-
-
-                }
-            }
-        });
     });
 
     const checkbox_lebih_hotel = document.getElementById('check_lebih_hotel');

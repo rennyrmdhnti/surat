@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Waktu pembuatan: 02 Jul 2023 pada 10.20
--- Versi server: 8.0.31
--- Versi PHP: 8.0.26
+-- Generation Time: Aug 14, 2023 at 11:53 PM
+-- Server version: 8.0.31
+-- PHP Version: 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_bidang`
+-- Table structure for table `tb_bidang`
 --
 
 DROP TABLE IF EXISTS `tb_bidang`;
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `tb_bidang` (
 ) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_bidang`
+-- Dumping data for table `tb_bidang`
 --
 
 INSERT INTO `tb_bidang` (`id_bidang`, `bidang`) VALUES
@@ -51,7 +51,7 @@ INSERT INTO `tb_bidang` (`id_bidang`, `bidang`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_golongan`
+-- Table structure for table `tb_golongan`
 --
 
 DROP TABLE IF EXISTS `tb_golongan`;
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `tb_golongan` (
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data untuk tabel `tb_golongan`
+-- Dumping data for table `tb_golongan`
 --
 
 INSERT INTO `tb_golongan` (`id_gol`, `kd_golongan`, `nama_pangkat`, `status`, `created_by`, `created_time`, `edit_by`, `edit_time`) VALUES
@@ -81,7 +81,6 @@ INSERT INTO `tb_golongan` (`id_gol`, `kd_golongan`, `nama_pangkat`, `status`, `c
 (7, 'III/b', 'Penata Muda Tingkat I', 0, '', '', '', ''),
 (8, 'III/a', 'Penata Muda', 0, '', '', '', ''),
 (9, 'II/d', 'Pengatur tingkat I', 0, '', '', '', ''),
-(10, 'II/c', 'Pengatur', 0, '', '', '', ''),
 (11, 'II/b', 'Pengatur Muda Tingkat I', 0, '', '', '', ''),
 (12, 'II/a', 'Pengatur Muda', 0, '', '', '', ''),
 (13, 'I/d', 'Juru Tingkat I', 0, '', '', '', ''),
@@ -92,7 +91,33 @@ INSERT INTO `tb_golongan` (`id_gol`, `kd_golongan`, `nama_pangkat`, `status`, `c
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_kabupaten`
+-- Table structure for table `tb_hasil_dinas`
+--
+
+DROP TABLE IF EXISTS `tb_hasil_dinas`;
+CREATE TABLE IF NOT EXISTS `tb_hasil_dinas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `perihal` varchar(500) NOT NULL,
+  `dasar` varchar(1000) NOT NULL,
+  `nama_kegiatan` varchar(500) NOT NULL,
+  `waktu_dan_tempat` varchar(500) NOT NULL,
+  `hasil_kegiatan` varchar(500) NOT NULL,
+  `kesimpulan` varchar(500) NOT NULL,
+  `tanggal_buat` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tb_hasil_dinas`
+--
+
+INSERT INTO `tb_hasil_dinas` (`id`, `perihal`, `dasar`, `nama_kegiatan`, `waktu_dan_tempat`, `hasil_kegiatan`, `kesimpulan`, `tanggal_buat`) VALUES
+(1, 'Laporan Hasil Perjlanan Dinas Luar Daerah Mengikuti Bimbingan Teknis Level Eksekutif dan Melakukan Kunjungan Kerja ke BPKAD Kabupaten Gianyar terkait Paparan Success Story Pengelolaan Pinjaman PEN Daerah di Bali pada tanggal 26 s.d 28 Juni 2023', '1)	Dokumen Pelaksanaan Pergeseran Anggaran (DPPA) Tahun 2023 Nomor DPPA/A.2/5.02.0.00.0.00.05.0000/001/2023 tanggal 16 Juni 2023 5.1.02.04.01.00001 Sub Kegiatan Penyelenggaraan Rapat Koordinasi dan Konsultasi SKPD;\n2)	Nota Dinas Badan Pengelolaan Keuangan, Pendapatan dan Aset Daerah Kota Banjarmasin pada tanggal 19 Juni 2023. Nomor: 000.1.2.3/539/Sekr/BPKPAD/VI/2023. Perihal: Mohon Izin Melakukan Perjalanan Dinas dalam Rangka Mengikuti Bimbingan Teknis Level Eksekutif dan Melakukan Kunjungan Kerja ke BPKAD Kabupaten Gianyar terkait Paparan Success Story Pengelolaan Pinjaman PEN Daerah;\n3)	Surat Perintah Tugas pada tanggal 23 Juni 2023.\n', 'Bimbingan Teknis Level Eksekutif dan Melakukan Kunjungan Kerja ke BPKAD Kabupaten Gianyar terkait Paparan Success Story Pengelolaan Pinjaman PEN Daerah ', 'Pada Tanggal 26 s.d 28 Juni 2023 di Gedung Keuangan Negara (GKN) I Denpasar dan BPKAD Kabupaten Gianyar, Bali.', 'Kegiatan Bimtwek di buka dengan diawali Keynote Speaker oleh Bapak Bhimantara Widyajala Direktur Kapasitas dan Pelaksanaan Transfer Kementerian keuangan RI juga dalam kesempatan ini Narasumber dari Bappenas secara zoom meeting dan Kementerian Dalam Negeri RI.\nDan Paparan oleh Bupati Kabupaten Gianyar I Made Bahayastra tentang Success Story Pengelolaan Pinjaman PEN Daerah di Kabupaten Gianyar.\n', 'Penandatangan kerjasama dengan STEI ITB ini terkait pendampingan transformasi digital, tim mereka melaksanakan pengukuran melalui survey, tentang redyness atau kesiapan pemko untuk bertransformasi digital.', '2023-08-15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_kabupaten`
 --
 
 DROP TABLE IF EXISTS `tb_kabupaten`;
@@ -105,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `tb_kabupaten` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
--- Dumping data untuk tabel `tb_kabupaten`
+-- Dumping data for table `tb_kabupaten`
 --
 
 INSERT INTO `tb_kabupaten` (`id`, `propinsi_id`, `nama`) VALUES
@@ -627,7 +652,7 @@ INSERT INTO `tb_kabupaten` (`id`, `propinsi_id`, `nama`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_nominatif`
+-- Table structure for table `tb_nominatif`
 --
 
 DROP TABLE IF EXISTS `tb_nominatif`;
@@ -640,24 +665,33 @@ CREATE TABLE IF NOT EXISTS `tb_nominatif` (
   `tujuan` varchar(255) NOT NULL,
   `lama` varchar(255) NOT NULL,
   `uang_harian` varchar(255) NOT NULL,
-  `status_hotel` varchar(255) NOT NULL,
-  `uang_hotel` varchar(255) NOT NULL,
-  `travel_hotel` varchar(255) NOT NULL,
-  `pagu_hotel` varchar(255) NOT NULL,
-  `status_pesawat` varchar(255) NOT NULL,
-  `uang_pesawat` varchar(255) NOT NULL,
-  `travel_pesawat` varchar(255) NOT NULL,
-  `pagu_pesawat` varchar(255) NOT NULL,
-  `transport_asal` varchar(255) NOT NULL,
-  `transport_tujuan` varchar(255) NOT NULL,
-  `uang_presentatif` varchar(255) NOT NULL,
+  `hotel_pribadi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `pesawat_pribadi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `transport_asal` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `transport_tujuan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `uang_presentatif` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `hotel_travel` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `pesawat_travel` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `lebih_pagu_hotel` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `lebih_pagu_pesawat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `select_hotel_travel` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `select_pesawat_travel` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tb_nominatif`
+--
+
+INSERT INTO `tb_nominatif` (`id`, `status`, `no_sppd`, `no_npd`, `nama`, `tujuan`, `lama`, `uang_harian`, `hotel_pribadi`, `pesawat_pribadi`, `transport_asal`, `transport_tujuan`, `uang_presentatif`, `hotel_travel`, `pesawat_travel`, `lebih_pagu_hotel`, `lebih_pagu_pesawat`, `select_hotel_travel`, `select_pesawat_travel`) VALUES
+(1, 'Tanpa Panjar', '090/003/Sekr/BPKPAD/VII/2023', '001', 'Ade Novrianda Adhita', 'KOTA BANDA ACEH', '3', '100000', '200000', '3000000', '100000', '200000', '100000', '', '', '', '', 'MASINAH (PT. FIRDAUS ABADI TOUR & TRAVEL)', 'MASINAH (PT. FIRDAUS ABADI TOUR & TRAVEL)'),
+(2, 'Tanpa Panjar', '090/003/Sekr/BPKPAD/VII/2023', '022', 'Abdy Darmawan, A.Md', 'KOTA BANDA ACEH', '3', '2132', '', '', '1234123', '23132', '245234', '123123123', '1321323', '', '', 'MASINAH (PT. FIRDAUS ABADI TOUR & TRAVEL)', 'RICKY CHANDRA (PT. CHANDRA GEMILANG ANGKASA TOUR &'),
+(3, 'Tanpa Panjar', '090/002/Sekr/BPKPAD/VII/2023', '090/012/Sekr/BPKPAD/VII/2023', 'Ade Novrianda Adhita', 'KABUPATEN SIMEULUE', '2', '123111111111', '10000000', '10000000', '150000', '200000', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pagu`
+-- Table structure for table `tb_pagu`
 --
 
 DROP TABLE IF EXISTS `tb_pagu`;
@@ -668,21 +702,22 @@ CREATE TABLE IF NOT EXISTS `tb_pagu` (
   `sub_kegiatan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `tahun` varchar(15) NOT NULL,
   `pagu_anggaran` int NOT NULL,
+  `tanggal_buat` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data untuk tabel `tb_pagu`
+-- Dumping data for table `tb_pagu`
 --
 
-INSERT INTO `tb_pagu` (`id`, `program`, `kegiatan`, `sub_kegiatan`, `tahun`, `pagu_anggaran`) VALUES
-(1, 'Penunjang Urusan Pemerintahan Daerah Kabupaten/Kota', 'Administrasi Umum Perangkat Daerah', 'Penyelenggaraan Rapat Koordinasi dan Konsultasi SKPD', '2023', 1357107000),
-(2, 'Program Pengelolaan Pendapatan Daerah', 'Kegiatan Pengelolaan Pendapatan Daerah', 'Penagihan Pajak Daerah', '2023', 1865917800);
+INSERT INTO `tb_pagu` (`id`, `program`, `kegiatan`, `sub_kegiatan`, `tahun`, `pagu_anggaran`, `tanggal_buat`) VALUES
+(1, 'Penunjang Urusan Pemerintahan Daerah Kabupaten/Kota', 'Administrasi Umum Perangkat Daerah', 'Penyelenggaraan Rapat Koordinasi dan Konsultasi SKPD', '2023', 1357107000, '2023-08-14'),
+(2, 'Program Pengelolaan Pendapatan Daerah', 'Kegiatan Pengelolaan Pendapatan Daerah', 'Penagihan Pajak Daerah', '2023', 1865917800, '2023-08-14');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pegawai`
+-- Table structure for table `tb_pegawai`
 --
 
 DROP TABLE IF EXISTS `tb_pegawai`;
@@ -708,11 +743,11 @@ CREATE TABLE IF NOT EXISTS `tb_pegawai` (
 ) ENGINE=InnoDB AUTO_INCREMENT=145 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data untuk tabel `tb_pegawai`
+-- Dumping data for table `tb_pegawai`
 --
 
 INSERT INTO `tb_pegawai` (`id`, `nip`, `nama`, `alamat`, `jabatan`, `nama_bank`, `kode_rekening`, `id_gol`, `bidang`, `npwp`, `nik`, `status`, `email`, `foto`, `password`) VALUES
-(46, '19690112 199303 1 004', 'H. Edy Wibowo, SE', 'Banjarmasin', 'Kepala Badan', 'Bank Kalsel', '001.03.28.27810.1', 4, 'Kepala Badan', '14.976.820.2-731.000', '6371011201590000', 'Kawin', 'edywibowo@gmail.com', '../assets/pegawai/1.jpg', ''),
+(46, '19690112 199303 1 0040', 'H. Edy Wibowo, SE', 'Banjarmasin', 'Kepala Badan', 'Bank Kalsel', '001.03.28.27810.1', 4, '', '14.976.820.2-731.000', '6371011201590000', 'Kawin', 'edywibowo@gmail.com', '../assets/pegawai/1.jpg', '123'),
 (47, '19740101 200501 1 023', 'Hendro, M.Pd', 'Banjarmasin', 'Sekretaris Badan', 'Bank Kalsel', '001.03.28.67091.2', 4, 'Sekretariat', '15.047.549.9-731.000', '-', 'Kawin', 'hendro@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08.jpeg', ''),
 (48, '19681110 198903 1 020', 'Pahriadi, SE, MM', 'Banjarmasin', 'Kepala Bidang Pengelolaan  Barang Milik Daerah', 'Bank Kalsel', '001.03.28.87202.6', 4, 'PBMD', '14.073.992.1-731.000', '-', 'Kawin', 'pahriadi@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08.jpeg', ''),
 (49, '19720405 199403 1 010', 'Muhammad Syahid, SE', 'Banjarmasin', 'Kepala Bidang Pendataan dan Penetapan Pajak Daerah', 'Bank Kalsel', '001.03.28.76091.4', 5, 'Pajak', '69.616.542.2-731.000', '-', 'Kawin', 'syahid@gmail.com', 'WhatsApp Image 2023-01-28 at 11.47.08(6).jpeg', ''),
@@ -801,13 +836,40 @@ INSERT INTO `tb_pegawai` (`id`, `nip`, `nama`, `alamat`, `jabatan`, `nama_bank`,
 (134, 'admin', '', '', '', '', '', 0, '', '', '', '', '', NULL, '123'),
 (141, 'AAA', 'AAA', 'AAA', 'A', 'AAA', 'AAA', 0, 'ANGGARAN', '', '', '1', '', '../assets/pegawai/AAA.jpg', '123456'),
 (142, '123123', 'asdadrfgdf', 'dfs', 'safsad', 'sdfs', '123414123414', 1, 'ANGGARAN', '', '', '1', '', NULL, '123456'),
-(143, '123432', 'adfsdf', 'asd', 'afsda', 'dasda', '123464353453', 4, 'Sekretariat', '', '', 'Kawin', '', NULL, '123456'),
-(144, 'sdfs', 'dfs', 'sfgsfd', 'sdfs', 'dsfs', 'sdfs', 1, 'Aset', '', '', 'Kawin', 'fdsfdfdyjutgh', '../assets/pegawai/sdfs.jpg', '123456');
+(143, '123432', 'adfsdf', 'asd', 'afsda', 'dasda', '123464353453', 4, 'Sekretariat', '', '', 'Kawin', '', NULL, '123456');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_penggajihan`
+-- Table structure for table `tb_pencairan_dana`
+--
+
+DROP TABLE IF EXISTS `tb_pencairan_dana`;
+CREATE TABLE IF NOT EXISTS `tb_pencairan_dana` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `no_npd` varchar(50) NOT NULL,
+  `id_sub` int NOT NULL,
+  `no_dpa` varchar(50) NOT NULL,
+  `id_rek` int NOT NULL,
+  `pencairan` varchar(10) NOT NULL,
+  `tanggal_npd` date NOT NULL,
+  `id_pegawai` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tb_pencairan_dana`
+--
+
+INSERT INTO `tb_pencairan_dana` (`id`, `no_npd`, `id_sub`, `no_dpa`, `id_rek`, `pencairan`, `tanggal_npd`, `id_pegawai`) VALUES
+(1, '001', 1, 'DPA/A.1/5.02.0.00.0.00.05.0000/001/2023, 22 Februa', 3, '100000', '2023-08-10', 47),
+(2, '022', 1, 'DPA/A.1/5.02.0.00.0.00.05.0000/001/2023, 22 Februa', 3, '8000000', '2023-08-09', 103),
+(3, '090/012/Sekr/BPKPAD/VII/2023', 1, 'DPA/A.1/5.02.0.00.0.00.05.0000/001/2023, 22 Februa', 3, '1200000', '2023-08-11', 124);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_penggajihan`
 --
 
 DROP TABLE IF EXISTS `tb_penggajihan`;
@@ -820,7 +882,7 @@ CREATE TABLE IF NOT EXISTS `tb_penggajihan` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_penginapan`
+-- Table structure for table `tb_penginapan`
 --
 
 DROP TABLE IF EXISTS `tb_penginapan`;
@@ -835,7 +897,7 @@ CREATE TABLE IF NOT EXISTS `tb_penginapan` (
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data untuk tabel `tb_penginapan`
+-- Dumping data for table `tb_penginapan`
 --
 
 INSERT INTO `tb_penginapan` (`id`, `propinsi`, `satuan`, `kategori1`, `kategori2`, `kategori3`) VALUES
@@ -844,7 +906,7 @@ INSERT INTO `tb_penginapan` (`id`, `propinsi`, `satuan`, `kategori1`, `kategori2
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_perintah_tugas`
+-- Table structure for table `tb_perintah_tugas`
 --
 
 DROP TABLE IF EXISTS `tb_perintah_tugas`;
@@ -854,25 +916,29 @@ CREATE TABLE IF NOT EXISTS `tb_perintah_tugas` (
   `nama` varchar(350) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `dasar` varchar(350) NOT NULL,
   `untuk` varchar(350) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `status` int DEFAULT NULL,
+  `tanggal_buat` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `no_spt` (`no_spt`)
+) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data untuk tabel `tb_perintah_tugas`
+-- Dumping data for table `tb_perintah_tugas`
 --
 
-INSERT INTO `tb_perintah_tugas` (`id`, `no_spt`, `nama`, `dasar`, `untuk`) VALUES
-(30, '800/002/Sekr/BPKPAD/V/2023', 'Abdy Darmawan, A.Md', '1. Nota Dinas Badan Keuangan, Pendapatan dan Aset Daerah Kota Banjarmasin tanggal\r\n10 Februari 2023 Nomor: 900/147/Sekr/BPKPAD/II/2022 Perihal: Mohon Izin Studi\r\nKomperatif ke Badan Pengelolaan Keuangan dan Aset (BPKAD) Kota Surabaya tentang\r\nPenatausahaan Penerimaan Daerah.\r\n2. Disposisi Walikota Banjarmasin.\r\n', '1. Melakukan Studi Komperatif ke Badan Pengelolaan Keuangan dan Aset Daerah\r\n(BPKAD) Kota tentang Penatausahaan Pajak Daerah Tanggal 22 s.d 24 Februari\r\n2023 Surabaya.\r\n2. Setelah selesai melaksanakan tugas, melaporkan tertulis yang menugaskan.\r\n3. Diindahkan sebagaimana mestinya.'),
-(31, '800/002/Sekr/BPKPAD/V/2023', 'Ade Novrianda Adhita', '1. Nota Dinas Badan Keuangan, Pendapatan dan Aset Daerah Kota Banjarmasin tanggal\r\n10 Februari 2023 Nomor: 900/147/Sekr/BPKPAD/II/2022 Perihal: Mohon Izin Studi\r\nKomperatif ke Badan Pengelolaan Keuangan dan Aset (BPKAD) Kota Surabaya tentang\r\nPenatausahaan Penerimaan Daerah.\r\n2. Disposisi Walikota Banjarmasin.\r\n', '1. Melakukan Studi Komperatif ke Badan Pengelolaan Keuangan dan Aset Daerah\r\n(BPKAD) Kota tentang Penatausahaan Pajak Daerah Tanggal 22 s.d 24 Februari\r\n2023 Surabaya.\r\n2. Setelah selesai melaksanakan tugas, melaporkan tertulis yang menugaskan.\r\n3. Diindahkan sebagaimana mestinya.'),
-(32, '800/002/Sekr/BPKPAD/V/2023', 'Adi Mata Angin', '1. Nota Dinas Badan Keuangan, Pendapatan dan Aset Daerah Kota Banjarmasin tanggal\r\n10 Februari 2023 Nomor: 900/147/Sekr/BPKPAD/II/2022 Perihal: Mohon Izin Studi\r\nKomperatif ke Badan Pengelolaan Keuangan dan Aset (BPKAD) Kota Surabaya tentang\r\nPenatausahaan Penerimaan Daerah.\r\n2. Disposisi Walikota Banjarmasin.\r\n', '1. Melakukan Studi Komperatif ke Badan Pengelolaan Keuangan dan Aset Daerah\r\n(BPKAD) Kota tentang Penatausahaan Pajak Daerah Tanggal 22 s.d 24 Februari\r\n2023 Surabaya.\r\n2. Setelah selesai melaksanakan tugas, melaporkan tertulis yang menugaskan.\r\n3. Diindahkan sebagaimana mestinya.'),
-(42, '800/005/Sekr/BPKPAD/V/2023', 'Abdy Darmawan, A.Md', '1. Nota Dinas Badan Keuangan, Pendapatan dan Aset Daerah Kota Banjarmasin tanggal\n10 Februari 2023 Nomor: 900/147/Sekr/BPKPAD/II/2022 Perihal: Mohon Izin Studi\nKomperatif ke Badan Pengelolaan Keuangan dan Aset (BPKAD) Kota Surabaya tentang\nPenatausahaan Penerimaan Daerah.\n2. Disposisi Walikota Banjarmasin.', '1. Melakukan Studi Komperatif ke Badan Pengelolaan Keuangan dan Aset Daerah\n(BPKAD) Kota tentang Penatausahaan Pajak Daerah Tanggal 22 s.d 24 Februari\n2023 Surabaya.\n2. Setelah selesai melaksanakan tugas, melaporkan tertulis yang menugaskan.\n3. Diindahkan sebagaimana mestinya.'),
-(43, '800/005/Sekr/BPKPAD/V/2023', 'Ade Novrianda Adhita', '1. Nota Dinas Badan Keuangan, Pendapatan dan Aset Daerah Kota Banjarmasin tanggal\n10 Februari 2023 Nomor: 900/147/Sekr/BPKPAD/II/2022 Perihal: Mohon Izin Studi\nKomperatif ke Badan Pengelolaan Keuangan dan Aset (BPKAD) Kota Surabaya tentang\nPenatausahaan Penerimaan Daerah.\n2. Disposisi Walikota Banjarmasin.', '1. Melakukan Studi Komperatif ke Badan Pengelolaan Keuangan dan Aset Daerah\n(BPKAD) Kota tentang Penatausahaan Pajak Daerah Tanggal 22 s.d 24 Februari\n2023 Surabaya.\n2. Setelah selesai melaksanakan tugas, melaporkan tertulis yang menugaskan.\n3. Diindahkan sebagaimana mestinya.'),
-(44, '800//Sekr/BPKPAD/VII/2023', 'Abdy Darmawan, A.Md', 'aaa', 'aaa');
+INSERT INTO `tb_perintah_tugas` (`id`, `no_spt`, `nama`, `dasar`, `untuk`, `status`, `tanggal_buat`) VALUES
+(30, '800/002/Sekr/BPKPAD/V/2023', 'Abdy Darmawan, A.Md', '1. Nota Dinas Badan Keuangan, Pendapatan dan Aset Daerah Kota Banjarmasin tanggal\r\n10 Februari 2023 Nomor: 900/147/Sekr/BPKPAD/II/2022 Perihal: Mohon Izin Studi\r\nKomperatif ke Badan Pengelolaan Keuangan dan Aset (BPKAD) Kota Surabaya tentang\r\nPenatausahaan Penerimaan Daerah.\r\n2. Disposisi Walikota Banjarmasin.\r\n', '1. Melakukan Studi Komperatif ke Badan Pengelolaan Keuangan dan Aset Daerah\r\n(BPKAD) Kota tentang Penatausahaan Pajak Daerah Tanggal 22 s.d 24 Februari\r\n2023 Surabaya.\r\n2. Setelah selesai melaksanakan tugas, melaporkan tertulis yang menugaskan.\r\n3. Diindahkan sebagaimana mestinya.', NULL, '2023-08-13'),
+(31, '800/002/Sekr/BPKPAD/V/2023', 'Ade Novrianda Adhita', '1. Nota Dinas Badan Keuangan, Pendapatan dan Aset Daerah Kota Banjarmasin tanggal\r\n10 Februari 2023 Nomor: 900/147/Sekr/BPKPAD/II/2022 Perihal: Mohon Izin Studi\r\nKomperatif ke Badan Pengelolaan Keuangan dan Aset (BPKAD) Kota Surabaya tentang\r\nPenatausahaan Penerimaan Daerah.\r\n2. Disposisi Walikota Banjarmasin.\r\n', '1. Melakukan Studi Komperatif ke Badan Pengelolaan Keuangan dan Aset Daerah\r\n(BPKAD) Kota tentang Penatausahaan Pajak Daerah Tanggal 22 s.d 24 Februari\r\n2023 Surabaya.\r\n2. Setelah selesai melaksanakan tugas, melaporkan tertulis yang menugaskan.\r\n3. Diindahkan sebagaimana mestinya.', NULL, '2023-08-13'),
+(32, '800/002/Sekr/BPKPAD/V/2023', 'Adi Mata Angin', '1. Nota Dinas Badan Keuangan, Pendapatan dan Aset Daerah Kota Banjarmasin tanggal\r\n10 Februari 2023 Nomor: 900/147/Sekr/BPKPAD/II/2022 Perihal: Mohon Izin Studi\r\nKomperatif ke Badan Pengelolaan Keuangan dan Aset (BPKAD) Kota Surabaya tentang\r\nPenatausahaan Penerimaan Daerah.\r\n2. Disposisi Walikota Banjarmasin.\r\n', '1. Melakukan Studi Komperatif ke Badan Pengelolaan Keuangan dan Aset Daerah\r\n(BPKAD) Kota tentang Penatausahaan Pajak Daerah Tanggal 22 s.d 24 Februari\r\n2023 Surabaya.\r\n2. Setelah selesai melaksanakan tugas, melaporkan tertulis yang menugaskan.\r\n3. Diindahkan sebagaimana mestinya.', NULL, '2023-08-13'),
+(42, '800/005/Sekr/BPKPAD/V/2023', 'Abdy Darmawan, A.Md', '1. Nota Dinas Badan Keuangan, Pendapatan dan Aset Daerah Kota Banjarmasin tanggal\n10 Februari 2023 Nomor: 900/147/Sekr/BPKPAD/II/2022 Perihal: Mohon Izin Studi\nKomperatif ke Badan Pengelolaan Keuangan dan Aset (BPKAD) Kota Surabaya tentang\nPenatausahaan Penerimaan Daerah.\n2. Disposisi Walikota Banjarmasin.', '1. Melakukan Studi Komperatif ke Badan Pengelolaan Keuangan dan Aset Daerah\n(BPKAD) Kota tentang Penatausahaan Pajak Daerah Tanggal 22 s.d 24 Februari\n2023 Surabaya.\n2. Setelah selesai melaksanakan tugas, melaporkan tertulis yang menugaskan.\n3. Diindahkan sebagaimana mestinya.', NULL, '2023-08-13'),
+(43, '800/005/Sekr/BPKPAD/V/2023', 'Ade Novrianda Adhita', '1. Nota Dinas Badan Keuangan, Pendapatan dan Aset Daerah Kota Banjarmasin tanggal\n10 Februari 2023 Nomor: 900/147/Sekr/BPKPAD/II/2022 Perihal: Mohon Izin Studi\nKomperatif ke Badan Pengelolaan Keuangan dan Aset (BPKAD) Kota Surabaya tentang\nPenatausahaan Penerimaan Daerah.\n2. Disposisi Walikota Banjarmasin.', '1. Melakukan Studi Komperatif ke Badan Pengelolaan Keuangan dan Aset Daerah\n(BPKAD) Kota tentang Penatausahaan Pajak Daerah Tanggal 22 s.d 24 Februari\n2023 Surabaya.\n2. Setelah selesai melaksanakan tugas, melaporkan tertulis yang menugaskan.\n3. Diindahkan sebagaimana mestinya.', 1, '2023-08-13'),
+(44, '800//Sekr/BPKPAD/VII/2023', 'Abdy Darmawan, A.Md', 'aaa', 'aaa', NULL, '2023-08-13'),
+(45, '800/100/Sekr/BPKPAD/VIII/2023', 'Artha Kencana, SE', 'AAA', 'VVVV', 1, '2023-08-13');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_perjalan_dinas`
+-- Table structure for table `tb_perjalan_dinas`
 --
 
 DROP TABLE IF EXISTS `tb_perjalan_dinas`;
@@ -891,22 +957,24 @@ CREATE TABLE IF NOT EXISTS `tb_perjalan_dinas` (
   `instansi` varchar(100) NOT NULL,
   `mata_anggaran` varchar(255) NOT NULL,
   `keterangan` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  `tanggal_buat` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `no_spt` (`no_spt`)
 ) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data untuk tabel `tb_perjalan_dinas`
+-- Dumping data for table `tb_perjalan_dinas`
 --
 
-INSERT INTO `tb_perjalan_dinas` (`id`, `no_sppd`, `no_spt`, `maksud`, `transportasi`, `tempat_berangkat`, `tempat_tujuan`, `tanggal_berangkat`, `tanggal_kembali`, `lama`, `pengikut`, `instansi`, `mata_anggaran`, `keterangan`) VALUES
-(6, '090/003/Sekr/BPKPAD/VII/2023', '800/005/Sekr/BPKPAD/V/2023', 'makdus', 'Pesawat atau Transportasi Lain yang Menunjang', 'Banjarmasin', 'KOTA BANDA ACEH', '2023-06-01', '2023-06-03', 3, '2', 'Badan Pengelola Keuangan, Pendapatan dan Aset Daerah', 'Penagihan Pajak Daerah', 'aaaaaa'),
-(5, '090/002/Sekr/BPKPAD/VII/2023', '800/005/Sekr/BPKPAD/V/2023', 'maksud', 'Pesawat atau Transportasi Lain yang Menunjang', 'Banjarmasin', 'KABUPATEN SIMEULUE', '2023-06-08', '2023-06-10', 2, '1', 'Badan Pengelola Keuangan, Pendapatan dan Aset Daerah', 'Penyelenggaraan Rapat Koordinasi dan Konsultasi SKPD', 'keterangan'),
-(7, '090//Sekr/BPKPAD/VII/2023', '800//Sekr/BPKPAD/VII/2023', 'szdfxcvz', 'Pesawat atau Transportasi Lain yang Menunjang', 'Banjarmasin', 'KABUPATEN BOGOR', '2023-07-13', '2023-07-20', 8, '1', 'Badan Pengelola Keuangan, Pendapatan dan Aset Daerah', 'Penyelenggaraan Rapat Koordinasi dan Konsultasi SKPD', 'dzf');
+INSERT INTO `tb_perjalan_dinas` (`id`, `no_sppd`, `no_spt`, `maksud`, `transportasi`, `tempat_berangkat`, `tempat_tujuan`, `tanggal_berangkat`, `tanggal_kembali`, `lama`, `pengikut`, `instansi`, `mata_anggaran`, `keterangan`, `tanggal_buat`) VALUES
+(6, '090/003/Sekr/BPKPAD/VII/2023', '800/005/Sekr/BPKPAD/V/2023', 'makdus', 'Pesawat atau Transportasi Lain yang Menunjang', 'Banjarmasin', 'KOTA BANDA ACEH', '2023-06-01', '2023-06-03', 3, '2', 'Badan Pengelola Keuangan, Pendapatan dan Aset Daerah', 'Penagihan Pajak Daerah', 'aaaaaa', '2023-08-13'),
+(5, '090/002/Sekr/BPKPAD/VII/2023', '800/005/Sekr/BPKPAD/V/2023', 'maksud', 'Pesawat atau Transportasi Lain yang Menunjang', 'Banjarmasin', 'KABUPATEN SIMEULUE', '2023-06-08', '2023-06-10', 2, '1', 'Badan Pengelola Keuangan, Pendapatan dan Aset Daerah', 'Penyelenggaraan Rapat Koordinasi dan Konsultasi SKPD', 'keterangan', '2023-08-13'),
+(7, '090//Sekr/BPKPAD/VII/2023', '800//Sekr/BPKPAD/VII/2023', 'szdfxcvz', 'Pesawat atau Transportasi Lain yang Menunjang', 'Banjarmasin', 'KABUPATEN BOGOR', '2023-07-13', '2023-07-20', 8, '1', 'Badan Pengelola Keuangan, Pendapatan dan Aset Daerah', 'Penyelenggaraan Rapat Koordinasi dan Konsultasi SKPD', 'dzf', '2023-08-13');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pesawat`
+-- Table structure for table `tb_pesawat`
 --
 
 DROP TABLE IF EXISTS `tb_pesawat`;
@@ -918,7 +986,7 @@ CREATE TABLE IF NOT EXISTS `tb_pesawat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data untuk tabel `tb_pesawat`
+-- Dumping data for table `tb_pesawat`
 --
 
 INSERT INTO `tb_pesawat` (`id_pesawat`, `kota`, `bisnis`, `ekonomi`) VALUES
@@ -956,7 +1024,7 @@ INSERT INTO `tb_pesawat` (`id_pesawat`, `kota`, `bisnis`, `ekonomi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_propinsi`
+-- Table structure for table `tb_propinsi`
 --
 
 DROP TABLE IF EXISTS `tb_propinsi`;
@@ -967,7 +1035,7 @@ CREATE TABLE IF NOT EXISTS `tb_propinsi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
--- Dumping data untuk tabel `tb_propinsi`
+-- Dumping data for table `tb_propinsi`
 --
 
 INSERT INTO `tb_propinsi` (`id`, `nama`) VALUES
@@ -1009,7 +1077,7 @@ INSERT INTO `tb_propinsi` (`id`, `nama`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_rek_kegiatan`
+-- Table structure for table `tb_rek_kegiatan`
 --
 
 DROP TABLE IF EXISTS `tb_rek_kegiatan`;
@@ -1020,19 +1088,21 @@ CREATE TABLE IF NOT EXISTS `tb_rek_kegiatan` (
   `uraian` varchar(2000) NOT NULL,
   `anggaran` bigint NOT NULL,
   PRIMARY KEY (`id_rek`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data untuk tabel `tb_rek_kegiatan`
+-- Dumping data for table `tb_rek_kegiatan`
 --
 
 INSERT INTO `tb_rek_kegiatan` (`id_rek`, `id_sub`, `kode_rekening`, `uraian`, `anggaran`) VALUES
-(2, 1, '123123', 'adads', 123123123);
+(2, 1, '5.1.02.01.01.0036', 'Bahan Alat/Bahan untuk Kegiatan Kantor-Alat/Bahan untuk Kegiatan Kantor Lainnya', 89200),
+(3, 1, '5.1.02.04.01.0001', 'Belanja Perjalanan Dinas Biasa', 1357107000),
+(4, 1, '5.1.02.04.02.0001', 'Belanja Perjalanan Dinas Biasa - Luar Negeri', 114119000);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_rek_travel`
+-- Table structure for table `tb_rek_travel`
 --
 
 DROP TABLE IF EXISTS `tb_rek_travel`;
@@ -1049,7 +1119,7 @@ CREATE TABLE IF NOT EXISTS `tb_rek_travel` (
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_rek_travel`
+-- Dumping data for table `tb_rek_travel`
 --
 
 INSERT INTO `tb_rek_travel` (`id`, `nama`, `norek`, `status`, `created_by`, `created_time`, `edit_by`, `edit_time`) VALUES
@@ -1061,25 +1131,7 @@ INSERT INTO `tb_rek_travel` (`id`, `nama`, `norek`, `status`, `created_by`, `cre
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_spt`
---
-
-DROP TABLE IF EXISTS `tb_spt`;
-CREATE TABLE IF NOT EXISTS `tb_spt` (
-  `id_spt` int NOT NULL AUTO_INCREMENT,
-  `no_spt` varchar(100) NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  `dasar` varchar(500) NOT NULL,
-  `untuk` varchar(500) NOT NULL,
-  `created_by` varchar(100) NOT NULL,
-  `credited_time` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_spt`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `tb_thl`
+-- Table structure for table `tb_thl`
 --
 
 DROP TABLE IF EXISTS `tb_thl`;
@@ -1098,7 +1150,7 @@ CREATE TABLE IF NOT EXISTS `tb_thl` (
 ) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data untuk tabel `tb_thl`
+-- Dumping data for table `tb_thl`
 --
 
 INSERT INTO `tb_thl` (`id`, `nama`, `alamat`, `jabatan`, `nama_bank`, `kode_rekening`, `status`, `email`, `foto`, `bidang`) VALUES
@@ -1144,7 +1196,7 @@ INSERT INTO `tb_thl` (`id`, `nama`, `alamat`, `jabatan`, `nama_bank`, `kode_reke
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_transportasi`
+-- Table structure for table `tb_transportasi`
 --
 
 DROP TABLE IF EXISTS `tb_transportasi`;
@@ -1157,7 +1209,7 @@ CREATE TABLE IF NOT EXISTS `tb_transportasi` (
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data untuk tabel `tb_transportasi`
+-- Dumping data for table `tb_transportasi`
 --
 
 INSERT INTO `tb_transportasi` (`id`, `nama_provinsi`, `satuan`, `besaran`) VALUES
@@ -1176,7 +1228,7 @@ INSERT INTO `tb_transportasi` (`id`, `nama_provinsi`, `satuan`, `besaran`) VALUE
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_uang_harian`
+-- Table structure for table `tb_uang_harian`
 --
 
 DROP TABLE IF EXISTS `tb_uang_harian`;
@@ -1189,7 +1241,7 @@ CREATE TABLE IF NOT EXISTS `tb_uang_harian` (
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data untuk tabel `tb_uang_harian`
+-- Dumping data for table `tb_uang_harian`
 --
 
 INSERT INTO `tb_uang_harian` (`id`, `id_propinsi`, `satuan`, `besaran`) VALUES

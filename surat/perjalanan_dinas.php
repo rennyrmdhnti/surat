@@ -96,7 +96,7 @@
                                     aria-label="Default select example">
                                     <?php
                                         // Query untuk mengambil data dari tabel tb_perintah_tugas
-                                        $query = "SELECT no_spt FROM tb_perintah_tugas GROUP BY no_spt";
+                                        $query = "SELECT no_spt FROM tb_perintah_tugas WHERE status = 1 GROUP BY no_spt";
                                         $result = mysqli_query($conn, $query);
 
                                         // Iterasi hasil query dan menampilkan nilai kolom "no_spt" dalam elemen select
@@ -221,7 +221,7 @@
                                     aria-label="Default select example">
                                     <?php
                                         // Query untuk mengambil data dari tabel tb_perintah_tugas
-                                        $query = "SELECT no_spt FROM tb_perintah_tugas GROUP BY no_spt";
+                                        $query = "SELECT no_spt FROM tb_perintah_tugas WHERE status = 1 GROUP BY no_spt";
                                         $result = mysqli_query($conn, $query);
 
                                         // Iterasi hasil query dan menampilkan nilai kolom "no_spt" dalam elemen select
@@ -352,112 +352,185 @@
     $(document).ready(function() {
 
         $("#editID").hide();
-        var table = $('#data-table').DataTable({
-            // "processing": true,
-            // "serverSide": true,
+        var table;
 
-            responsive: true,
-            "ajax": {
-                "url": "get_data_surat.php?data=sppd",
-                "type": "POST"
-            },
-            "columns": [{
-                    "data": ""
+        if (<?php echo $status_login ?> === 0) {
+            table = $('#data-table').DataTable({
+                responsive: true,
+                "ajax": {
+                    "url": "get_data_surat.php?data=sppd",
+                    "type": "POST"
                 },
-                {
-                    "data": "no_spt"
-                },
-                {
-                    "data": "no_sppd"
-                },
-                {
-                    "data": "maksud"
-                },
-                {
-                    "data": "transportasi"
-                },
-                {
-                    "data": "tempat_berangkat"
-                },
-                {
-                    "data": "tempat_tujuan"
-                },
-                {
-                    "data": "tanggal_berangkat",
-                    "render": function(data, type, row) {
-                        // Ubah format tanggal dari "YYYY-MM-DD" menjadi "senin, 10 januari 2023"
-                        var date = new Date(data);
-                        var options = {
-                            weekday: 'long',
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric'
-                        };
-                        return date.toLocaleDateString('id-ID', options);
+                "columns": [{
+                        "data": ""
+                    },
+                    {
+                        "data": "no_spt"
+                    },
+                    {
+                        "data": "no_sppd"
+                    },
+                    {
+                        "data": "maksud"
+                    },
+                    {
+                        "data": "transportasi"
+                    },
+                    {
+                        "data": "tempat_berangkat"
+                    },
+                    {
+                        "data": "tempat_tujuan"
+                    },
+                    {
+                        "data": "tanggal_berangkat",
+                        "render": function(data, type, row) {
+                            var date = new Date(data);
+                            var options = {
+                                weekday: 'long',
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric'
+                            };
+                            return date.toLocaleDateString('id-ID', options);
+                        }
+                    },
+                    {
+                        "data": "tanggal_kembali",
+                        "render": function(data, type, row) {
+                            var date = new Date(data);
+                            var options = {
+                                weekday: 'long',
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric'
+                            };
+                            return date.toLocaleDateString('id-ID', options);
+                        }
+                    },
+                    {
+                        "data": "lama"
+                    },
+                    {
+                        "data": "pengikut"
+                    },
+                    {
+                        "data": "instansi"
+                    },
+                    {
+                        "data": "mata_anggaran"
+                    },
+                    {
+                        "data": "keterangan"
                     }
-                },
-                {
-                    "data": "tanggal_kembali",
-                    "render": function(data, type, row) {
-                        // Ubah format tanggal dari "YYYY-MM-DD" menjadi "senin, 10 januari 2023"
-                        var date = new Date(data);
-                        var options = {
-                            weekday: 'long',
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric'
-                        };
-                        return date.toLocaleDateString('id-ID', options);
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1;
                     }
-                },
-                {
-                    "data": "lama"
-                },
-                {
-                    "data": "pengikut"
-                },
-                {
-                    "data": "instansi"
-                },
-                {
-                    "data": "mata_anggaran"
-                },
-                {
-                    "data": "keterangan"
+                }],
+                "createdRow": function(row, data, dataIndex) {
+                    var no_sppd = data.no_sppd.replace(/\//g, '').replace('Sekr/BPKPAD', '');
+                    if (dataIndex === (table.rows().count() - 1)) {
+                        $(row).append(
+                            '<td><button class="btn btn-primary edit-button" data-id="' + data
+                            .id +
+                            '"><i class="cil-pencil"></i></button></td>'
+                        );
+                        $(row).append(
+                            '<td><button class="btn btn-danger" onclick="deleteRow(\'' + data
+                            .id +
+                            '\')"><i class="cil-trash"></i></button></td>'
+                        );
+                        $(row).append(
+                            '<td><button class="btn btn-primary" onclick="print(\'' + data.id +
+                            '\')"><i class="cil-print"></i></button></td>'
+                        );
+                    }
                 }
-            ],
-            "columnDefs": [{
-                "targets": 0,
-                "data": null,
-                "render": function(data, type, row, meta) {
-                    return meta.row + 1;
-                }
-            }],
-            "createdRow": function(row, data, dataIndex) {
-                // check if this is the last row
-                var no_sppd = data.no_sppd.replace(/\//g, '').replace('Sekr/BPKPAD', '');
+            });
+        } else {
+            table = $('#data-table').DataTable({
+                responsive: true,
+                "ajax": {
+                    "url": "get_data_surat.php?data=sppd",
+                    "type": "POST"
+                },
+                "columns": [{
+                        "data": ""
+                    },
+                    {
+                        "data": "no_spt"
+                    },
+                    {
+                        "data": "no_sppd"
+                    },
+                    {
+                        "data": "maksud"
+                    },
+                    {
+                        "data": "transportasi"
+                    },
+                    {
+                        "data": "tempat_berangkat"
+                    },
+                    {
+                        "data": "tempat_tujuan"
+                    },
+                    {
+                        "data": "tanggal_berangkat",
+                        "render": function(data, type, row) {
+                            var date = new Date(data);
+                            var options = {
+                                weekday: 'long',
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric'
+                            };
+                            return date.toLocaleDateString('id-ID', options);
+                        }
+                    },
+                    {
+                        "data": "tanggal_kembali",
+                        "render": function(data, type, row) {
+                            var date = new Date(data);
+                            var options = {
+                                weekday: 'long',
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric'
+                            };
+                            return date.toLocaleDateString('id-ID', options);
+                        }
+                    },
+                    {
+                        "data": "lama"
+                    },
+                    {
+                        "data": "pengikut"
+                    },
+                    {
+                        "data": "instansi"
+                    },
+                    {
+                        "data": "mata_anggaran"
+                    },
+                    {
+                        "data": "keterangan"
+                    }
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                }]
+            });
+        }
 
-                if (dataIndex === (table.rows().count() - 1)) {
-                    // add Edit button
-                    // $(row).append(
-                    //     '<td><button class="btn btn-primary" onclick="print(\'' + data.id +
-                    //     '\')"><i class="cil-print"></i></button></td>'
-                    // );
-                    // add Edit button
-                    $(row).append(
-                        '<td><button class="btn btn-primary edit-button" data-id="' + data.id +
-                        '"><i class="cil-pencil"></i></button></td>'
-                    );
-                    // add Delete button
-                    $(row).append(
-                        '<td><button class="btn btn-danger" onclick="deleteRow(\'' + data.id +
-                        '\')"><i class="cil-trash"></i></button></td>'
-                    );
-
-
-                }
-            }
-        });
     });
 
     function calculateDuration() {
