@@ -444,6 +444,10 @@
                             .id +
                             '\')"><i class="cil-trash"></i></button></td>'
                         );
+                        $(row).append(
+                            '<td><button class="btn btn-primary" onclick="print(\'' + data.id +
+                            '\')"><i class="cil-print"></i></button></td>'
+                        );
                     }
                 }
             });

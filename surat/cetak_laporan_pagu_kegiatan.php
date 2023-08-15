@@ -4,17 +4,16 @@ require_once 'config/koneksi.php';
 $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : null;
 $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : null;
 
-$sql = "SELECT *
-        FROM tb_perintah_tugas 
-        LEFT JOIN tb_perjalan_dinas ON tb_perjalan_dinas.no_spt = tb_perintah_tugas.no_spt
-        WHERE status = 1";
+$sql = "select * from tb_pagu";
 
 // Tambahkan kondisi WHERE jika startDate dan endDate tidak null
 if ($startDate !== '' && $endDate !== '') {
     // Anda mungkin perlu memformat tanggal sesuai dengan format di tabel atau database Anda
     // Contoh format: 'Y-m-d'
-    $sql .= " AND tanggal_buat >= '$startDate' AND tanggal_buat <= '$endDate'";
+    $sql .= " WHERE tb_pagu.tanggal_buat >= '$startDate' AND tb_pagu.tanggal_buat <= '$endDate'";
 }
+
+// var_dump($sql);exit;
 
     $result = $conn->query($sql);
     $data = array();
@@ -22,6 +21,9 @@ if ($startDate !== '' && $endDate !== '') {
         $data[] = $row;
     }
     // var_dump($data);exit;
+    function formatRupiah($angka) {
+        return 'Rp ' . number_format($angka, 0, ',', '.');
+    }
         ?>
 <html>
 
@@ -73,7 +75,6 @@ if ($startDate !== '' && $endDate !== '') {
         /* Agar gambar tetap proporsional */
     }
     </style>
-
     <table width="100%">
         <tr>
             <td width="10%" style="text-align: center;">
@@ -94,17 +95,17 @@ if ($startDate !== '' && $endDate !== '') {
     <br><br>
     <hr>
 
-    <h3 style="text-align: center;">LAPORAN SURAT PERINTAH TUGAS</h3>
+    <h3 style="text-align: center;">LAPORAN PAGU KEGIATAN</h3>
 
     <table class="custom-table">
         <thead>
             <tr>
                 <th>No</th>
-                <th>No SPT</th>
-                <th>Berangkat/Kembali</th>
-                <th>Tujuan</th>
-                <th>Dasar</th>
-                <th>Untuk</th>
+                <th>Program</th>
+                <th>Kegiatan</th>
+                <th>Sub Kegiatan</th>
+                <th>Tahun</th>
+                <th>Pagu Anggaran</th>
             </tr>
         </thead>
         <tbody>
@@ -113,11 +114,11 @@ if ($startDate !== '' && $endDate !== '') {
         foreach ($data as $index => $item) {
             echo '<tr>';
             echo '<td>' . ($index + 1) . '</td>'; // Nomor urut
-            echo '<td>' . $item['no_spt'] . '</td>';
-            echo '<td>' . $item['tanggal_berangkat'] . ' / ' . $item['tanggal_kembali'] . '</td>';
-            echo '<td>' . $item['tempat_tujuan'] . '</td>';
-            echo '<td>' . $item['dasar'] . '</td>';
-            echo '<td>' . $item['untuk'] . '</td>';
+            echo '<td>' . $item['program'] . '</td>';
+            echo '<td>' . $item['kegiatan'] . '</td>';
+            echo '<td>' . $item['sub_kegiatan'] . '</td>';
+            echo '<td>' . $item['tahun'] . '</td>';
+            echo '<td>' . formatRupiah($item['pagu_anggaran']) . '</td>';
             echo '</tr>';
         }
         ?>
@@ -171,8 +172,11 @@ $lokasi = "Banjarmasin";
             <td style="text-align: center;">NIP. 19690112 199303 1 004</td>
         </tr>
     </table>
-    <script>
-    window.onload = function() {
-        window.print();
-    };
-    </script>
+</body>
+
+</html>
+<script>
+window.onload = function() {
+    window.print();
+};
+</script>

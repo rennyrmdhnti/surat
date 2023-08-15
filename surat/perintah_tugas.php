@@ -350,9 +350,8 @@
                             '\')"><i class="cil-trash"></i></button></td>'
                         );
                         $(row).append(
-                            '<td><button class="btn btn-secondary" onclick="approve(\'' + data
-                            .id +
-                            '\')"><i class="cil-task"></i></button></td>'
+                            '<td><button class="btn btn-primary" onclick="print(\'' + data.id +
+                            '\')"><i class="cil-print"></i></button></td>'
                         );
                     }
                 }
