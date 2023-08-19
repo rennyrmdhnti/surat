@@ -8,10 +8,10 @@ if (isset($_POST['id'])) {
     // var_dump($id);exit;
 
     // Query untuk menghapus data pegawai berdasarkan ID
-    $sql = "DELETE FROM tb_transportasi WHERE id = '$id'";
+    $sql = "DELETE FROM tb_pesawat WHERE id_pesawat = '$id'";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Data Biaya Transportasi berhasil dihapus.";
+        echo "Data Biaya Pesawat berhasil dihapus.";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

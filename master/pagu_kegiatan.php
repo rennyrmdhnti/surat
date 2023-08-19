@@ -2,17 +2,17 @@
 <?php include '../template/sidebar.php'; ?>
 
 <style>
-#data-table_wrapper {
-    overflow-x: auto;
-}
+    #data-table_wrapper {
+        overflow-x: auto;
+    }
 
-td {
-    /* font-size: 10px; */
-    max-width: 240px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+    td {
+        /* font-size: 10px; */
+        max-width: 240px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 </style>
 
 <div class="wrapper d-flex flex-column min-vh-100 bg-light">
@@ -40,8 +40,7 @@ td {
                             
                         </div> -->
                         <div class="card-body">
-                            <button type="button" class="btn btn-primary" data-coreui-toggle="modal"
-                                data-coreui-target="#exampleModal">
+                            <button type="button" class="btn btn-primary" data-coreui-toggle="modal" data-coreui-target="#exampleModal">
                                 Tambah Data
                             </button>
                         </div>
@@ -121,7 +120,7 @@ td {
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Input Data Pagu Kegiatan</h5>
+                    <h5 class="modal-title" id="editModalLabel">Edit Data Pagu Kegiatan</h5>
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -156,309 +155,309 @@ td {
     </div>
 
     <script>
-    $(document).ready(function() {
-        var table;
+        $(document).ready(function() {
+            var table;
 
-        if (<?php echo $status_login ?> === 0) {
-            table = $('#data-table').DataTable({
-                "ajax": {
-                    "url": "get_data_master.php?data=pagu",
-                    "type": "POST"
+            if (<?php echo $status_login ?> === 0) {
+                table = $('#data-table').DataTable({
+                    "ajax": {
+                        "url": "get_data_master.php?data=pagu",
+                        "type": "POST"
+                    },
+                    "columns": [{
+                            "data": ""
+                        },
+                        {
+                            "data": "program"
+                        },
+                        {
+                            "data": "kegiatan"
+                        },
+                        {
+                            "data": "sub_kegiatan"
+                        },
+                        {
+                            "data": "tahun"
+                        },
+                        {
+                            "data": "pagu_anggaran",
+                            "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                        }
+                    ],
+                    "columnDefs": [{
+                        "targets": 0,
+                        "data": null,
+                        "render": function(data, type, row, meta) {
+                            return meta.row + 1;
+                        }
+                    }],
+                    "createdRow": function(row, data, dataIndex) {
+                        if (dataIndex === (table.rows().count() - 1)) {
+                            $(row).append(
+                                '<td><button class="btn btn-primary edit-button" data-id="' + data
+                                .id +
+                                '"><i class="cil-pencil"></i></button></td>'
+                            );
+
+                            $(row).append(
+                                '<td><button class="btn btn-danger delete-button" onclick="deleteData(' +
+                                data.id + ')"><i class="cil-trash"></i></button></td>'
+                            );
+                        }
+                    }
+                });
+            } else {
+                table = $('#data-table').DataTable({
+                    "ajax": {
+                        "url": "get_data_master.php?data=pagu",
+                        "type": "POST"
+                    },
+                    "columns": [{
+                            "data": ""
+                        },
+                        {
+                            "data": "program"
+                        },
+                        {
+                            "data": "kegiatan"
+                        },
+                        {
+                            "data": "sub_kegiatan"
+                        },
+                        {
+                            "data": "tahun"
+                        },
+                        {
+                            "data": "pagu_anggaran",
+                            "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                        }
+                    ],
+                    "columnDefs": [{
+                        "targets": 0,
+                        "data": null,
+                        "render": function(data, type, row, meta) {
+                            return meta.row + 1;
+                        }
+                    }]
+                });
+            }
+
+
+            $("#data-table").on("mouseenter", "td", function() {
+                $(this).attr('title', this.innerText);
+            });
+        });
+
+
+
+        // Fungsi untuk menyimpan data pegawai ke dalam database
+        function simpanData() {
+            // Mengambil nilai input dari form
+            var program = document.getElementById('program').value;
+            var kegiatan = document.getElementById('kegiatan').value;
+            var subKegiatan = document.getElementById('sub_kegiatan').value;
+            var tahun = document.getElementById('tahun').value;
+            var paguAnggaran = document.getElementById('pagu_anggaran').value;
+
+            var formData = new FormData();
+            // Menambahkan data ke formData
+            formData.append('program', program);
+            formData.append('kegiatan', kegiatan);
+            formData.append('sub_kegiatan', subKegiatan);
+            formData.append('tahun', tahun);
+            formData.append('pagu_anggaran', paguAnggaran);
+
+            // Mengirim data ke server menggunakan AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'pagu_kegiatan_simpan.php', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Menampilkan pesan atau melakukan aksi setelah data berhasil disimpan
+                    // alert(xhr.responseText);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses',
+                        text: xhr.responseText,
+                        // showCancelButton: true,
+                        confirmButtonText: 'OK',
+                        // cancelButtonText: 'Batal',
+                        showLoaderOnConfirm: true,
+                        preConfirm: () => {
+                            return new Promise((resolve) => {
+                                // Mengatur waktu delay sebelum mengarahkan ke halaman 'pegawai.php'
+                                setTimeout(() => {
+                                    resolve();
+                                }, 6000);
+                            });
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Pengguna mengklik tombol "OK"
+                            window.location.href = 'pagu_kegiatan.php';
+                        }
+                    });
+
+                }
+            };
+            xhr.send(formData);
+        }
+
+        // Mengatur nilai-nilai data dalam modal edit berdasarkan data yang dipilih
+        function openEditModal(data) {
+            $('#editProgram').val(data.program);
+            $('#editKegiatan').val(data.kegiatan);
+            $('#editSubKegiatan').val(data.sub_kegiatan);
+            $('#editTahun').val(data.tahun);
+            $('#editPagu').val(data.pagu_anggaran);
+            $('#id').val(data.id);
+
+            // Buka modal edit
+            $('#editModal').modal('show');
+        }
+
+
+        // Mengambil data pegawai berdasarkan ID
+        function getDataById(id) {
+            // Lakukan permintaan AJAX untuk mendapatkan data pegawai berdasarkan ID
+            $.ajax({
+                url: 'get_data_by_id.php', // Ganti dengan URL yang sesuai untuk mengambil data pegawai berdasarkan ID
+                type: 'POST',
+                data: {
+                    get_data: 'pagu',
+                    id: id
                 },
-                "columns": [{
-                        "data": ""
-                    },
-                    {
-                        "data": "program"
-                    },
-                    {
-                        "data": "kegiatan"
-                    },
-                    {
-                        "data": "sub_kegiatan"
-                    },
-                    {
-                        "data": "tahun"
-                    },
-                    {
-                        "data": "pagu_anggaran",
-                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                    }
-                ],
-                "columnDefs": [{
-                    "targets": 0,
-                    "data": null,
-                    "render": function(data, type, row, meta) {
-                        return meta.row + 1;
-                    }
-                }],
-                "createdRow": function(row, data, dataIndex) {
-                    if (dataIndex === (table.rows().count() - 1)) {
-                        $(row).append(
-                            '<td><button class="btn btn-primary edit-button" data-id="' + data
-                            .id +
-                            '"><i class="cil-pencil"></i></button></td>'
-                        );
-
-                        $(row).append(
-                            '<td><button class="btn btn-danger delete-button" onclick="deleteData(' +
-                            data.id + ')"><i class="cil-trash"></i></button></td>'
-                        );
-                    }
+                success: function(response) {
+                    // Mengambil objek data pegawai dari respon
+                    var data = JSON.parse(response);
+                    // console.log();
+                    // Membuka modal edit dan mengisi nilai-nilai data di dalamnya
+                    openEditModal(data['data'][0]);
+                },
+                error: function(xhr, status, error) {
+                    // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
+                    console.error(xhr.responseText);
                 }
             });
-        } else {
-            table = $('#data-table').DataTable({
-                "ajax": {
-                    "url": "get_data_master.php?data=pagu",
-                    "type": "POST"
-                },
-                "columns": [{
-                        "data": ""
-                    },
-                    {
-                        "data": "program"
-                    },
-                    {
-                        "data": "kegiatan"
-                    },
-                    {
-                        "data": "sub_kegiatan"
-                    },
-                    {
-                        "data": "tahun"
-                    },
-                    {
-                        "data": "pagu_anggaran",
-                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                    }
-                ],
-                "columnDefs": [{
-                    "targets": 0,
-                    "data": null,
-                    "render": function(data, type, row, meta) {
-                        return meta.row + 1;
-                    }
-                }]
+        }
+
+        // Mengatur tindakan untuk tombol "Edit" pada baris tabel
+        $(document).on('click', '.edit-button', function() {
+            var id = $(this).data('id');
+            getDataById(id);
+        });
+
+        // Menghapus data pegawai berdasarkan ID
+        function deleteData(id) {
+            // Show a confirmation popup before proceeding with deletion
+            Swal.fire({
+                icon: 'warning',
+                title: 'Konfirmasi',
+                text: 'Apakah Anda yakin ingin menghapus data ini?',
+                showCancelButton: true,
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Tidak',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return new Promise((resolve) => {
+                        // Lakukan permintaan AJAX untuk menghapus data pegawai berdasarkan ID
+                        $.ajax({
+                            url: 'pagu_kegiatan_hapus.php', // Ganti dengan URL yang sesuai untuk menghapus data pegawai berdasarkan ID
+                            type: 'POST',
+                            data: {
+                                id: id
+                            },
+                            success: function(response) {
+                                // Menampilkan pesan atau melakukan aksi setelah data berhasil dihapus
+                                resolve(response);
+                            },
+                            error: function(xhr, status, error) {
+                                // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
+                                console.error(xhr.responseText);
+                                resolve('Terjadi kesalahan saat menghapus data.');
+                            }
+                        });
+                    });
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Pengguna mengklik tombol "Ya"
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses',
+                        text: result.value,
+                        confirmButtonText: 'OK',
+                        showLoaderOnConfirm: true,
+                        preConfirm: () => {
+                            return new Promise((resolve) => {
+                                // Mengatur waktu delay sebelum mengarahkan ke halaman 'pagu_kegiatan.php'
+                                setTimeout(() => {
+                                    resolve();
+                                }, 3000);
+                            });
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Pengguna mengklik tombol "OK"
+                            window.location.href = 'pagu_kegiatan.php';
+                        }
+                    });
+                }
             });
         }
 
 
-        $("#data-table").on("mouseenter", "td", function() {
-            $(this).attr('title', this.innerText);
-        });
-    });
+        function updateData() {
+            // Mengambil nilai input dari form
+            var program = document.getElementById('editProgram').value;
+            var kegiatan = document.getElementById('editKegiatan').value;
+            var subKegiatan = document.getElementById('editSubKegiatan').value;
+            var tahun = document.getElementById('editTahun').value;
+            var paguAnggaran = document.getElementById('editPagu').value;
+            var id = document.getElementById('id').value;
 
+            var formData = new FormData();
 
+            // Menambahkan data ke formData
+            formData.append('program', program);
+            formData.append('kegiatan', kegiatan);
+            formData.append('sub_kegiatan', subKegiatan);
+            formData.append('tahun', tahun);
+            formData.append('pagu_anggaran', paguAnggaran);
+            formData.append('id', id);
 
-    // Fungsi untuk menyimpan data pegawai ke dalam database
-    function simpanData() {
-        // Mengambil nilai input dari form
-        var program = document.getElementById('program').value;
-        var kegiatan = document.getElementById('kegiatan').value;
-        var subKegiatan = document.getElementById('sub_kegiatan').value;
-        var tahun = document.getElementById('tahun').value;
-        var paguAnggaran = document.getElementById('pagu_anggaran').value;
-
-        var formData = new FormData();
-        // Menambahkan data ke formData
-        formData.append('program', program);
-        formData.append('kegiatan', kegiatan);
-        formData.append('sub_kegiatan', subKegiatan);
-        formData.append('tahun', tahun);
-        formData.append('pagu_anggaran', paguAnggaran);
-
-        // Mengirim data ke server menggunakan AJAX
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'pagu_kegiatan_simpan.php', true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                // Menampilkan pesan atau melakukan aksi setelah data berhasil disimpan
-                // alert(xhr.responseText);
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Sukses',
-                    text: xhr.responseText,
-                    // showCancelButton: true,
-                    confirmButtonText: 'OK',
-                    // cancelButtonText: 'Batal',
-                    showLoaderOnConfirm: true,
-                    preConfirm: () => {
-                        return new Promise((resolve) => {
-                            // Mengatur waktu delay sebelum mengarahkan ke halaman 'pegawai.php'
-                            setTimeout(() => {
-                                resolve();
-                            }, 6000);
-                        });
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Pengguna mengklik tombol "OK"
-                        window.location.href = 'pagu_kegiatan.php';
-                    }
-                });
-
-            }
-        };
-        xhr.send(formData);
-    }
-
-    // Mengatur nilai-nilai data dalam modal edit berdasarkan data yang dipilih
-    function openEditModal(data) {
-        $('#editProgram').val(data.program);
-        $('#editKegiatan').val(data.kegiatan);
-        $('#editSubKegiatan').val(data.sub_kegiatan);
-        $('#editTahun').val(data.tahun);
-        $('#editPagu').val(data.pagu_anggaran);
-        $('#id').val(data.id);
-
-        // Buka modal edit
-        $('#editModal').modal('show');
-    }
-
-
-    // Mengambil data pegawai berdasarkan ID
-    function getDataById(id) {
-        // Lakukan permintaan AJAX untuk mendapatkan data pegawai berdasarkan ID
-        $.ajax({
-            url: 'get_data_by_id.php', // Ganti dengan URL yang sesuai untuk mengambil data pegawai berdasarkan ID
-            type: 'POST',
-            data: {
-                get_data: 'pagu',
-                id: id
-            },
-            success: function(response) {
-                // Mengambil objek data pegawai dari respon
-                var data = JSON.parse(response);
-                // console.log();
-                // Membuka modal edit dan mengisi nilai-nilai data di dalamnya
-                openEditModal(data['data'][0]);
-            },
-            error: function(xhr, status, error) {
-                // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
-                console.error(xhr.responseText);
-            }
-        });
-    }
-
-    // Mengatur tindakan untuk tombol "Edit" pada baris tabel
-    $(document).on('click', '.edit-button', function() {
-        var id = $(this).data('id');
-        getDataById(id);
-    });
-
-    // Menghapus data pegawai berdasarkan ID
-    function deleteData(id) {
-        // Show a confirmation popup before proceeding with deletion
-        Swal.fire({
-            icon: 'warning',
-            title: 'Konfirmasi',
-            text: 'Apakah Anda yakin ingin menghapus data ini?',
-            showCancelButton: true,
-            confirmButtonText: 'Ya',
-            cancelButtonText: 'Tidak',
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return new Promise((resolve) => {
-                    // Lakukan permintaan AJAX untuk menghapus data pegawai berdasarkan ID
-                    $.ajax({
-                        url: 'pagu_kegiatan_hapus.php', // Ganti dengan URL yang sesuai untuk menghapus data pegawai berdasarkan ID
-                        type: 'POST',
-                        data: {
-                            id: id
-                        },
-                        success: function(response) {
-                            // Menampilkan pesan atau melakukan aksi setelah data berhasil dihapus
-                            resolve(response);
-                        },
-                        error: function(xhr, status, error) {
-                            // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
-                            console.error(xhr.responseText);
-                            resolve('Terjadi kesalahan saat menghapus data.');
+            // Mengirim data ke server menggunakan AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'pagu_kegiatan_edit.php', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Menampilkan pesan atau melakukan aksi setelah data berhasil diperbarui
+                    // alert(xhr.responseText);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses',
+                        text: xhr.responseText,
+                        // showCancelButton: true,
+                        confirmButtonText: 'OK',
+                        // cancelButtonText: 'Batal',
+                        showLoaderOnConfirm: true,
+                        preConfirm: () => {
+                            return new Promise((resolve) => {
+                                // Mengatur waktu delay sebelum mengarahkan kembali ke halaman 'pegawai.php'
+                                setTimeout(() => {
+                                    resolve();
+                                }, 6000);
+                            });
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Pengguna mengklik tombol "OK"
+                            window.location.href = 'pagu_kegiatan.php';
                         }
                     });
-                });
-            }
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Pengguna mengklik tombol "Ya"
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Sukses',
-                    text: result.value,
-                    confirmButtonText: 'OK',
-                    showLoaderOnConfirm: true,
-                    preConfirm: () => {
-                        return new Promise((resolve) => {
-                            // Mengatur waktu delay sebelum mengarahkan ke halaman 'pagu_kegiatan.php'
-                            setTimeout(() => {
-                                resolve();
-                            }, 3000);
-                        });
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Pengguna mengklik tombol "OK"
-                        window.location.href = 'pagu_kegiatan.php';
-                    }
-                });
-            }
-        });
-    }
-
-
-    function updateData() {
-        // Mengambil nilai input dari form
-        var program = document.getElementById('editProgram').value;
-        var kegiatan = document.getElementById('editKegiatan').value;
-        var subKegiatan = document.getElementById('editSubKegiatan').value;
-        var tahun = document.getElementById('editTahun').value;
-        var paguAnggaran = document.getElementById('editPagu').value;
-        var id = document.getElementById('id').value;
-
-        var formData = new FormData();
-
-        // Menambahkan data ke formData
-        formData.append('program', program);
-        formData.append('kegiatan', kegiatan);
-        formData.append('sub_kegiatan', subKegiatan);
-        formData.append('tahun', tahun);
-        formData.append('pagu_anggaran', paguAnggaran);
-        formData.append('id', id);
-
-        // Mengirim data ke server menggunakan AJAX
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'pagu_kegiatan_edit.php', true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                // Menampilkan pesan atau melakukan aksi setelah data berhasil diperbarui
-                // alert(xhr.responseText);
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Sukses',
-                    text: xhr.responseText,
-                    // showCancelButton: true,
-                    confirmButtonText: 'OK',
-                    // cancelButtonText: 'Batal',
-                    showLoaderOnConfirm: true,
-                    preConfirm: () => {
-                        return new Promise((resolve) => {
-                            // Mengatur waktu delay sebelum mengarahkan kembali ke halaman 'pegawai.php'
-                            setTimeout(() => {
-                                resolve();
-                            }, 6000);
-                        });
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Pengguna mengklik tombol "OK"
-                        window.location.href = 'pagu_kegiatan.php';
-                    }
-                });
-            }
-        };
-        xhr.send(formData);
-    }
+                }
+            };
+            xhr.send(formData);
+        }
     </script>
 
     <?php include '../template/footer.php'; ?>

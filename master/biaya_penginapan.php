@@ -27,8 +27,7 @@
                             
                         </div> -->
                         <div class="card-body">
-                            <button type="button" class="btn btn-primary" data-coreui-toggle="modal"
-                                data-coreui-target="#exampleModal">
+                            <button type="button" class="btn btn-primary" data-coreui-toggle="modal" data-coreui-target="#exampleModal">
                                 Tambah Data
                             </button>
                         </div>
@@ -90,7 +89,7 @@
 
                                 echo '<option value="' . $id . '">' . $nama . '</option>';
                             }
-                        ?>
+                            ?>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -141,7 +140,7 @@
 
                                 echo '<option value="' . $id . '">' . $nama . '</option>';
                             }
-                        ?>
+                            ?>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -172,305 +171,305 @@
     <!-- end modal -->
 
     <script>
-    $(document).ready(function() {
-        var table;
+        $(document).ready(function() {
+            var table;
 
-        if (<?php echo $status_login ?> === 0) {
-            table = $('#data-table').DataTable({
-                "ajax": {
-                    "url": "get_data_master.php?data=penginapan",
-                    "type": "POST"
-                },
-                "columns": [{
-                        "data": ""
+            if (<?php echo $status_login ?> === 0) {
+                table = $('#data-table').DataTable({
+                    "ajax": {
+                        "url": "get_data_master.php?data=penginapan",
+                        "type": "POST"
                     },
-                    {
-                        "data": "nama"
-                    },
-                    {
-                        "data": "satuan"
-                    },
-                    {
-                        "data": "kategori1",
-                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                    },
-                    {
-                        "data": "kategori2",
-                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                    },
-                    {
-                        "data": "kategori3",
-                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                    "columns": [{
+                            "data": ""
+                        },
+                        {
+                            "data": "nama"
+                        },
+                        {
+                            "data": "satuan"
+                        },
+                        {
+                            "data": "kategori1",
+                            "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                        },
+                        {
+                            "data": "kategori2",
+                            "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                        },
+                        {
+                            "data": "kategori3",
+                            "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                        }
+                    ],
+                    "columnDefs": [{
+                        "targets": 0,
+                        "data": null,
+                        "render": function(data, type, row, meta) {
+                            return meta.row + 1;
+                        }
+                    }],
+                    "createdRow": function(row, data, dataIndex) {
+                        if (dataIndex === (table.rows().count() - 1)) {
+                            $(row).append(
+                                '<td><button class="btn btn-primary edit-button" data-id="' + data
+                                .id +
+                                '"><i class="cil-pencil"></i></button></td>'
+                            );
+                            $(row).append(
+                                '<td><button class="btn btn-danger delete-button" onclick="deleteData(' +
+                                data.id + ')"><i class="cil-trash"></i></button></td>'
+                            );
+                        }
                     }
-                ],
-                "columnDefs": [{
-                    "targets": 0,
-                    "data": null,
-                    "render": function(data, type, row, meta) {
-                        return meta.row + 1;
-                    }
-                }],
-                "createdRow": function(row, data, dataIndex) {
-                    if (dataIndex === (table.rows().count() - 1)) {
-                        $(row).append(
-                            '<td><button class="btn btn-primary edit-button" data-id="' + data
-                            .id +
-                            '"><i class="cil-pencil"></i></button></td>'
-                        );
-                        $(row).append(
-                            '<td><button class="btn btn-danger delete-button" onclick="deleteData(' +
-                            data.id + ')"><i class="cil-trash"></i></button></td>'
-                        );
-                    }
+                });
+            } else {
+                table = $('#data-table').DataTable({
+                    "ajax": {
+                        "url": "get_data_master.php?data=penginapan",
+                        "type": "POST"
+                    },
+                    "columns": [{
+                            "data": ""
+                        },
+                        {
+                            "data": "nama"
+                        },
+                        {
+                            "data": "satuan"
+                        },
+                        {
+                            "data": "kategori1",
+                            "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                        },
+                        {
+                            "data": "kategori2",
+                            "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                        },
+                        {
+                            "data": "kategori3",
+                            "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                        }
+                    ],
+                    "columnDefs": [{
+                        "targets": 0,
+                        "data": null,
+                        "render": function(data, type, row, meta) {
+                            return meta.row + 1;
+                        }
+                    }]
+                });
+            }
+
+        });
+        // Fungsi untuk menyimpan data pegawai ke dalam database
+        function simpanData() {
+            // Mengambil nilai input dari form
+            var propinsi = document.getElementById('propinsi').value;
+            var satuan = document.getElementById('satuan').value;
+            var kategori1 = document.getElementById('kategori1').value;
+            var kategori2 = document.getElementById('kategori2').value;
+            var kategori3 = document.getElementById('kategori3').value;
+
+            var formData = new FormData();
+            // Menambahkan data ke formData
+            formData.append('propinsi', propinsi);
+            formData.append('satuan', satuan);
+            formData.append('kategori1', kategori1);
+            formData.append('kategori2', kategori2);
+            formData.append('kategori3', kategori3);
+
+            // Mengirim data ke server menggunakan AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'biaya_penginapan_simpan.php', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Menampilkan pesan atau melakukan aksi setelah data berhasil disimpan
+                    // alert(xhr.responseText);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses',
+                        text: xhr.responseText,
+                        // showCancelButton: true,
+                        confirmButtonText: 'OK',
+                        // cancelButtonText: 'Batal',
+                        showLoaderOnConfirm: true,
+                        preConfirm: () => {
+                            return new Promise((resolve) => {
+                                // Mengatur waktu delay sebelum mengarahkan ke halaman 'pegawai.php'
+                                setTimeout(() => {
+                                    resolve();
+                                }, 6000);
+                            });
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Pengguna mengklik tombol "OK"
+                            window.location.href = 'biaya_penginapan.php';
+                        }
+                    });
+
                 }
-            });
-        } else {
-            table = $('#data-table').DataTable({
-                "ajax": {
-                    "url": "get_data_master.php?data=penginapan",
-                    "type": "POST"
+            };
+            xhr.send(formData);
+        }
+
+        // Mengatur nilai-nilai data dalam modal edit berdasarkan data yang dipilih
+        function openEditModal(data) {
+            $('#edit_propinsi').val(data.propinsi);
+            $('#edit_satuan').val(data.satuan);
+            $('#edit_kategori1').val(data.kategori1);
+            $('#edit_kategori2').val(data.kategori2);
+            $('#edit_kategori3').val(data.kategori3);
+            $('#id_penginapan').val(data.id);
+
+            // Buka modal edit
+            $('#editModal').modal('show');
+        }
+
+
+        // Mengambil data pegawai berdasarkan ID
+        function getDataById(id) {
+            // Lakukan permintaan AJAX untuk mendapatkan data pegawai berdasarkan ID
+            $.ajax({
+                url: 'get_data_by_id.php', // Ganti dengan URL yang sesuai untuk mengambil data pegawai berdasarkan ID
+                type: 'POST',
+                data: {
+                    get_data: 'biaya_penginapan',
+                    id: id
                 },
-                "columns": [{
-                        "data": ""
-                    },
-                    {
-                        "data": "nama"
-                    },
-                    {
-                        "data": "satuan"
-                    },
-                    {
-                        "data": "kategori1",
-                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                    },
-                    {
-                        "data": "kategori2",
-                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                    },
-                    {
-                        "data": "kategori3",
-                        "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                    }
-                ],
-                "columnDefs": [{
-                    "targets": 0,
-                    "data": null,
-                    "render": function(data, type, row, meta) {
-                        return meta.row + 1;
-                    }
-                }]
+                success: function(response) {
+                    // Mengambil objek data pegawai dari respon
+                    var data = JSON.parse(response);
+                    // console.log();
+                    // Membuka modal edit dan mengisi nilai-nilai data di dalamnya
+                    openEditModal(data['data'][0]);
+                },
+                error: function(xhr, status, error) {
+                    // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
+                    console.error(xhr.responseText);
+                }
             });
         }
 
-    });
-    // Fungsi untuk menyimpan data pegawai ke dalam database
-    function simpanData() {
-        // Mengambil nilai input dari form
-        var propinsi = document.getElementById('propinsi').value;
-        var satuan = document.getElementById('satuan').value;
-        var kategori1 = document.getElementById('kategori1').value;
-        var kategori2 = document.getElementById('kategori2').value;
-        var kategori3 = document.getElementById('kategori3').value;
-
-        var formData = new FormData();
-        // Menambahkan data ke formData
-        formData.append('propinsi', propinsi);
-        formData.append('satuan', satuan);
-        formData.append('kategori1', kategori1);
-        formData.append('kategori2', kategori2);
-        formData.append('kategori3', kategori3);
-
-        // Mengirim data ke server menggunakan AJAX
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'biaya_penginapan_simpan.php', true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                // Menampilkan pesan atau melakukan aksi setelah data berhasil disimpan
-                // alert(xhr.responseText);
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Sukses',
-                    text: xhr.responseText,
-                    // showCancelButton: true,
-                    confirmButtonText: 'OK',
-                    // cancelButtonText: 'Batal',
-                    showLoaderOnConfirm: true,
-                    preConfirm: () => {
-                        return new Promise((resolve) => {
-                            // Mengatur waktu delay sebelum mengarahkan ke halaman 'pegawai.php'
-                            setTimeout(() => {
-                                resolve();
-                            }, 6000);
-                        });
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Pengguna mengklik tombol "OK"
-                        window.location.href = 'biaya_penginapan.php';
-                    }
-                });
-
-            }
-        };
-        xhr.send(formData);
-    }
-
-    // Mengatur nilai-nilai data dalam modal edit berdasarkan data yang dipilih
-    function openEditModal(data) {
-        $('#edit_propinsi').val(data.propinsi);
-        $('#edit_satuan').val(data.satuan);
-        $('#edit_kategori1').val(data.kategori1);
-        $('#edit_kategori2').val(data.kategori2);
-        $('#edit_kategori3').val(data.kategori3);
-        $('#id_penginapan').val(data.id_penginapan);
-
-        // Buka modal edit
-        $('#editModal').modal('show');
-    }
-
-
-    // Mengambil data pegawai berdasarkan ID
-    function getDataById(id) {
-        // Lakukan permintaan AJAX untuk mendapatkan data pegawai berdasarkan ID
-        $.ajax({
-            url: 'get_data_by_id.php', // Ganti dengan URL yang sesuai untuk mengambil data pegawai berdasarkan ID
-            type: 'POST',
-            data: {
-                get_data: 'biaya_penginapan',
-                id: id
-            },
-            success: function(response) {
-                // Mengambil objek data pegawai dari respon
-                var data = JSON.parse(response);
-                // console.log();
-                // Membuka modal edit dan mengisi nilai-nilai data di dalamnya
-                openEditModal(data['data'][0]);
-            },
-            error: function(xhr, status, error) {
-                // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
-                console.error(xhr.responseText);
-            }
+        // Mengatur tindakan untuk tombol "Edit" pada baris tabel
+        $(document).on('click', '.edit-button', function() {
+            var id = $(this).data('id');
+            getDataById(id);
         });
-    }
 
-    // Mengatur tindakan untuk tombol "Edit" pada baris tabel
-    $(document).on('click', '.edit-button', function() {
-        var id = $(this).data('id');
-        getDataById(id);
-    });
-
-    // Menghapus data pegawai berdasarkan ID
-    function deleteData(id) {
-        // Show a confirmation popup before proceeding with deletion
-        Swal.fire({
-            icon: 'warning',
-            title: 'Konfirmasi',
-            text: 'Apakah Anda yakin ingin menghapus data ini?',
-            showCancelButton: true,
-            confirmButtonText: 'Ya',
-            cancelButtonText: 'Tidak',
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return new Promise((resolve) => {
-                    // Lakukan permintaan AJAX untuk menghapus data biaya penginapan berdasarkan ID
-                    $.ajax({
-                        url: 'biaya_penginapan_hapus.php', // Ganti dengan URL yang sesuai untuk menghapus data biaya penginapan berdasarkan ID
-                        type: 'POST',
-                        data: {
-                            id: id
-                        },
-                        success: function(response) {
-                            // Menampilkan pesan atau melakukan aksi setelah data berhasil dihapus
-                            resolve(response);
-                        },
-                        error: function(xhr, status, error) {
-                            // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
-                            console.error(xhr.responseText);
-                            resolve('Terjadi kesalahan saat menghapus data.');
+        // Menghapus data pegawai berdasarkan ID
+        function deleteData(id) {
+            // Show a confirmation popup before proceeding with deletion
+            Swal.fire({
+                icon: 'warning',
+                title: 'Konfirmasi',
+                text: 'Apakah Anda yakin ingin menghapus data ini?',
+                showCancelButton: true,
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Tidak',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return new Promise((resolve) => {
+                        // Lakukan permintaan AJAX untuk menghapus data biaya penginapan berdasarkan ID
+                        $.ajax({
+                            url: 'biaya_penginapan_hapus.php', // Ganti dengan URL yang sesuai untuk menghapus data biaya penginapan berdasarkan ID
+                            type: 'POST',
+                            data: {
+                                id: id
+                            },
+                            success: function(response) {
+                                // Menampilkan pesan atau melakukan aksi setelah data berhasil dihapus
+                                resolve(response);
+                            },
+                            error: function(xhr, status, error) {
+                                // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
+                                console.error(xhr.responseText);
+                                resolve('Terjadi kesalahan saat menghapus data.');
+                            }
+                        });
+                    });
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Pengguna mengklik tombol "Ya"
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses',
+                        text: result.value,
+                        confirmButtonText: 'OK',
+                        showLoaderOnConfirm: true,
+                        preConfirm: () => {
+                            return new Promise((resolve) => {
+                                // Mengatur waktu delay sebelum mengarahkan ke halaman 'biaya_penginapan.php'
+                                setTimeout(() => {
+                                    resolve();
+                                }, 3000);
+                            });
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Pengguna mengklik tombol "OK"
+                            window.location.href = 'biaya_penginapan.php';
                         }
                     });
-                });
-            }
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Pengguna mengklik tombol "Ya"
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Sukses',
-                    text: result.value,
-                    confirmButtonText: 'OK',
-                    showLoaderOnConfirm: true,
-                    preConfirm: () => {
-                        return new Promise((resolve) => {
-                            // Mengatur waktu delay sebelum mengarahkan ke halaman 'biaya_penginapan.php'
-                            setTimeout(() => {
-                                resolve();
-                            }, 3000);
-                        });
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Pengguna mengklik tombol "OK"
-                        window.location.href = 'biaya_penginapan.php';
-                    }
-                });
-            }
-        });
-    }
+                }
+            });
+        }
 
 
-    function updateData() {
-        // Mengambil nilai input dari form
-        var propinsi = document.getElementById('edit_propinsi').value;
-        var satuan = document.getElementById('edit_satuan').value;
-        var kategori1 = document.getElementById('edit_kategori1').value;
-        var kategori2 = document.getElementById('edit_kategori2').value;
-        var kategori3 = document.getElementById('edit_kategori3').value;
-        var id_penginapan = document.getElementById('id_penginapan').value;
+        function updateData() {
+            // Mengambil nilai input dari form
+            var propinsi = document.getElementById('edit_propinsi').value;
+            var satuan = document.getElementById('edit_satuan').value;
+            var kategori1 = document.getElementById('edit_kategori1').value;
+            var kategori2 = document.getElementById('edit_kategori2').value;
+            var kategori3 = document.getElementById('edit_kategori3').value;
+            var id_penginapan = document.getElementById('id_penginapan').value;
 
-        var formData = new FormData();
+            var formData = new FormData();
 
-        // Menambahkan data ke formData
-        formData.append('propinsi', propinsi);
-        formData.append('satuan', satuan);
-        formData.append('kategori1', kategori1);
-        formData.append('kategori2', kategori2);
-        formData.append('kategori3', kategori3);
-        formData.append('id_penginapan', id_penginapan);
+            // Menambahkan data ke formData
+            formData.append('propinsi', propinsi);
+            formData.append('satuan', satuan);
+            formData.append('kategori1', kategori1);
+            formData.append('kategori2', kategori2);
+            formData.append('kategori3', kategori3);
+            formData.append('id_penginapan', id_penginapan);
 
-        // Mengirim data ke server menggunakan AJAX
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'biaya_penginapan_edit.php', true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                // Menampilkan pesan atau melakukan aksi setelah data berhasil diperbarui
-                // alert(xhr.responseText);
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Sukses',
-                    text: xhr.responseText,
-                    // showCancelButton: true,
-                    confirmButtonText: 'OK',
-                    // cancelButtonText: 'Batal',
-                    showLoaderOnConfirm: true,
-                    preConfirm: () => {
-                        return new Promise((resolve) => {
-                            // Mengatur waktu delay sebelum mengarahkan kembali ke halaman 'pegawai.php'
-                            setTimeout(() => {
-                                resolve();
-                            }, 6000);
-                        });
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Pengguna mengklik tombol "OK"
-                        window.location.href = 'biaya_penginapan.php';
-                    }
-                });
-            }
-        };
-        xhr.send(formData);
-    }
+            // Mengirim data ke server menggunakan AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'biaya_penginapan_edit.php', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Menampilkan pesan atau melakukan aksi setelah data berhasil diperbarui
+                    // alert(xhr.responseText);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses',
+                        text: xhr.responseText,
+                        // showCancelButton: true,
+                        confirmButtonText: 'OK',
+                        // cancelButtonText: 'Batal',
+                        showLoaderOnConfirm: true,
+                        preConfirm: () => {
+                            return new Promise((resolve) => {
+                                // Mengatur waktu delay sebelum mengarahkan kembali ke halaman 'pegawai.php'
+                                setTimeout(() => {
+                                    resolve();
+                                }, 6000);
+                            });
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Pengguna mengklik tombol "OK"
+                            window.location.href = 'biaya_penginapan.php';
+                        }
+                    });
+                }
+            };
+            xhr.send(formData);
+        }
     </script>
 
     <?php include '../template/footer.php'; ?>

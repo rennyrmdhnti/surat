@@ -2,16 +2,16 @@
 <?php include '../template/sidebar.php'; ?>
 
 <style>
-#data-table_wrapper {
-    overflow-x: auto;
-}
+    #data-table_wrapper {
+        overflow-x: auto;
+    }
 
-/* td { */
-/* max-width: 80px; */
-/* overflow: hidden; */
-/* text-overflow: ellipsis; */
-/* white-space: nowrap; */
-/* } */
+    /* td { */
+    /* max-width: 80px; */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    /* white-space: nowrap; */
+    /* } */
 </style>
 
 
@@ -40,8 +40,7 @@
                             
                         </div> -->
                         <div class="card-body">
-                            <button type="button" class="btn btn-primary" data-coreui-toggle="modal"
-                                data-coreui-target="#exampleModal">
+                            <button type="button" class="btn btn-primary" data-coreui-toggle="modal" data-coreui-target="#exampleModal">
                                 Tambah Data
                             </button>
                         </div>
@@ -91,9 +90,7 @@
                         <div class="row">
                             <div class="col col-lg-4">
                                 <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Pilih Pegawai</label><input
-                                        type="text" id="pegawai" class="form-control" placeholder="Pilih pegawai"
-                                        data-toggle="popover">
+                                    <label for="exampleFormControlInput1" class="form-label">Pilih Pegawai</label><input type="text" id="pegawai" class="form-control" placeholder="Pilih pegawai" data-toggle="popover">
                                 </div>
                             </div>
                             <div class="col col-lg-8">
@@ -137,8 +134,7 @@
                             <div class="col col-lg-4">
                                 <div class="mb-3">
                                     <label for="pegawai" class="form-label">Pilih Pegawai</label>
-                                    <input type="text" id="editPegawai" class="form-control" placeholder="Pilih pegawai"
-                                        data-toggle="popover">
+                                    <input type="text" id="editPegawai" class="form-control" placeholder="Pilih pegawai" data-toggle="popover">
                                 </div>
                             </div>
                             <div class="col col-lg-8">
@@ -176,525 +172,532 @@
 
 
     <script>
-    var inputNoSPT = document.getElementById("no_spt");
-    inputNoSPT.addEventListener("input", function() {
-        var value = this.value;
-        var formattedValue = value.replace(/\D/g, ''); // Menghapus karakter non-angka
+        var inputNoSPT = document.getElementById("no_spt");
+        inputNoSPT.addEventListener("input", function() {
+            var value = this.value;
+            var formattedValue = value.replace(/\D/g, ''); // Menghapus karakter non-angka
 
-        if (formattedValue.length > 3) {
-            formattedValue = formattedValue.substr(0, 3); // Mengambil tiga digit pertama
-        }
+            if (formattedValue.length > 3) {
+                formattedValue = formattedValue.substr(0, 3); // Mengambil tiga digit pertama
+            }
 
-        if (formattedValue !== value) {
-            this.value = formattedValue; // Mengupdate nilai input dengan nilai yang telah diformat
-        }
-    });
-
-    function print(id) {
-        console.log(id); // Menampilkan nilai id ke konsol
-        var printWindow = window.open();
-        fetch('perintahtugas_print.php?id=' + id)
-            .then(response => response.text())
-            .then(content => {
-                printWindow.document.write('<html><head><title>Cetak</title></head><body>');
-                printWindow.document.write(content);
-                printWindow.document.write('</body></html>');
-                printWindow.print();
-                printWindow.close();
-            });
-    }
-
-    function openEditModal(data) {
-        // console.log(data[0]); // Menampilkan data ke konsol
-
-        var id = [data[0].id, data[1].id, data[2].id];
-        // console.log(id); // Menampilkan nilai id ke konsol
-
-        var str = data[0].no_spt;
-        var startIdx = str.indexOf("/") + 1; // Menemukan indeks awal setelah tanda slash pertama
-        var endIdx = str.indexOf("/", startIdx); // Menemukan indeks akhir setelah indeks awal
-        var angka = str.substring(startIdx, endIdx); // Mengambil substring antara dua indeks
-        $('#editDasar').val(data[0].dasar);
-        $('#editNoSPT').val(angka);
-        $('#editUntuk').val(data[0].untuk);
-        $('#editID').val(id);
-
-        // Buka modal edit
-        $('#editModal').modal('show');
-    }
-    // Mengambil data pegawai berdasarkan ID
-    function getDataById(id) {
-        // Lakukan permintaan AJAX untuk mendapatkan data pegawai berdasarkan ID
-        $.ajax({
-            url: 'get_data_by_id.php', // Ganti dengan URL yang sesuai untuk mengambil data pegawai berdasarkan ID
-            type: 'POST',
-            data: {
-                get_data: 'surat_perintah',
-                id: id
-            },
-            success: function(response) {
-                // Mengambil objek data pegawai dari respon
-                var data = JSON.parse(response);
-                console.log(data['data']);
-                // Membuka modal edit dan mengisi nilai-nilai data di dalamnya
-                openEditModal(data['data']);
-            },
-            error: function(xhr, status, error) {
-                // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
-                console.error(xhr.responseText);
+            if (formattedValue !== value) {
+                this.value = formattedValue; // Mengupdate nilai input dengan nilai yang telah diformat
             }
         });
-    }
 
-    // Mengatur tindakan untuk tombol "Edit" pada baris tabel
-    $(document).on('click', '.edit-button', function() {
-        var id = $(this).data('id');
-        getDataById(id);
-    });
+        function print(id) {
+            console.log(id); // Menampilkan nilai id ke konsol
+            var printWindow = window.open();
+            fetch('perintahtugas_print.php?id=' + id)
+                .then(response => response.text())
+                .then(content => {
+                    printWindow.document.write('<html><head><title>Cetak</title></head><body>');
+                    printWindow.document.write(content);
+                    printWindow.document.write('</body></html>');
+                    printWindow.print();
+                    printWindow.close();
+                });
+        }
 
-    // $('#pegawai').on('change', function() {
-    //     var selectedData = $('#pegawai').inputpicker('getSelection');
-    //     console.log(selectedData);
-    // });
+        function openEditModal(data) {
+            // console.log(data.length); // Menampilkan data ke konsol
 
-    // $('#editPegawai').on('change', function() {
-    //     var selectedData = $('#editPegawai').inputpicker('getSelection');
-    //     console.log(selectedData);
-    // });
+            var id = Array();
 
-    $(document).ready(function() {
+            data.forEach(element => {
+                id.push(element.id);
+            });
 
-        $("#editID").hide();
+            // var id = [data[0].id];
+            // console.log(id); // Menampilkan nilai id ke konsol
+            let text = id.toString();
 
-        var table;
+            var str = data[0].no_spt;
+            var startIdx = str.indexOf("/") + 1; // Menemukan indeks awal setelah tanda slash pertama
+            var endIdx = str.indexOf("/", startIdx); // Menemukan indeks akhir setelah indeks awal
+            var angka = str.substring(startIdx, endIdx); // Mengambil substring antara dua indeks
+            $('#editDasar').val(data[0].dasar);
+            $('#editNoSPT').val(angka);
+            $('#editUntuk').val(data[0].untuk);
+            $('#editID').val(text);
 
-        if (<?php echo $status_login ?> === 0) {
-            table = $('#data-table').DataTable({
-                "scrollX": true,
-                responsive: true,
-                "ajax": {
-                    "url": "get_data_surat.php?data=spt",
-                    "type": "POST"
+            // Buka modal edit
+            $('#editModal').modal('show');
+        }
+        // Mengambil data pegawai berdasarkan ID
+        function getDataById(id) {
+            // Lakukan permintaan AJAX untuk mendapatkan data pegawai berdasarkan ID
+            $.ajax({
+                url: 'get_data_by_id.php', // Ganti dengan URL yang sesuai untuk mengambil data pegawai berdasarkan ID
+                type: 'POST',
+                data: {
+                    get_data: 'surat_perintah',
+                    id: id
                 },
-                "columns": [{
-                        "data": ""
-                    },
-                    {
-                        "data": "no_spt"
-                    },
-                    {
-                        "data": "nama"
-                    },
-                    {
-                        "data": "dasar"
-                    },
-                    {
-                        "data": "untuk"
-                    },
-                    {
-                        "data": "status",
-                        "render": function(data, type, row) {
-                            if (data === "1") {
-                                return "approve";
-                            } else if (data === null) {
-                                return "belum diapprove";
-                            } else {
-                                return "unapproved";
-                            }
-                        }
-                    }
-                ],
-                "columnDefs": [{
-                        "width": "10px",
-                        "targets": [0]
-                    },
-                    {
-                        "width": "300px",
-                        "targets": [1]
-                    },
-                    {
-                        "width": "280px",
-                        "targets": [2]
-                    },
-                    {
-                        "width": "600px",
-                        "targets": [3]
-                    },
-                    {
-                        "width": "600px",
-                        "targets": [4]
-                    },
-                    {
-                        "width": "200px",
-                        "targets": [5]
-                    },
-                    {
-                        "targets": 0,
-                        "data": null,
-                        "render": function(data, type, row, meta) {
-                            return meta.row + 1;
-                        }
-                    }
-                ],
-                "createdRow": function(row, data, dataIndex) {
-                    var no_spt = data.no_spt.replace(/\//g, '').replace('Sekr/BPKPAD', '');
-                    if (dataIndex === (table.rows().count() - 1)) {
-                        $(row).append(
-                            '<td><button class="btn btn-primary edit-button" data-id="' +
-                            no_spt +
-                            '"><i class="cil-pencil"></i></button></td>'
-                        );
-                        $(row).append(
-                            '<td><button class="btn btn-danger" onclick="deleteRow(\'' +
-                            no_spt +
-                            '\')"><i class="cil-trash"></i></button></td>'
-                        );
-                        $(row).append(
-                            '<td><button class="btn btn-primary" onclick="print(\'' + data.id +
-                            '\')"><i class="cil-print"></i></button></td>'
-                        );
-                    }
+                success: function(response) {
+                    // Mengambil objek data pegawai dari respon
+                    var data = JSON.parse(response);
+                    console.log(data['data']);
+                    // Membuka modal edit dan mengisi nilai-nilai data di dalamnya
+                    openEditModal(data['data']);
+                },
+                error: function(xhr, status, error) {
+                    // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
+                    console.error(xhr.responseText);
                 }
             });
-        } else {
-            table = $('#data-table').DataTable({
-                "scrollX": true,
-                responsive: true,
-                "ajax": {
-                    "url": "get_data_surat.php?data=spt",
-                    "type": "POST"
-                },
-                "columns": [{
-                        "data": ""
+        }
+
+        // Mengatur tindakan untuk tombol "Edit" pada baris tabel
+        $(document).on('click', '.edit-button', function() {
+            var id = $(this).data('id');
+            getDataById(id);
+        });
+
+        // $('#pegawai').on('change', function() {
+        //     var selectedData = $('#pegawai').inputpicker('getSelection');
+        //     console.log(selectedData);
+        // });
+
+        // $('#editPegawai').on('change', function() {
+        //     var selectedData = $('#editPegawai').inputpicker('getSelection');
+        //     console.log(selectedData);
+        // });
+
+        $(document).ready(function() {
+
+            $("#editID").hide();
+
+            var table;
+
+            if (<?php echo $status_login ?> === 0) {
+                table = $('#data-table').DataTable({
+                    "scrollX": true,
+                    responsive: true,
+                    "ajax": {
+                        "url": "get_data_surat.php?data=spt",
+                        "type": "POST"
                     },
-                    {
-                        "data": "no_spt"
-                    },
-                    {
-                        "data": "nama"
-                    },
-                    {
-                        "data": "dasar"
-                    },
-                    {
-                        "data": "untuk"
-                    },
-                    {
-                        "data": "status",
-                        "render": function(data, type, row) {
-                            if (data === "1") {
-                                return "approve";
-                            } else if (data === null) {
-                                return "belum diapprove";
-                            } else {
-                                return "unapproved";
+                    "columns": [{
+                            "data": ""
+                        },
+                        {
+                            "data": "no_spt"
+                        },
+                        {
+                            "data": "nama"
+                        },
+                        {
+                            "data": "dasar"
+                        },
+                        {
+                            "data": "untuk"
+                        },
+                        {
+                            "data": "status",
+                            "render": function(data, type, row) {
+                                if (data === "1") {
+                                    return "approve";
+                                } else if (data === null) {
+                                    return "belum diapprove";
+                                } else {
+                                    return "unapproved";
+                                }
                             }
                         }
-                    }
-                ],
-                "columnDefs": [{
-                        "width": "10px",
-                        "targets": [0]
-                    },
-                    {
-                        "width": "300px",
-                        "targets": [1]
-                    },
-                    {
-                        "width": "280px",
-                        "targets": [2]
-                    },
-                    {
-                        "width": "600px",
-                        "targets": [3]
-                    },
-                    {
-                        "width": "600px",
-                        "targets": [4]
-                    },
-                    {
-                        "width": "200px",
-                        "targets": [5]
-                    },
-                    {
-                        "targets": 0,
-                        "data": null,
-                        "render": function(data, type, row, meta) {
-                            return meta.row + 1;
+                    ],
+                    "columnDefs": [{
+                            "width": "10px",
+                            "targets": [0]
+                        },
+                        {
+                            "width": "300px",
+                            "targets": [1]
+                        },
+                        {
+                            "width": "280px",
+                            "targets": [2]
+                        },
+                        {
+                            "width": "600px",
+                            "targets": [3]
+                        },
+                        {
+                            "width": "600px",
+                            "targets": [4]
+                        },
+                        {
+                            "width": "200px",
+                            "targets": [5]
+                        },
+                        {
+                            "targets": 0,
+                            "data": null,
+                            "render": function(data, type, row, meta) {
+                                return meta.row + 1;
+                            }
                         }
-                    }
-                ],
-                "createdRow": function(row, data, dataIndex) {
-                    var no_spt = data.no_spt.replace(/\//g, '').replace('Sekr/BPKPAD', '');
-                    if (data.status !== 1) {
+                    ],
+                    "createdRow": function(row, data, dataIndex) {
+                        var no_spt = data.no_spt.replace(/\//g, '').replace('Sekr/BPKPAD', '');
                         if (dataIndex === (table.rows().count() - 1)) {
                             $(row).append(
-                                '<td><button class="btn btn-secondary" onclick="approve(\'' +
-                                data
-                                .id +
-                                '\')"><i class="cil-task"></i></button></td>'
+                                '<td><button class="btn btn-primary edit-button" data-id="' +
+                                no_spt +
+                                '"><i class="cil-pencil"></i></button></td>'
+                            );
+                            $(row).append(
+                                '<td><button class="btn btn-danger" onclick="deleteRow(\'' +
+                                no_spt +
+                                '\')"><i class="cil-trash"></i></button></td>'
+                            );
+                            $(row).append(
+                                '<td><button class="btn btn-primary" onclick="print(\'' + data.id +
+                                '\')"><i class="cil-print"></i></button></td>'
                             );
                         }
                     }
+                });
+            } else {
+                table = $('#data-table').DataTable({
+                    "scrollX": true,
+                    responsive: true,
+                    "ajax": {
+                        "url": "get_data_surat.php?data=spt",
+                        "type": "POST"
+                    },
+                    "columns": [{
+                            "data": ""
+                        },
+                        {
+                            "data": "no_spt"
+                        },
+                        {
+                            "data": "nama"
+                        },
+                        {
+                            "data": "dasar"
+                        },
+                        {
+                            "data": "untuk"
+                        },
+                        {
+                            "data": "status",
+                            "render": function(data, type, row) {
+                                if (data === "1") {
+                                    return "approve";
+                                } else if (data === null) {
+                                    return "belum diapprove";
+                                } else {
+                                    return "unapproved";
+                                }
+                            }
+                        }
+                    ],
+                    "columnDefs": [{
+                            "width": "10px",
+                            "targets": [0]
+                        },
+                        {
+                            "width": "300px",
+                            "targets": [1]
+                        },
+                        {
+                            "width": "280px",
+                            "targets": [2]
+                        },
+                        {
+                            "width": "600px",
+                            "targets": [3]
+                        },
+                        {
+                            "width": "600px",
+                            "targets": [4]
+                        },
+                        {
+                            "width": "200px",
+                            "targets": [5]
+                        },
+                        {
+                            "targets": 0,
+                            "data": null,
+                            "render": function(data, type, row, meta) {
+                                return meta.row + 1;
+                            }
+                        }
+                    ],
+                    "createdRow": function(row, data, dataIndex) {
+                        var no_spt = data.no_spt.replace(/\//g, '').replace('Sekr/BPKPAD', '');
+                        if (data.status !== 1) {
+                            if (dataIndex === (table.rows().count() - 1)) {
+                                $(row).append(
+                                    '<td><button class="btn btn-secondary" onclick="approve(\'' +
+                                    data
+                                    .id +
+                                    '\')"><i class="cil-task"></i></button></td>'
+                                );
+                            }
+                        }
+                    }
+                });
+            }
+
+
+            $("#data-table").on("mouseenter", "td", function() {
+                $(this).attr('title', this.innerText);
+            });
+
+            table.on('draw', function() {
+                adjustRowHeight();
+            });
+
+            $(window).on('resize', function() {
+                adjustRowHeight();
+            });
+
+            // Fungsi untuk mengatur tinggi baris
+            function adjustRowHeight() {
+                $('.datatable td').each(function() {
+                    var $cell = $(this);
+                    var cellHeight = $cell[0].scrollHeight;
+                    $cell.css('max-height', cellHeight);
+                });
+            }
+
+            $.ajax({
+                url: 'get_data_pegawai.php',
+                method: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    $('#pegawai').inputpicker({
+                        data: response,
+                        fields: ['value', 'nama', 'bidang'],
+                        fieldText: 'nama',
+                        multiple: true,
+                        headShow: true,
+                        filterOpen: true,
+                        autoOpen: true
+                    });
+                },
+                error: function() {
+                    // Tindakan jika terjadi kesalahan
+                }
+            });
+
+            $.ajax({
+                url: 'get_data_pegawai.php',
+                method: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    $('#editPegawai').inputpicker({
+                        data: response,
+                        fields: ['value', 'nama', 'bidang'],
+                        fieldText: 'nama',
+                        multiple: true,
+                        headShow: true,
+                        filterOpen: true,
+                        autoOpen: true
+                    });
+                },
+                error: function() {
+                    // Tindakan jika terjadi kesalahan
+                }
+            });
+
+
+        });
+
+        function deleteRow(id) {
+            // Lakukan permintaan AJAX untuk menghapus data pegawai berdasarkan ID
+            $.ajax({
+                url: 'perintahtugas_hapus.php', // Ganti dengan URL yang sesuai untuk menghapus data pegawai berdasarkan ID
+                type: 'POST',
+                data: {
+                    id: id
+                },
+                success: function(response) {
+                    // Menampilkan pesan atau melakukan aksi setelah data berhasil dihapus
+                    // alert(response);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses',
+                        text: response,
+                        // showCancelButton: true,
+                        confirmButtonText: 'OK',
+                        // cancelButtonText: 'Batal',
+                        showLoaderOnConfirm: true,
+                        preConfirm: () => {
+                            return new Promise((resolve) => {
+                                // Mengatur waktu delay sebelum mengarahkan ke halaman 'pegawai.php'
+                                setTimeout(() => {
+                                    resolve();
+                                }, 3000);
+                            });
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Pengguna mengklik tombol "OK"
+                            window.location.href = 'perintah_tugas.php';
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+
+        function approve(id) {
+            // Lakukan permintaan AJAX untuk menghapus data pegawai berdasarkan ID
+            $.ajax({
+                url: 'perintahtugas_approve.php', // Ganti dengan URL yang sesuai untuk menghapus data pegawai berdasarkan ID
+                type: 'POST',
+                data: {
+                    id: id
+                },
+                success: function(response) {
+                    // Menampilkan pesan atau melakukan aksi setelah data berhasil dihapus
+                    // alert(response);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses',
+                        text: response,
+                        // showCancelButton: true,
+                        confirmButtonText: 'OK',
+                        // cancelButtonText: 'Batal',
+                        showLoaderOnConfirm: true,
+                        preConfirm: () => {
+                            return new Promise((resolve) => {
+                                // Mengatur waktu delay sebelum mengarahkan ke halaman 'pegawai.php'
+                                setTimeout(() => {
+                                    resolve();
+                                }, 3000);
+                            });
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Pengguna mengklik tombol "OK"
+                            window.location.href = 'perintah_tugas.php';
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
+                    console.error(xhr.responseText);
                 }
             });
         }
 
 
-        $("#data-table").on("mouseenter", "td", function() {
-            $(this).attr('title', this.innerText);
-        });
+        function simpanData() {
+            // Mengambil nilai input dari elemen modal
+            var nama = $("#pegawai").val();
+            var noSPT = $("#no_spt").val();
+            var dasar = $("#dasar").val();
+            var untuk = $("#untuk").val();
 
-        table.on('draw', function() {
-            adjustRowHeight();
-        });
+            // Lakukan validasi atau manipulasi data sebelum mengirimkan ke server
 
-        $(window).on('resize', function() {
-            adjustRowHeight();
-        });
-
-        // Fungsi untuk mengatur tinggi baris
-        function adjustRowHeight() {
-            $('.datatable td').each(function() {
-                var $cell = $(this);
-                var cellHeight = $cell[0].scrollHeight;
-                $cell.css('max-height', cellHeight);
+            // Mengirim data ke server menggunakan AJAX
+            $.ajax({
+                url: "perintahtugas_simpan.php", // Ganti dengan URL endpoint untuk menyimpan data
+                type: "POST",
+                data: {
+                    nama: nama,
+                    no_spt: noSPT,
+                    dasar: dasar,
+                    untuk: untuk
+                },
+                success: function(response) {
+                    // Handle response dari server setelah data disimpan
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses',
+                        text: response,
+                        confirmButtonText: 'OK',
+                        showLoaderOnConfirm: true,
+                        preConfirm: () => {
+                            return new Promise((resolve) => {
+                                // Mengatur waktu delay sebelum mengarahkan ke halaman 'perintah_tugas.php'
+                                setTimeout(() => {
+                                    resolve();
+                                }, 3000);
+                            });
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Pengguna mengklik tombol "OK"
+                            window.location.href = 'perintah_tugas.php';
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Handle error jika terjadi masalah saat mengirimkan data
+                    console.error(xhr.responseText);
+                    alert("Terjadi kesalahan saat menyimpan data. Silakan coba lagi.");
+                }
             });
         }
 
-        $.ajax({
-            url: 'get_data_pegawai.php',
-            method: 'GET',
-            dataType: 'json',
-            success: function(response) {
-                $('#pegawai').inputpicker({
-                    data: response,
-                    fields: ['value', 'nama', 'bidang'],
-                    fieldText: 'nama',
-                    multiple: true,
-                    headShow: true,
-                    filterOpen: true,
-                    autoOpen: true
-                });
-            },
-            error: function() {
-                // Tindakan jika terjadi kesalahan
-            }
-        });
+        function EditData() {
+            // Mengambil nilai input dari elemen modal
+            var nama = $("#editPegawai").val();
+            var noSPT = $("#editNoSPT").val();
+            var dasar = $("#editDasar").val();
+            var untuk = $("#editUntuk").val();
+            var id = $("#editID").val();
 
-        $.ajax({
-            url: 'get_data_pegawai.php',
-            method: 'GET',
-            dataType: 'json',
-            success: function(response) {
-                $('#editPegawai').inputpicker({
-                    data: response,
-                    fields: ['value', 'nama', 'bidang'],
-                    fieldText: 'nama',
-                    multiple: true,
-                    headShow: true,
-                    filterOpen: true,
-                    autoOpen: true
-                });
-            },
-            error: function() {
-                // Tindakan jika terjadi kesalahan
-            }
-        });
+            // console.log(nama);
+            // console.log(noSPT);
+            // console.log(dasar);
+            // console.log(untuk);
+            // console.log(id);
 
+            // Lakukan validasi atau manipulasi data sebelum mengirimkan ke server
 
-    });
-
-    function deleteRow(id) {
-        // Lakukan permintaan AJAX untuk menghapus data pegawai berdasarkan ID
-        $.ajax({
-            url: 'perintahtugas_hapus.php', // Ganti dengan URL yang sesuai untuk menghapus data pegawai berdasarkan ID
-            type: 'POST',
-            data: {
-                id: id
-            },
-            success: function(response) {
-                // Menampilkan pesan atau melakukan aksi setelah data berhasil dihapus
-                // alert(response);
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Sukses',
-                    text: response,
-                    // showCancelButton: true,
-                    confirmButtonText: 'OK',
-                    // cancelButtonText: 'Batal',
-                    showLoaderOnConfirm: true,
-                    preConfirm: () => {
-                        return new Promise((resolve) => {
-                            // Mengatur waktu delay sebelum mengarahkan ke halaman 'pegawai.php'
-                            setTimeout(() => {
-                                resolve();
-                            }, 3000);
-                        });
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Pengguna mengklik tombol "OK"
-                        window.location.href = 'perintah_tugas.php';
-                    }
-                });
-            },
-            error: function(xhr, status, error) {
-                // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
-                console.error(xhr.responseText);
-            }
-        });
-    }
-
-    function approve(id) {
-        // Lakukan permintaan AJAX untuk menghapus data pegawai berdasarkan ID
-        $.ajax({
-            url: 'perintahtugas_approve.php', // Ganti dengan URL yang sesuai untuk menghapus data pegawai berdasarkan ID
-            type: 'POST',
-            data: {
-                id: id
-            },
-            success: function(response) {
-                // Menampilkan pesan atau melakukan aksi setelah data berhasil dihapus
-                // alert(response);
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Sukses',
-                    text: response,
-                    // showCancelButton: true,
-                    confirmButtonText: 'OK',
-                    // cancelButtonText: 'Batal',
-                    showLoaderOnConfirm: true,
-                    preConfirm: () => {
-                        return new Promise((resolve) => {
-                            // Mengatur waktu delay sebelum mengarahkan ke halaman 'pegawai.php'
-                            setTimeout(() => {
-                                resolve();
-                            }, 3000);
-                        });
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Pengguna mengklik tombol "OK"
-                        window.location.href = 'perintah_tugas.php';
-                    }
-                });
-            },
-            error: function(xhr, status, error) {
-                // Tindakan yang dilakukan jika terjadi kesalahan dalam permintaan AJAX
-                console.error(xhr.responseText);
-            }
-        });
-    }
-
-
-    function simpanData() {
-        // Mengambil nilai input dari elemen modal
-        var nama = $("#pegawai").val();
-        var noSPT = $("#no_spt").val();
-        var dasar = $("#dasar").val();
-        var untuk = $("#untuk").val();
-
-        // Lakukan validasi atau manipulasi data sebelum mengirimkan ke server
-
-        // Mengirim data ke server menggunakan AJAX
-        $.ajax({
-            url: "perintahtugas_simpan.php", // Ganti dengan URL endpoint untuk menyimpan data
-            type: "POST",
-            data: {
-                nama: nama,
-                no_spt: noSPT,
-                dasar: dasar,
-                untuk: untuk
-            },
-            success: function(response) {
-                // Handle response dari server setelah data disimpan
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Sukses',
-                    text: response,
-                    confirmButtonText: 'OK',
-                    showLoaderOnConfirm: true,
-                    preConfirm: () => {
-                        return new Promise((resolve) => {
-                            // Mengatur waktu delay sebelum mengarahkan ke halaman 'perintah_tugas.php'
-                            setTimeout(() => {
-                                resolve();
-                            }, 3000);
-                        });
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Pengguna mengklik tombol "OK"
-                        window.location.href = 'perintah_tugas.php';
-                    }
-                });
-            },
-            error: function(xhr, status, error) {
-                // Handle error jika terjadi masalah saat mengirimkan data
-                console.error(xhr.responseText);
-                alert("Terjadi kesalahan saat menyimpan data. Silakan coba lagi.");
-            }
-        });
-    }
-
-    function EditData() {
-        // Mengambil nilai input dari elemen modal
-        var nama = $("#editPegawai").val();
-        var noSPT = $("#editNoSPT").val();
-        var dasar = $("#editDasar").val();
-        var untuk = $("#editUntuk").val();
-        var id = $("#editID").val();
-
-        // console.log(nama);
-        // console.log(noSPT);
-        // console.log(dasar);
-        // console.log(untuk);
-        // console.log(id);
-
-        // Lakukan validasi atau manipulasi data sebelum mengirimkan ke server
-
-        // Mengirim data ke server menggunakan AJAX
-        $.ajax({
-            url: "perintahtugas_edit.php", // Ganti dengan URL endpoint untuk menyimpan data
-            type: "POST",
-            data: {
-                nama: nama,
-                no_spt: noSPT,
-                dasar: dasar,
-                untuk: untuk,
-                id: id
-            },
-            success: function(response) {
-                // Handle response dari server setelah data disimpan
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Sukses',
-                    text: response,
-                    confirmButtonText: 'OK',
-                    showLoaderOnConfirm: true,
-                    preConfirm: () => {
-                        return new Promise((resolve) => {
-                            // Mengatur waktu delay sebelum mengarahkan ke halaman 'perintah_tugas.php'
-                            setTimeout(() => {
-                                resolve();
-                            }, 3000);
-                        });
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Pengguna mengklik tombol "OK"
-                        window.location.href = 'perintah_tugas.php';
-                    }
-                });
-            },
-            error: function(xhr, status, error) {
-                // Handle error jika terjadi masalah saat mengirimkan data
-                console.error(xhr.responseText);
-                alert("Terjadi kesalahan saat menyimpan data. Silakan coba lagi.");
-            }
-        });
-    }
+            // Mengirim data ke server menggunakan AJAX
+            $.ajax({
+                url: "perintahtugas_edit.php", // Ganti dengan URL endpoint untuk menyimpan data
+                type: "POST",
+                data: {
+                    nama: nama,
+                    no_spt: noSPT,
+                    dasar: dasar,
+                    untuk: untuk,
+                    id: id
+                },
+                success: function(response) {
+                    // Handle response dari server setelah data disimpan
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses',
+                        text: response,
+                        confirmButtonText: 'OK',
+                        showLoaderOnConfirm: true,
+                        preConfirm: () => {
+                            return new Promise((resolve) => {
+                                // Mengatur waktu delay sebelum mengarahkan ke halaman 'perintah_tugas.php'
+                                setTimeout(() => {
+                                    resolve();
+                                }, 3000);
+                            });
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Pengguna mengklik tombol "OK"
+                            window.location.href = 'perintah_tugas.php';
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Handle error jika terjadi masalah saat mengirimkan data
+                    console.error(xhr.responseText);
+                    alert("Terjadi kesalahan saat menyimpan data. Silakan coba lagi.");
+                }
+            });
+        }
     </script>
 
     <?php include '../template/footer.php'; ?>

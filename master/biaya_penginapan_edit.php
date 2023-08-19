@@ -14,9 +14,8 @@ $id_penginapan = $_POST['id_penginapan'];
 $sql = "UPDATE tb_penginapan SET propinsi = '$propinsi', satuan = '$satuan', kategori1 = '$kategori1', kategori2 = '$kategori2', kategori3 = '$kategori3' WHERE id = '$id_penginapan'";
 
 if ($conn->query($sql) === TRUE) {
-        echo "Data Biaya Penginapan berhasil diperbarui.";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
+    echo "Data Biaya Penginapan berhasil diperbarui.";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
 $conn->close();
-?>

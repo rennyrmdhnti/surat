@@ -11,8 +11,16 @@ $id = $_POST['id'];
 // $dasar = $_POST['dasar'];
 $namaArray = $_POST['nama'];
 // var_dump($namaArray);
-// var_dump($id);exit;
+// var_dump($noSPT);
+// var_dump($untuk);
+// var_dump($dasar);
+// var_dump($id);
+$id_array = explode(",", $id);
 
+foreach ($id_array as $key => $value) {
+    $sqlHapus = "DELETE FROM tb_perintah_tugas WHERE id = '$value'";
+    $conn->query($sqlHapus);
+}
 $query = "
 SELECT *
 FROM (
@@ -48,12 +56,13 @@ $tahunSekarang = date('Y');
 $romawi = romanNumerals($bulanSekarang);
 
 // Membuat nomor urut
-$nomorUrut = '800/'.$noSPT.'/Sekr/BPKPAD/'.$romawi.'/'.$tahunSekarang;
+$nomorUrut = '800/' . $noSPT . '/Sekr/BPKPAD/' . $romawi . '/' . $tahunSekarang;
 
 // echo $nomorUrut;
 
 // Fungsi untuk mengonversi angka menjadi angka romawi
-function romanNumerals($number) {
+function romanNumerals($number)
+{
     $map = [
         'X' => 10,
         'IX' => 9,
@@ -71,8 +80,6 @@ function romanNumerals($number) {
     return $result;
 }
 
-$sqlDel = "DELETE FROM tb_perintah_tugas WHERE id IN ($id)";
-$conn->query($sqlDel);
 
 
 $dasar = $_POST['dasar'];
@@ -97,4 +104,3 @@ if ($conn->query($sql) === TRUE) {
 
 // Menutup koneksi ke database
 $conn->close();
-?>

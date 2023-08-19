@@ -32,7 +32,7 @@ if ($_POST['get_data'] === 'pegawai') {
     } else {
         echo "ID pegawai tidak tersedia";
     }
-} 
+}
 
 if ($_POST['get_data'] === 'thl') {
     // Memeriksa apakah ID pegawai telah dikirim melalui permintaan POST
@@ -63,7 +63,7 @@ if ($_POST['get_data'] === 'thl') {
     } else {
         echo "ID thl tidak tersedia";
     }
-} 
+}
 
 if ($_POST['get_data'] === 'pagu') {
     // Memeriksa apakah ID pegawai telah dikirim melalui permintaan POST
@@ -94,7 +94,7 @@ if ($_POST['get_data'] === 'pagu') {
     } else {
         echo "ID pagu tidak tersedia";
     }
-    }
+}
 
 if ($_POST['get_data'] === 'rek_kegiatan') {
     // Memeriksa apakah ID pegawai telah dikirim melalui permintaan POST
@@ -253,13 +253,13 @@ if ($_POST['get_data'] === 'biaya_penginapan') {
     }
 }
 
-if ($_POST['get_data'] === 'travel') {
+if ($_POST['get_data'] === 'biaya_pesawat') {
     // Memeriksa apakah ID pegawai telah dikirim melalui permintaan POST
     if (isset($_POST['id'])) {
         $id = $_POST['id'];
 
         // Mengambil data pegawai dari MySQL
-        $sql = "SELECT * FROM tb_rek_travel WHERE id = $id";
+        $sql = "SELECT * FROM tb_pesawat WHERE id_pesawat = $id";
         // var_dump($sql);exit;
 
         // Mempersiapkan statement SQL menggunakan prepared statement
@@ -284,4 +284,3 @@ if ($_POST['get_data'] === 'travel') {
         echo "ID Biaya Penginapan tidak tersedia";
     }
 }
-?>

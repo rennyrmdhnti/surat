@@ -283,8 +283,7 @@
 <!-- end modal -->
 
 <!-- Modal -->
-<div class="modal fade" id="ModalPaguKegiatan" tabindex="-1" aria-labelledby="ModalPaguKegiatanLabel"
-    aria-hidden="true">
+<div class="modal fade" id="ModalPaguKegiatan" tabindex="-1" aria-labelledby="ModalPaguKegiatanLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -308,8 +307,7 @@
 <!-- end modal -->
 
 <!-- Modal -->
-<div class="modal fade" id="ModalLaporanKegiatan" tabindex="-1" aria-labelledby="ModalLaporanKegiatanLabel"
-    aria-hidden="true">
+<div class="modal fade" id="ModalLaporanKegiatan" tabindex="-1" aria-labelledby="ModalLaporanKegiatanLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -334,82 +332,82 @@
 
 <!-- Anda harus menempatkan kode ini di dalam tag <script> di bagian bawah halaman -->
 <script>
-function cetakDataSPT() {
-    var startDate = document.getElementById("startDateSPT").value;
-    var endDate = document.getElementById("endDateSPT").value;
+    function cetakDataSPT() {
+        var startDate = document.getElementById("startDateSPT").value;
+        var endDate = document.getElementById("endDateSPT").value;
 
-    // Mengarahkan pengguna ke halaman cetak_data_pagu.php dengan parameter startDate dan endDate
-    var url = "cetak_laporan_surat_perintah_tugas.php?startDate=" + startDate + "&endDate=" + endDate;
-    window.open(url, '_blank');
-}
+        // Mengarahkan pengguna ke halaman cetak_data_pagu.php dengan parameter startDate dan endDate
+        var url = "cetak_laporan_surat_perintah_tugas.php?startDate=" + startDate + "&endDate=" + endDate;
+        window.open(url, '_blank');
+    }
 
-function cetakDataRPD() {
-    var startDate = document.getElementById("startDateRPD").value;
-    var endDate = document.getElementById("endDateRPD").value;
+    function cetakDataRPD() {
+        var startDate = document.getElementById("startDateRPD").value;
+        var endDate = document.getElementById("endDateRPD").value;
 
-    var url = "cetak_rekap_perjalan_dinas.php?startDate=" + startDate + "&endDate=" + endDate;
-    window.open(url, '_blank');
-}
+        var url = "cetak_rekap_perjalan_dinas.php?startDate=" + startDate + "&endDate=" + endDate;
+        window.open(url, '_blank');
+    }
 
-function cetakDataLPD() {
-    var startDate = document.getElementById("startDateLPD").value;
-    var endDate = document.getElementById("endDateLPD").value;
+    function cetakDataLPD() {
+        var startDate = document.getElementById("startDateLPD").value;
+        var endDate = document.getElementById("endDateLPD").value;
 
-    var url = "cetak_laporan_perjalan_dinas.php?startDate=" + startDate + "&endDate=" + endDate;
-    window.open(url, '_blank');
-}
+        var url = "cetak_laporan_perjalan_dinas.php?startDate=" + startDate + "&endDate=" + endDate;
+        window.open(url, '_blank');
+    }
 
-function cetakDataLRA() {
-    var startDate = document.getElementById("startDateLRA").value;
-    var endDate = document.getElementById("endDateLRA").value;
-
-
-    var url = "cetak_laporan_realisasi_anggaran.php?startDate=" + startDate + "&endDate=" + endDate;
-    window.open(url, '_blank');
-}
-
-function cetakDataLapNota() {
-    var startDate = document.getElementById("startDateLapNota").value;
-    var endDate = document.getElementById("endDateLapNota").value;
-
-    var url = "cetak_laporan_pencairan_dana.php?startDate=" + startDate + "&endDate=" + endDate;
-    window.open(url, '_blank');
-}
-
-function cetakDataSP() {
-    var startDate = document.getElementById("startDateSP").value;
-    var endDate = document.getElementById("endDateSP").value;
+    function cetakDataLRA() {
+        var startDate = document.getElementById("startDateLRA").value;
+        var endDate = document.getElementById("endDateLRA").value;
 
 
-    var url = "cetak_laporan_pertanggungjawaban.php?startDate=" + startDate + "&endDate=" + endDate;
-    window.open(url, '_blank');
-}
+        var url = "cetak_laporan_realisasi_anggaran.php?startDate=" + startDate + "&endDate=" + endDate;
+        window.open(url, '_blank');
+    }
 
-function cetakDataLAP() {
-    var startDate = document.getElementById("startDateLAP").value;
-    var endDate = document.getElementById("endDateLAP").value;
+    function cetakDataLapNota() {
+        var startDate = document.getElementById("startDateLapNota").value;
+        var endDate = document.getElementById("endDateLapNota").value;
 
-    var url = "cetak_laporan_anggaran_perjadin.php?startDate=" + startDate + "&endDate=" + endDate;
-    window.open(url, '_blank');
-}
+        var url = "cetak_laporan_pencairan_dana.php?startDate=" + startDate + "&endDate=" + endDate;
+        window.open(url, '_blank');
+    }
 
-function cetakDataPaguKegiatan() {
-    var startDate = document.getElementById("startDatePaguKegiatan").value;
-    var endDate = document.getElementById("endDatePaguKegiatan").value;
+    function cetakDataSP() {
+        var startDate = document.getElementById("startDateSP").value;
+        var endDate = document.getElementById("endDateSP").value;
 
-    // Mengarahkan pengguna ke halaman cetak_data_pagu.php dengan parameter startDate dan endDate
-    var url = "cetak_laporan_pertanggungjawaban.php?startDate=" + startDate + "&endDate=" + endDate;
-    window.open(url, '_blank');
 
-}
+        var url = "cetak_laporan_pertanggungjawaban.php?startDate=" + startDate + "&endDate=" + endDate;
+        window.open(url, '_blank');
+    }
 
-function cetakDataLaporanKegiatan() {
-    var startDate = document.getElementById("startDateLaporanKegiatan").value;
-    var endDate = document.getElementById("endDateLaporanKegiatan").value;
+    function cetakDataLAP() {
+        var startDate = document.getElementById("startDateLAP").value;
+        var endDate = document.getElementById("endDateLAP").value;
 
-    // Mengarahkan pengguna ke halaman cetak_data_pagu.php dengan parameter startDate dan endDate
-    var url = "cetak_laporan_kegiatan.php?startDate=" + startDate + "&endDate=" + endDate;
-    window.open(url, '_blank');
+        var url = "cetak_laporan_anggaran_perjadin.php?startDate=" + startDate + "&endDate=" + endDate;
+        window.open(url, '_blank');
+    }
 
-}
+    function cetakDataPaguKegiatan() {
+        var startDate = document.getElementById("startDatePaguKegiatan").value;
+        var endDate = document.getElementById("endDatePaguKegiatan").value;
+
+        // Mengarahkan pengguna ke halaman cetak_data_pagu.php dengan parameter startDate dan endDate
+        var url = "cetak_laporan_pagu_kegiatan.php?startDate=" + startDate + "&endDate=" + endDate;
+        window.open(url, '_blank');
+
+    }
+
+    function cetakDataLaporanKegiatan() {
+        var startDate = document.getElementById("startDateLaporanKegiatan").value;
+        var endDate = document.getElementById("endDateLaporanKegiatan").value;
+
+        // Mengarahkan pengguna ke halaman cetak_data_pagu.php dengan parameter startDate dan endDate
+        var url = "cetak_laporan_kegiatan.php?startDate=" + startDate + "&endDate=" + endDate;
+        window.open(url, '_blank');
+
+    }
 </script>

@@ -7,18 +7,23 @@ if ($_POST['get_data'] === 'surat_perintah') {
     // Memeriksa apakah ID pegawai telah dikirim melalui permintaan POST
     if (isset($_POST['id'])) {
         $id = $_POST['id'];
-        
+
+        // var_dump($id);
+
         $firstPart = substr($id, 0, 3);
         $secondPart = substr($id, 3, 3);
         $thirdPart = substr($id, 6, 4);
         $fourthPart = substr($id, 10, 6);
-        $fifthPart = substr($id, 16, 1);
-        $sixPart = substr($id, 17);
-        
+        $fifthPart = substr($id, 16, 4);
+        $sixPart = substr($id, 20);
+
         $finalId = $firstPart . '/' . $secondPart . '/' . $thirdPart . '/' . $fourthPart . '/' . $fifthPart . '/' . $sixPart;
 
+        // var_dump($finalId);
         // Mengambil data pegawai dari MySQL
         $sql = "SELECT * FROM tb_perintah_tugas WHERE no_spt = '$finalId'";
+        // var_dump($sql);
+        // exit;
 
         // Mempersiapkan statement SQL menggunakan prepared statement
         $stmt = $conn->prepare($sql);
@@ -41,20 +46,20 @@ if ($_POST['get_data'] === 'surat_perintah') {
     } else {
         echo "ID pegawai tidak tersedia";
     }
-} 
+}
 
 if ($_POST['get_data'] === 'perjalanan_dinas') {
     // Memeriksa apakah ID pegawai telah dikirim melalui permintaan POST
     if (isset($_POST['id'])) {
         $id = $_POST['id'];
-        
+
         // $firstPart = substr($id, 0, 3);
         // $secondPart = substr($id, 3, 3);
         // $thirdPart = substr($id, 6, 4);
         // $fourthPart = substr($id, 10, 6);
         // $fifthPart = substr($id, 16, 2);
         // $sixPart = substr($id, 18);
-        
+
         // $finalId = $firstPart . '/' . $secondPart . '/' . $thirdPart . '/' . $fourthPart . '/' . $fifthPart . '/' . $sixPart;
 
         // Mengambil data pegawai dari MySQL
@@ -82,20 +87,20 @@ if ($_POST['get_data'] === 'perjalanan_dinas') {
     } else {
         echo "ID pegawai tidak tersedia";
     }
-} 
+}
 
 if ($_POST['get_data'] === 'nominatif') {
     // Memeriksa apakah ID pegawai telah dikirim melalui permintaan POST
     if (isset($_POST['id'])) {
         $id = $_POST['id'];
-        
+
         // $firstPart = substr($id, 0, 3);
         // $secondPart = substr($id, 3, 3);
         // $thirdPart = substr($id, 6, 4);
         // $fourthPart = substr($id, 10, 6);
         // $fifthPart = substr($id, 16, 2);
         // $sixPart = substr($id, 18);
-        
+
         // $finalId = $firstPart . '/' . $secondPart . '/' . $thirdPart . '/' . $fourthPart . '/' . $fifthPart . '/' . $sixPart;
 
         // Mengambil data pegawai dari MySQL
@@ -124,4 +129,3 @@ if ($_POST['get_data'] === 'nominatif') {
         echo "ID pegawai tidak tersedia";
     }
 }
-?>
