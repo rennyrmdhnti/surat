@@ -544,6 +544,17 @@
     document.getElementById("tanggal_berangkat").addEventListener("change", calculateDuration);
     document.getElementById("tanggal_kembali").addEventListener("change", calculateDuration);
 
+    function calculateDurationEdit() {
+        const departureDate = new Date(document.getElementById("edit_tanggal_berangkat").value);
+        const returnDate = new Date(document.getElementById("edit_tanggal_kembali").value);
+        const timeDiff = returnDate.getTime() - departureDate.getTime();
+        const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); // calculate difference in days
+        document.getElementById("edit_lama").value = daysDiff + 1 + " Hari";;
+    }
+
+    document.getElementById("edit_tanggal_berangkat").addEventListener("change", calculateDurationEdit);
+    document.getElementById("edit_tanggal_kembali").addEventListener("change", calculateDurationEdit);
+
     function simpanData() {
         // Mengambil nilai input dari elemen modal
         var noSPT = $("#no_spt").val();

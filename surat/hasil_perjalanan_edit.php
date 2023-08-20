@@ -10,6 +10,7 @@ $dasar = $_POST['dasar'];
 $waktu_dan_tempat = $_POST['waktu_dan_tempat'];
 $hasil_kegiatan = $_POST['hasil_kegiatan'];
 $kesimpulan = $_POST['kesimpulan'];
+$id = $_POST['id'];
 
 // Periksa apakah ada file yang diunggah
 if(isset($_FILES['foto'])) {
@@ -29,24 +30,38 @@ if(isset($_FILES['foto'])) {
          // File foto berhasil disimpan, Anda dapat melanjutkan dengan penyimpanan data ke dalam tabel pegawai
 
          // Query untuk menyimpan data ke dalam tabel pegawai
-         $sql = "INSERT INTO tb_hasil_dinas (perihal,nama_kegiatan,dasar,waktu_dan_tempat,hasil_kegiatan,kesimpulan,tanggal_buat,foto) 
-         VALUES ('$perihal', '$nama_kegiatan', '$dasar', '$waktu_dan_tempat', '$hasil_kegiatan', '$kesimpulan', CURDATE(),'$tujuanSimpan')";
+         $sql = "UPDATE tb_hasil_dinas SET 
+         perihal = '$perihal',
+         nama_kegiatan = '$nama_kegiatan',
+         dasar = '$dasar',
+         waktu_dan_tempat = '$waktu_dan_tempat',
+         hasil_kegiatan = '$hasil_kegiatan',
+         kesimpulan = '$kesimpulan',
+         foto = '$tujuanSimpan'
+         WHERE id = '$id'";
 
          if ($conn->query($sql) === TRUE) {
-             echo "Data Hasil Dinas berhasil disimpan.";
+             echo "Data Hasil Dinas berhasil diperbarui.";
          } else {
              echo "Error: " . $sql . "<br>" . $conn->error;
          }
 } else {
    // Query untuk menyimpan data ke dalam tabel pegawai
-   $sql = "INSERT INTO tb_hasil_dinas (nama_kegiatan,dasar,waktu_dan_tempat,hasil_kegiatan,kesimpulan,tanggal_buat,foto) 
-   VALUES ('$nama_kegiatan', '$dasar', '$waktu_dan_tempat', '$hasil_kegiatan', '$kesimpulan', CURDATE(),'')";
+   $sql = "UPDATE tb_hasil_dinas SET 
+         perihal = '$perihal',
+         nama_kegiatan = '$nama_kegiatan',
+         dasar = '$dasar',
+         waktu_dan_tempat = '$waktu_dan_tempat',
+         hasil_kegiatan = '$hasil_kegiatan',
+         kesimpulan = '$kesimpulan',
+         foto = ''
+         WHERE id = '$id'";
 
-     if ($conn->query($sql) === TRUE) {
-     echo "Data Hasil Dinas berhasil disimpan.";
-     } else {
-     echo "Error: " . $sql . "<br>" . $conn->error;
-     }
+         if ($conn->query($sql) === TRUE) {
+             echo "Data Hasil Dinas berhasil diperbarui.";
+         } else {
+             echo "Error: " . $sql . "<br>" . $conn->error;
+         }
 }
 
 $conn->close();

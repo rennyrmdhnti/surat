@@ -110,14 +110,15 @@ body {
     margin-left: 20px;
     margin-right: 20px;
 }
+
 .margin1 {
     margin-left: 40px;
     margin-right: 20px;
 }
+
 .align-top {
     vertical-align: top;
 }
-
 </style>
 
 <?php
@@ -288,6 +289,8 @@ $lokasi = "Banjarmasin";
 <br><br><br><br><br>
 <br><br><br><br><br>
 <br><br><br><br><br>
+
+<img src="<?php echo $data[0]['foto'] ?>" alt="Gambar" width="auto" height="auto" >
 <?php
 }
 ?>

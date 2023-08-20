@@ -55,10 +55,10 @@ $instansi = $_POST['instansi'];
 $mata_anggaran = $_POST['mata_anggaran'];
 $keterangan = $_POST['keterangan'];
 $id = $_POST['id'];
+// var_dump($id);exit;
 
 $sql = "UPDATE tb_perjalan_dinas SET no_sppd = '$nomorUrut' , no_spt = '$no_spt', maksud = '$maksud', transportasi = '$transportasi', tempat_berangkat = '$tempat_berangkat', tempat_tujuan = '$tempat_tujuan', tanggal_berangkat = '$tanggal_berangkat', tanggal_kembali = '$tanggal_kembali', lama = '$lama', pengikut = '$pengikut', instansi = '$instansi', mata_anggaran = '$mata_anggaran', keterangan = '$keterangan' WHERE id = '$id'";
-
-// Menjalankan query dan memeriksa hasilnya
+// var_dump($sql);exit;// Menjalankan query dan memeriksa hasilnya
 if ($conn->query($sql) === TRUE) {
     echo "Data berhasil disimpan.";
 } else {
