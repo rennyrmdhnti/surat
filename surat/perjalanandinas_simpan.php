@@ -49,7 +49,7 @@ $instansi = $_POST['instansi'];
 $mataAnggaran = $_POST['mata_anggaran'];
 $keterangan = $_POST['keterangan'];
 
-$sql = "INSERT INTO tb_perjalan_dinas (no_sppd, no_spt, maksud, transportasi, tempat_berangkat, tempat_tujuan, tanggal_berangkat, tanggal_kembali, lama, pengikut, instansi, mata_anggaran, keterangan ) VALUES ('$nomorUrut', '$noSPT', '$maksud', '$transportasi', '$tempatBerangkat', '$tempatTujuan', '$tanggalBerangkat', '$tanggalKembali', '$lama', '$pengikut', '$instansi', '$mataAnggaran', '$keterangan')";
+$sql = "INSERT INTO tb_perjalan_dinas (no_sppd, no_spt, maksud, transportasi, tempat_berangkat, tempat_tujuan, tanggal_berangkat, tanggal_kembali, lama, pengikut, instansi, mata_anggaran, keterangan, tanggal_buat ) VALUES ('$nomorUrut', '$noSPT', '$maksud', '$transportasi', '$tempatBerangkat', '$tempatTujuan', '$tanggalBerangkat', '$tanggalKembali', '$lama', '$pengikut', '$instansi', '$mataAnggaran', '$keterangan',CURDATE())";
 
 // Menjalankan query dan memeriksa hasilnya
 if ($conn->query($sql) === TRUE) {

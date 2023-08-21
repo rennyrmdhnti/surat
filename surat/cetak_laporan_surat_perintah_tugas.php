@@ -13,7 +13,7 @@ $sql = "SELECT *
 if ($startDate !== '' && $endDate !== '') {
     // Anda mungkin perlu memformat tanggal sesuai dengan format di tabel atau database Anda
     // Contoh format: 'Y-m-d'
-    $sql .= " AND tanggal_buat >= '$startDate' AND tanggal_buat <= '$endDate'";
+    $sql .= " AND tb_perintah_tugas.tanggal_buat >= '$startDate' AND tb_perintah_tugas.tanggal_buat <= '$endDate'";
 }
 
     $result = $conn->query($sql);

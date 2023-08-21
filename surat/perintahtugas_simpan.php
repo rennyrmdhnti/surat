@@ -68,12 +68,12 @@ function romanNumerals($number) {
 
 $dasar = $_POST['dasar'];
 $untuk = $_POST['untuk'];
-$sql = "INSERT INTO tb_perintah_tugas (nama, no_spt, dasar, untuk) VALUES ";
+$sql = "INSERT INTO tb_perintah_tugas (nama, no_spt, dasar, untuk, tanggal_buat) VALUES ";
 
 // Menambahkan setiap nama dalam array ke query SQL
 foreach ($data as $nama) {
     $nama = $conn->real_escape_string($nama); // Melakukan escape string untuk menghindari SQL injection
-    $sql .= "('$nama', '$nomorUrut', '$dasar', '$untuk'),";
+    $sql .= "('$nama', '$nomorUrut', '$dasar', '$untuk' , CURDATE()),";
 }
 
 // Menghapus koma terakhir dari query SQL
