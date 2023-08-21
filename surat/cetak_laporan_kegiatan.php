@@ -11,7 +11,7 @@ FROM tb_hasil_dinas ";
 if ($startDate !== '' && $endDate !== '') {
     // Anda mungkin perlu memformat tanggal sesuai dengan format di tabel atau database Anda
     // Contoh format: 'Y-m-d'
-    $sql .= " AND tb_hasil_dinas.tanggal_buat >= '$startDate' AND tb_hasil_dinas.tanggal_buat <= '$endDate'";
+    $sql .= " WHERE tb_hasil_dinas.tanggal_buat >= '$startDate' AND tb_hasil_dinas.tanggal_buat <= '$endDate'";
 }
 
     $result = $conn->query($sql);
