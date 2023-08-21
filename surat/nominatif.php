@@ -1415,6 +1415,20 @@
             }
         });
     }
+
+    function print(id) {
+        console.log(id); // Menampilkan nilai id ke konsol
+        var printWindow = window.open();
+        fetch('nominatif_print.php?id=' + id)
+            .then(response => response.text())
+            .then(content => {
+                printWindow.document.write('<html><head><title>Cetak</title></head><body>');
+                printWindow.document.write(content);
+                printWindow.document.write('</body></html>');
+                printWindow.print();
+                printWindow.close();
+            });
+    }
     </script>
 
 
