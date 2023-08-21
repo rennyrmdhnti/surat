@@ -86,7 +86,7 @@
                     Dinas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-coreui-toggle="modal" onclick="cetakDataLRA()">Lap Realisasi Anggaran</a>
+                <a class="nav-link" data-coreui-toggle="modal" data-coreui-target="#ModalRealisasi">Lap Realisasi Anggaran</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-coreui-toggle="modal" data-coreui-target="#ModalLaporanKegiatan">Kegiatan
@@ -308,6 +308,31 @@
 <!-- end modal -->
 
 <!-- Modal -->
+<div class="modal fade" id="ModalRealisasi" tabindex="-1" aria-labelledby="ModalRealisasiLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Laporan Surat Pagu Kegiatan</h5>
+                <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="startDate">Tahun</label>
+                <select id="startYearRealisasi" class="form-control"></select>
+                <!-- <br> -->
+                <!-- <label for="endDate">Tanggal Akhir</label>
+                <input type="date" id="endDateRealisasi" class="form-control"> -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="cetakDataRealisasi()">Cetak Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal -->
+
+<!-- Modal -->
 <div class="modal fade" id="ModalLaporanKegiatan" tabindex="-1" aria-labelledby="ModalLaporanKegiatanLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -359,12 +384,11 @@ function cetakDataLPD() {
     window.open(url, '_blank');
 }
 
-function cetakDataLRA() {
-    var startDate = document.getElementById("startDateLRA").value;
-    var endDate = document.getElementById("endDateLRA").value;
+function cetakDataRealisasi() {
+    var tahun = document.getElementById("startYearRealisasi").value;
 
 
-    var url = "cetak_laporan_realisasi_anggaran.php?startDate=" + startDate + "&endDate=" + endDate;
+    var url = "cetak_laporan_realisasi_anggaran.php?tahun=" + tahun;
     window.open(url, '_blank');
 }
 
@@ -421,6 +445,18 @@ function cetakDataLaporanKegiatan() {
     
     // Mengisi elemen select dengan opsi tahun dari 3 tahun kebelakang sampai tahun sekarang
     for (var year = currentYear - 3; year <= currentYear; year++) {
+        var option = document.createElement("option");
+        option.value = year;
+        option.text = year;
+        startYearSelect.appendChild(option);
+    }
+   var startYearSelect = document.getElementById("startYearRealisasi");
+    
+    // Mendapatkan tahun sekarang
+    var currentYear = new Date().getFullYear();
+    
+    // Mengisi elemen select dengan opsi tahun dari 3 tahun kebelakang sampai tahun sekarang
+    for (var year = currentYear - 10; year <= currentYear; year++) {
         var option = document.createElement("option");
         option.value = year;
         option.text = year;

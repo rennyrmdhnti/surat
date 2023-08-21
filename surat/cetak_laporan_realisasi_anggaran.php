@@ -1,12 +1,13 @@
 <?php 
 require_once 'config/koneksi.php';
 
-$startDate = isset($_GET['startDate']) ? $_GET['startDate'] : null;
-$endDate = isset($_GET['endDate']) ? $_GET['endDate'] : null;
+$tahun = isset($_GET['tahun']) ? $_GET['tahun'] : null;
+// $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : null;
 
 $sql = "SELECT YEAR(tanggal_npd) AS tahun, SUM(pencairan) AS total_pencairan ,(select SUM(anggaran) from tb_rek_kegiatan trk) AS total_anggaran
 FROM tb_pencairan_dana
-GROUP BY YEAR(tanggal_npd)";
+WHERE YEAR(tanggal_npd) = '$tahun'
+GROUP BY YEAR(tanggal_npd) ";
 
 // Tambahkan kondisi WHERE jika startDate dan endDate tidak null
 // if ($startDate !== '' && $endDate !== '') {
