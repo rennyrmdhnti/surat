@@ -307,7 +307,8 @@
                             <div class="mb-2">
                                 <label for="exampleFormControlInput1" class="form-label">Tujuan</label>
                                 <input type="text" class="form-control" id="tujuan_edit" name="tujuan_edit" readonly>
-                                <input type="text" class="form-control hidden" id="id_nominatif" name="id_nominatif" hidden>
+                                <input type="text" class="form-control hidden" id="id_nominatif" name="id_nominatif"
+                                    hidden>
                             </div>
                             <div class="mb-2">
                                 <label for="exampleFormControlInput1" class="form-label">Lama</label>
@@ -387,8 +388,8 @@
                             <div class="mb-2">
                                 <label for="exampleFormControlInput1" class="form-label"
                                     style="font-weight: bold; ">HOTEL</label>
-                                <select class="form-select" id="select_hotel_travel_edit" name="select_hotel_travel_edit"
-                                    aria-label="Default select example" disabled>
+                                <select class="form-select" id="select_hotel_travel_edit"
+                                    name="select_hotel_travel_edit" aria-label="Default select example" disabled>
                                     <option value="">-- Pilih Travel --</option>
                                     <?php
                                         // Query untuk mengambil data dari tabel tb_perintah_tugas
@@ -537,6 +538,12 @@
             });
         });
 
+
+        var penginapanLuar = '';
+        var pesawatLuar = '';
+        var transportLuar = '';
+
+
         $('#nama').on('change', function() {
             var selectedNama = $(this).val(); // Dapatkan nilai "nama" yang dipilih
             var selectedNoSPPD = $('#no_sppd').val(); // Dapatkan nilai "no_sppd" yang dipilih
@@ -561,10 +568,20 @@
 
                     var penginapan = data[0].penginapan;
                     var lama = data[0].lama;
+
+                    var uang_harian = data;
+
+                    // console.log(uang_harian);
+
                     var formatter = new Intl.NumberFormat('id-ID', {
                         style: 'currency',
                         currency: 'IDR'
                     });
+
+
+
+
+
                     var formattedpenginapan = formatter.format(penginapan);
                     var formattedlama = lama + ' Hari';
 
@@ -585,12 +602,17 @@
                     var formattedTransport = formatter.format(Transport) + ' (PP)';
 
 
+
+                    $('#uang_harian').val(data[0].uang_harian);
                     $('#text_hotel_pribadi').text(hasilPenginapan);
                     $('#text_pesawat_pribadi').text(formattedpesawat);
                     $('#text_hotel_travel').text(hasilPenginapan);
                     $('#text_pesawat_travel').text(formattedpesawat);
                     $('#text_transport').text(formattedTransport);
 
+                    penginapanLuar = penginapan;
+                    pesawatLuar = pesawat;
+                    transportLuar = Transport;
 
                 }
             });
@@ -718,6 +740,223 @@
                 }]
             });
         }
+
+
+        document.getElementById("hotel_pribadi").addEventListener("input", function() {
+            var inputValue = parseFloat(this
+                .value); // Mengambil nilai input dan mengubahnya menjadi tipe data angka (float)
+
+            if (isNaN(inputValue)) {
+                alert("Nilai tidak valid");
+                this.value = ""; // Mengosongkan input jika nilai tidak valid
+            } else if (inputValue > penginapanLuar) {
+                alert("Nilai lebih dari pagu yang ditetapkan");
+                this.value = ""; // Mengosongkan input jika nilai melebihi 100000
+            }
+        });
+
+        document.getElementById("hotel_travel").addEventListener("input", function() {
+            var inputValue = parseFloat(this
+                .value); // Mengambil nilai input dan mengubahnya menjadi tipe data angka (float)
+
+            if (isNaN(inputValue)) {
+                alert("Nilai tidak valid");
+                this.value = ""; // Mengosongkan input jika nilai tidak valid
+            } else if (inputValue > penginapanLuar) {
+                alert("Nilai lebih dari pagu yang ditetapkan");
+                this.value = ""; // Mengosongkan input jika nilai melebihi 100000
+            }
+        });
+        document.getElementById("pesawat_pribadi").addEventListener("input", function() {
+            var inputValue = parseFloat(this
+                .value); // Mengambil nilai input dan mengubahnya menjadi tipe data angka (float)
+
+            if (isNaN(inputValue)) {
+                alert("Nilai tidak valid");
+                this.value = ""; // Mengosongkan input jika nilai tidak valid
+            } else if (inputValue > pesawatLuar) {
+                alert("Nilai lebih dari pagu yang ditetapkan");
+                this.value = ""; // Mengosongkan input jika nilai melebihi 100000
+            }
+        });
+        document.getElementById("pesawat_travel").addEventListener("input", function() {
+            var inputValue = parseFloat(this
+                .value); // Mengambil nilai input dan mengubahnya menjadi tipe data angka (float)
+
+            if (isNaN(inputValue)) {
+                alert("Nilai tidak valid");
+                this.value = ""; // Mengosongkan input jika nilai tidak valid
+            } else if (inputValue > pesawatLuar) {
+                alert("Nilai lebih dari pagu yang ditetapkan");
+                this.value = ""; // Mengosongkan input jika nilai melebihi 100000
+            }
+        });
+        
+    document.getElementById("transport_asal").addEventListener("input", function() {
+        var inputValue = parseFloat(this
+        .value); // Mengambil nilai input dan mengubahnya menjadi tipe data angka (float)
+
+        if (isNaN(inputValue)) {
+            alert("Nilai tidak valid");
+            this.value = ""; // Mengosongkan input jika nilai tidak valid
+        } else if (inputValue > 150000) {
+            alert("Nilai lebih dari pagu yang ditetapkan");
+            this.value = ""; // Mengosongkan input jika nilai melebihi 100000
+        }
+    });
+
+            document.getElementById("hotel_pribadi").addEventListener("input", function() {
+            var inputValue = parseFloat(this
+                .value); // Mengambil nilai input dan mengubahnya menjadi tipe data angka (float)
+
+            if (isNaN(inputValue)) {
+                alert("Nilai tidak valid");
+                this.value = ""; // Mengosongkan input jika nilai tidak valid
+            } else if (inputValue > penginapanLuar) {
+                alert("Nilai lebih dari pagu yang ditetapkan");
+                this.value = ""; // Mengosongkan input jika nilai melebihi 100000
+            }
+        });
+
+        document.getElementById("hotel_travel").addEventListener("input", function() {
+            var inputValue = parseFloat(this
+                .value); // Mengambil nilai input dan mengubahnya menjadi tipe data angka (float)
+
+            if (isNaN(inputValue)) {
+                alert("Nilai tidak valid");
+                this.value = ""; // Mengosongkan input jika nilai tidak valid
+            } else if (inputValue > penginapanLuar) {
+                alert("Nilai lebih dari pagu yang ditetapkan");
+                this.value = ""; // Mengosongkan input jika nilai melebihi 100000
+            }
+        });
+        document.getElementById("pesawat_pribadi").addEventListener("input", function() {
+            var inputValue = parseFloat(this
+                .value); // Mengambil nilai input dan mengubahnya menjadi tipe data angka (float)
+
+            if (isNaN(inputValue)) {
+                alert("Nilai tidak valid");
+                this.value = ""; // Mengosongkan input jika nilai tidak valid
+            } else if (inputValue > pesawatLuar) {
+                alert("Nilai lebih dari pagu yang ditetapkan");
+                this.value = ""; // Mengosongkan input jika nilai melebihi 100000
+            }
+        });
+        document.getElementById("pesawat_travel").addEventListener("input", function() {
+            var inputValue = parseFloat(this
+                .value); // Mengambil nilai input dan mengubahnya menjadi tipe data angka (float)
+
+            if (isNaN(inputValue)) {
+                alert("Nilai tidak valid");
+                this.value = ""; // Mengosongkan input jika nilai tidak valid
+            } else if (inputValue > pesawatLuar) {
+                alert("Nilai lebih dari pagu yang ditetapkan");
+                this.value = ""; // Mengosongkan input jika nilai melebihi 100000
+            }
+        });
+        
+    document.getElementById("transport_asal").addEventListener("input", function() {
+        var inputValue = parseFloat(this
+        .value); // Mengambil nilai input dan mengubahnya menjadi tipe data angka (float)
+
+        if (isNaN(inputValue)) {
+            alert("Nilai tidak valid");
+            this.value = ""; // Mengosongkan input jika nilai tidak valid
+        } else if (inputValue > 150000) {
+            alert("Nilai lebih dari pagu yang ditetapkan");
+            this.value = ""; // Mengosongkan input jika nilai melebihi 100000
+        }
+    });
+
+    document.getElementById("transport_tujuan").addEventListener("input", function() {
+        var inputValue = parseFloat(this
+        .value); // Mengambil nilai input dan mengubahnya menjadi tipe data angka (float)
+
+        if (isNaN(inputValue)) {
+            alert("Nilai tidak valid");
+            this.value = ""; // Mengosongkan input jika nilai tidak valid
+        } else if (inputValue > transportLuar) {
+            alert("Nilai lebih dari pagu yang ditetapkan");
+            this.value = ""; // Mengosongkan input jika nilai melebihi 100000
+        }
+    });
+
+    document.getElementById("hotel_pribadi_edit").addEventListener("input", function() {
+            var inputValue = parseFloat(this
+                .value); // Mengambil nilai input dan mengubahnya menjadi tipe data angka (float)
+
+            if (isNaN(inputValue)) {
+                alert("Nilai tidak valid");
+                this.value = ""; // Mengosongkan input jika nilai tidak valid
+            } else if (inputValue > penginapanLuar) {
+                alert("Nilai lebih dari pagu yang ditetapkan");
+                this.value = ""; // Mengosongkan input jika nilai melebihi 100000
+            }
+        });
+
+        document.getElementById("hotel_travel_edit").addEventListener("input", function() {
+            var inputValue = parseFloat(this
+                .value); // Mengambil nilai input dan mengubahnya menjadi tipe data angka (float)
+
+            if (isNaN(inputValue)) {
+                alert("Nilai tidak valid");
+                this.value = ""; // Mengosongkan input jika nilai tidak valid
+            } else if (inputValue > penginapanLuar) {
+                alert("Nilai lebih dari pagu yang ditetapkan");
+                this.value = ""; // Mengosongkan input jika nilai melebihi 100000
+            }
+        });
+        document.getElementById("pesawat_pribadi_edit").addEventListener("input", function() {
+            var inputValue = parseFloat(this
+                .value); // Mengambil nilai input dan mengubahnya menjadi tipe data angka (float)
+
+            if (isNaN(inputValue)) {
+                alert("Nilai tidak valid");
+                this.value = ""; // Mengosongkan input jika nilai tidak valid
+            } else if (inputValue > pesawatLuar) {
+                alert("Nilai lebih dari pagu yang ditetapkan");
+                this.value = ""; // Mengosongkan input jika nilai melebihi 100000
+            }
+        });
+        document.getElementById("pesawat_travel_edit").addEventListener("input", function() {
+            var inputValue = parseFloat(this
+                .value); // Mengambil nilai input dan mengubahnya menjadi tipe data angka (float)
+
+            if (isNaN(inputValue)) {
+                alert("Nilai tidak valid");
+                this.value = ""; // Mengosongkan input jika nilai tidak valid
+            } else if (inputValue > pesawatLuar) {
+                alert("Nilai lebih dari pagu yang ditetapkan");
+                this.value = ""; // Mengosongkan input jika nilai melebihi 100000
+            }
+        });
+        
+    document.getElementById("transport_asal_edit").addEventListener("input", function() {
+        var inputValue = parseFloat(this
+        .value); // Mengambil nilai input dan mengubahnya menjadi tipe data angka (float)
+
+        if (isNaN(inputValue)) {
+            alert("Nilai tidak valid");
+            this.value = ""; // Mengosongkan input jika nilai tidak valid
+        } else if (inputValue > 150000) {
+            alert("Nilai lebih dari pagu yang ditetapkan");
+            this.value = ""; // Mengosongkan input jika nilai melebihi 100000
+        }
+    });
+
+    
+    document.getElementById("transport_tujuan_edit").addEventListener("input", function() {
+        var inputValue = parseFloat(this
+        .value); // Mengambil nilai input dan mengubahnya menjadi tipe data angka (float)
+
+        if (isNaN(inputValue)) {
+            alert("Nilai tidak valid");
+            this.value = ""; // Mengosongkan input jika nilai tidak valid
+        } else if (inputValue > transportLuar) {
+            alert("Nilai lebih dari pagu yang ditetapkan");
+            this.value = ""; // Mengosongkan input jika nilai melebihi 100000
+        }
+    });
 
     });
 
