@@ -1,16 +1,16 @@
 <?php 
 require_once 'config/koneksi.php';
 
-$startDate = isset($_GET['startDate']) ? $_GET['startDate'] : null;
-$endDate = isset($_GET['endDate']) ? $_GET['endDate'] : null;
+$tahun = isset($_GET['tahun']) ? $_GET['tahun'] : null;
+// $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : null;
 
 $sql = "select * from tb_pagu";
 
 // Tambahkan kondisi WHERE jika startDate dan endDate tidak null
-if ($startDate !== '' && $endDate !== '') {
+if ($tahun !== '') {
     // Anda mungkin perlu memformat tanggal sesuai dengan format di tabel atau database Anda
     // Contoh format: 'Y-m-d'
-    $sql .= " WHERE tb_pagu.tanggal_buat >= '$startDate' AND tb_pagu.tanggal_buat <= '$endDate'";
+    $sql .= " WHERE YEAR(tb_pagu.tanggal_buat) = '$tahun' ";
 }
 
 // var_dump($sql);exit;

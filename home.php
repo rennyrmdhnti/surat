@@ -1,6 +1,47 @@
 <?php include 'template/header.php'; ?>
 <?php include 'template/sidebar.php'; ?>
 
+<?php 
+require_once 'config/koneksi.php';
+
+$sql = "SELECT COUNT(*) as total FROM tb_pegawai";
+
+
+    $result = $conn->query($sql);
+    $data = array();
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+
+
+    $sqlTHL = "SELECT COUNT(*) as total FROM tb_thl";
+
+
+    $resultTHL = $conn->query($sqlTHL);
+    $dataTHL = array();
+    while ($rowTHL = $resultTHL->fetch_assoc()) {
+        $dataTHL[] = $rowTHL;
+    }
+
+
+    $sqlSurat = "SELECT
+    (SELECT COUNT(*) FROM tb_pencairan_dana) AS total_tb_pencairan_dana,
+    (SELECT COUNT(*) FROM tb_perintah_tugas) AS total_tb_perintah_tugas,
+    (SELECT COUNT(*) FROM tb_perjalan_dinas) AS total_tb_perjalan_dinas,
+    (SELECT COUNT(*) FROM tb_nominatif) AS total_tb_nominatif;
+";
+
+
+    $resultSurat = $conn->query($sqlSurat);
+    $dataSurat = array();
+    while ($rowSurat = $resultSurat->fetch_assoc()) {
+        $dataSurat[] = $rowSurat;
+    }
+
+
+
+?>
+
 
 <div class="wrapper d-flex flex-column min-vh-100 bg-light">
     <header class="header header-sticky mb-4">
@@ -24,14 +65,11 @@
                     <div class="card mb-4 text-white bg-primary">
                         <div class="card-body pb-0 d-flex justify-content-between align-items-start">
                             <div>
-                                <div class="fs-4 fw-semibold">26K <span class="fs-6 fw-normal">(-12.4%
-                                        <svg class="icon">
-                                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-arrow-bottom">
-                                            </use>
-                                        </svg>)</span></div>
-                                <div>Users</div>
+                                <div class="fs-4 fw-semibold"><?php echo $data[0]['total'] ?><span
+                                        class="fs-6 fw-normal"></span></div>
+                                <div>Pegawai</div>
                             </div>
-                            <div class="dropdown">
+                            <!-- <div class="dropdown">
                                 <button class="btn btn-transparent text-white p-0" type="button"
                                     data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <svg class="icon">
@@ -41,7 +79,7 @@
                                 <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item"
                                         href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a
                                         class="dropdown-item" href="#">Something else here</a></div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="c-chart-wrapper mt-3 mx-3" style="height:70px;">
                             <canvas class="chart" id="card-chart1" height="70"></canvas>
@@ -53,14 +91,10 @@
                     <div class="card mb-4 text-white bg-info">
                         <div class="card-body pb-0 d-flex justify-content-between align-items-start">
                             <div>
-                                <div class="fs-4 fw-semibold">$6.200 <span class="fs-6 fw-normal">(40.9%
-                                        <svg class="icon">
-                                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-arrow-top">
-                                            </use>
-                                        </svg>)</span></div>
-                                <div>Income</div>
+                                <div class="fs-4 fw-semibold"><?php echo $dataTHL[0]['total'] ?><span class="fs-6 fw-normal"></span></div>
+                                <div>THL</div>
                             </div>
-                            <div class="dropdown">
+                            <!-- <div class="dropdown">
                                 <button class="btn btn-transparent text-white p-0" type="button"
                                     data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <svg class="icon">
@@ -70,7 +104,7 @@
                                 <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item"
                                         href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a
                                         class="dropdown-item" href="#">Something else here</a></div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="c-chart-wrapper mt-3 mx-3" style="height:70px;">
                             <canvas class="chart" id="card-chart2" height="70"></canvas>
@@ -82,14 +116,10 @@
                     <div class="card mb-4 text-white bg-warning">
                         <div class="card-body pb-0 d-flex justify-content-between align-items-start">
                             <div>
-                                <div class="fs-4 fw-semibold">2.49% <span class="fs-6 fw-normal">(84.7%
-                                        <svg class="icon">
-                                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-arrow-top">
-                                            </use>
-                                        </svg>)</span></div>
-                                <div>Conversion Rate</div>
+                                <div class="fs-4 fw-semibold"><?php echo $dataSurat[0]['total_tb_pencairan_dana'] + $dataSurat[0]['total_tb_perintah_tugas'] + $dataSurat[0]['total_tb_perjalan_dinas'] + $dataSurat[0]['total_tb_nominatif']?><span class="fs-6 fw-normal"></span></div>
+                                <div>Surat</div>
                             </div>
-                            <div class="dropdown">
+                            <!-- <div class="dropdown">
                                 <button class="btn btn-transparent text-white p-0" type="button"
                                     data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <svg class="icon">
@@ -99,7 +129,7 @@
                                 <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item"
                                         href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a
                                         class="dropdown-item" href="#">Something else here</a></div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="c-chart-wrapper mt-3" style="height:70px;">
                             <canvas class="chart" id="card-chart3" height="70"></canvas>
